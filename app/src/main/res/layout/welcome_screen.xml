@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C4DBE0">
+    android:background="#C4DBE0"
+    tools:context=".WelcomeActivity">
 
     <FrameLayout
         android:layout_width="280dp"
@@ -21,24 +22,24 @@
         android:id="@+id/sign_up"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="158dp"
+        android:layout_marginBottom="128dp"
         android:backgroundTint="#0C6980"
         android:text="SIGN UP"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/sign_in"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="83dp"
+        android:layout_marginBottom="56dp"
         android:backgroundTint="#0C6980"
         android:text="SIGN IN"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -59,13 +60,13 @@
         android:id="@+id/textView2"
         android:layout_width="242dp"
         android:layout_height="21dp"
-        android:layout_marginBottom="256dp"
+        android:layout_marginBottom="208dp"
         android:text="Blood pressure tracking app"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
