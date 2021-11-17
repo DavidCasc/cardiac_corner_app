@@ -21,6 +21,9 @@
         </activity>
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".NewMeasurementActivity" />
+        <activity android:name=".SettingsActivity" />
     </application>
 
 </manifest>

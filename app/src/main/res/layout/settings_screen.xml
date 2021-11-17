@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C4DBE0">
+    android:background="#7AC5CD"
+    tools:context=".SettingsActivity">
 
     <TextView
         android:id="@+id/settings"
@@ -13,6 +14,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:text="Settings"
+        android:textColor="#000000"
         android:textSize="48sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,6 +48,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="128dp"
         android:text="Email: johndoe@gmail.com"
+        android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,6 +59,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="160dp"
         android:text="Username: johndoe"
+        android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

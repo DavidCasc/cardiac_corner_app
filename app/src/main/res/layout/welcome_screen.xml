@@ -4,19 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C4DBE0"
+    android:background="#7AC5CD"
     tools:context=".WelcomeActivity">
-
-    <FrameLayout
-        android:layout_width="280dp"
-        android:layout_height="280dp"
-        android:layout_marginTop="80dp"
-        android:background="#00A8A8"
-        android:rotation="45"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
     <Button
         android:id="@+id/sign_up"
@@ -44,15 +33,18 @@
 
     <TextView
         android:id="@+id/cardiac_corner"
-        android:layout_width="196dp"
-        android:layout_height="123dp"
-        android:layout_marginTop="154dp"
+        android:layout_width="268dp"
+        android:layout_height="121dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="72dp"
         android:background="#C4DBE0"
-        android:text="Cardiac Corner"
+        android:text="CARDIAC CORNER"
         android:textAlignment="center"
+        android:textColor="#000000"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
