@@ -137,6 +137,7 @@
             android:textColor="@color/chip_text_color"
             android:textSize="16dp"
             app:checkedIconEnabled="true"
+            app:checkedIconTint="@color/white"
             app:checkedIconVisible="true"
             app:chipBackgroundColor="@color/chip_background_color"
             app:chipEndPadding="10dp"
@@ -156,6 +157,7 @@
             android:textColor="@color/chip_text_color"
             android:textSize="16dp"
             app:checkedIconEnabled="true"
+            app:checkedIconTint="@color/white"
             app:checkedIconVisible="true"
             app:chipBackgroundColor="@color/chip_background_color"
             app:chipEndPadding="10dp"
@@ -175,6 +177,7 @@
             android:textColor="@color/chip_text_color"
             android:textSize="16dp"
             app:checkedIconEnabled="true"
+            app:checkedIconTint="@color/white"
             app:checkedIconVisible="true"
             app:chipBackgroundColor="@color/chip_background_color"
             app:chipEndPadding="10dp"
@@ -184,5 +187,16 @@
             app:chipStartPadding="10dp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#9B64FF"
+        android:text="Continue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
