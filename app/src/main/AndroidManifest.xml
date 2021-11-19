@@ -24,6 +24,10 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".NewMeasurementActivity" />
         <activity android:name=".SettingsActivity" />
+        <activity android:name=".BreakdownActivity" />
+        <activity android:name=".BpHistoryActivity" />
+        <activity android:name=".BpDetailsActivity" />
+        <activity android:name=".GraphViewActivity" />
     </application>
 
 </manifest>

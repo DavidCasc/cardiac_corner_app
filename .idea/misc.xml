@@ -5,9 +5,13 @@
       <map>
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.24177631578947367" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/bp_details_screen.xml" value="0.23157894736842105" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/bp_history_screen.xml" value="0.23157894736842105" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/breakdown_screen.xml" value="0.23157894736842105" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/graph_view_screen.xml" value="0.23157894736842105" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/main_screen.xml" value="0.25" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/new_measurement_screen.xml" value="0.25" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/settings_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/settings_screen.xml" value="0.25" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/signin_screen.xml" value="0.22" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/signup_screen.xml" value="0.22" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/test.xml" value="0.36666666666666664" />

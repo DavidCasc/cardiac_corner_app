@@ -11,6 +11,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button settingsBtn;
     Button newMeasurementBtn;
+    Button bpHistoryBtn;
+    Button graphViewBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,26 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(MainActivity.this,NewMeasurementActivity.class);
+                        startActivity(i);
+                    }
+                });
+
+        bpHistoryBtn = (Button) findViewById(R.id.bp_history);
+        bpHistoryBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(MainActivity.this,BpHistoryActivity.class);
+                        startActivity(i);
+                    }
+                });
+
+        graphViewBtn = (Button) findViewById(R.id.graph_view);
+        graphViewBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(MainActivity.this,GraphViewActivity.class);
                         startActivity(i);
                     }
                 });

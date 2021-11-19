@@ -24,9 +24,11 @@
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:layout_marginStart="92dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="99dp"
         android:backgroundTint="#0C6980"
         android:text="CLEAR DATA"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,9 +37,11 @@
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:layout_marginStart="92dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="99dp"
         android:backgroundTint="#0C6980"
         android:text="SIGN OUT"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,6 +53,7 @@
         android:layout_marginTop="128dp"
         android:text="Email: johndoe@gmail.com"
         android:textColor="#000000"
+        android:textSize="17dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,6 +65,7 @@
         android:layout_marginTop="160dp"
         android:text="Username: johndoe"
         android:textColor="#000000"
+        android:textSize="17dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
