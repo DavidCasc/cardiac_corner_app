@@ -29,6 +29,21 @@ public class  SignInActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    private void initData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("init", true);
+        editor.apply();
+    }
+
+    private boolean loggedIn(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        if(sharedPreferences.contains("init")){
+            return true;
+        } else {
+            return false;
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +78,10 @@ public class  SignInActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.isSuccessful()) {
+                    initData();
                     saveData("refreshToken", response.body().getRefreshToken());
+                    saveData("username", username.getText().toString());
+                    saveData("username", password.getText().toString());
                     Intent i = new Intent(SignInActivity.this,MainActivity.class);
                     startActivity(i);
                 } else {
