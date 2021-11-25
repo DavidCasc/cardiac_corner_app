@@ -37,6 +37,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     Button signInBtn;
     Button signUpBtn;
+    Button tempBypassBtn; //TEMPORARY LOGIN BYPASS FOR DEVELOPMENT
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,16 @@ public class WelcomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(WelcomeActivity.this,SignUpActivity.class);
+                        startActivity(i);
+                    }
+                });
+
+        tempBypassBtn = (Button) findViewById(R.id.tempBypass);
+        tempBypassBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(WelcomeActivity.this,MainActivity.class);
                         startActivity(i);
                     }
                 });

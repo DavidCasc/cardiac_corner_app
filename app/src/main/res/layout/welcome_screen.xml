@@ -60,4 +60,18 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/tempBypass"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginEnd="166dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#660000"
+        android:text="Bypass"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
