@@ -29,10 +29,10 @@ public class  SignInActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private void initData(){
+    private void signIn(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("init", true);
+        editor.putBoolean("loggedIn", true);
         editor.apply();
     }
 
@@ -71,17 +71,17 @@ public class  SignInActivity extends AppCompatActivity {
         loginRequest.setUsername(username.getText().toString());
         loginRequest.setPassword(password.getText().toString());
 
-        Call<LoginResponse> loginResponseCall = ApiClient.getUserService().userLogin(loginRequest);
+        Call<LoginResponse> loginResponseCall = AuthClient.getUserService().userLogin(loginRequest);
 
 
         loginResponseCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.isSuccessful()) {
-                    initData();
+                    signIn();
                     saveData("refreshToken", response.body().getRefreshToken());
                     saveData("username", username.getText().toString());
-                    saveData("username", password.getText().toString());
+                    saveData("password", password.getText().toString());
                     Intent i = new Intent(SignInActivity.this,MainActivity.class);
                     startActivity(i);
                 } else {

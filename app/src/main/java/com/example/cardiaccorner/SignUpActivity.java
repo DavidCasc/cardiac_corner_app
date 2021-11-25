@@ -45,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
         registerRequest.setPassword(password.getText().toString());
         registerRequest.setEmail(email.getText().toString());
 
-        Call<RegisterResponse> registerResponseCall = ApiClient.getUserService().userRegister(registerRequest);
+        Call<RegisterResponse> registerResponseCall = AuthClient.getUserService().userRegister(registerRequest);
 
         registerResponseCall.enqueue(new Callback<RegisterResponse>() {
             @Override

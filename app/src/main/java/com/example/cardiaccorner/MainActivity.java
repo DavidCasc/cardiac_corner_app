@@ -3,19 +3,42 @@ package com.example.cardiaccorner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    private void saveData(String Key, String Val) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Key, Val);
+        editor.apply();
+    }
+    public String loadData(String Key) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getString(Key, "");
+    }
 
     Button settingsBtn;
     Button newMeasurementBtn;
     Button bpHistoryBtn;
     Button graphViewBtn;
+    static final String SHARED_PREFS = "cardiacCornerPrefs";
+    String username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        username = loadData("username");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
 
@@ -46,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent i = new Intent(MainActivity.this,BpHistoryActivity.class);
                         startActivity(i);
+
                     }
                 });
 

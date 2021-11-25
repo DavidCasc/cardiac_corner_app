@@ -28,7 +28,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private boolean loggedIn(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        if(sharedPreferences.contains("init")){
+        if(sharedPreferences.contains("loggedIn")){
             return true;
         } else {
             return false;
@@ -42,7 +42,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
-
+        initData();
         if(loggedIn()){
             Intent i = new Intent(WelcomeActivity.this,MainActivity.class);
             startActivity(i);
