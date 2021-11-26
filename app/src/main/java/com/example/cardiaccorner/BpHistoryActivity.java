@@ -29,7 +29,7 @@ public class BpHistoryActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Key, Val);
-        editor.apply();
+        editor.commit();
     }
     public String loadData(String Key) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -39,13 +39,13 @@ public class BpHistoryActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.contains("logs");
     }
-    public void storeLogs(ArrayList<Entry> logs){
+    public void storeLogs(ArrayList<Entry> log){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String arr = gson.toJson(logs);
+        String arr = gson.toJson(log);
         editor.putString("logs", arr);
-        editor.apply();
+        editor.commit();
     }
 
     public ArrayList<Entry> retrieveLogs(){
@@ -54,12 +54,13 @@ public class BpHistoryActivity extends AppCompatActivity {
         String arr = sharedPreferences.getString("logs", null);
         Type type = new TypeToken<ArrayList<Entry>>() {}.getType();
 
-        ArrayList<Entry> logs = gson.fromJson(arr, type);
+        ArrayList<Entry> log = gson.fromJson(arr, type);
 
-        if (logs == null) {
-            logs = new ArrayList<Entry>();
+        if (log == null) {
+            log = new ArrayList<Entry>();
         }
-        return logs;
+
+        return log;
     }
     ArrayList<Entry> logs;
     @Override
@@ -68,12 +69,11 @@ public class BpHistoryActivity extends AppCompatActivity {
         username = loadData("username");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bp_history_screen);
-        if(!logsStored()){
+        if(!logsStored()) {
             fetchLogs();
-        } else {
-            logs = retrieveLogs();
         }
-        System.out.println(logs.toString());
+        logs = retrieveLogs();
+        System.out.println(logs);
     }
 
     public void fetchLogs() {
@@ -82,7 +82,6 @@ public class BpHistoryActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LogsResponse> call, Response<LogsResponse> response) {
                 storeLogs(response.body().getLogs());
-                logs = response.body().getLogs();
             }
 
             @Override
