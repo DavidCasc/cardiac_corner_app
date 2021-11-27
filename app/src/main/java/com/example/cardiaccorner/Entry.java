@@ -4,16 +4,16 @@ public class Entry {
     private String time_created;
     private int sys_measurement;
     private int dia_measurement;
-    private boolean heavy_exer;
+    private boolean exercise;
     private boolean sodium;
     private boolean stress;
     private String notes;
 
-    public Entry(String time_created, int sys_measurement, int dia_measurement, boolean heavy_exer, boolean sodium, boolean stress, String notes) {
+    public Entry(String time_created, int sys_measurement, int dia_measurement, boolean exercise, boolean sodium, boolean stress, String notes) {
         this.time_created = time_created;
         this.sys_measurement = sys_measurement;
         this.dia_measurement = dia_measurement;
-        this.heavy_exer = heavy_exer;
+        this.exercise = exercise;
         this.sodium = sodium;
         this.stress = stress;
         this.notes = notes;
@@ -43,12 +43,12 @@ public class Entry {
         this.dia_measurement = dia_measurement;
     }
 
-    public boolean isHeavy_exer() {
-        return heavy_exer;
+    public boolean isExercise() {
+        return exercise;
     }
 
-    public void setHeavy_exer(boolean heavy_exer) {
-        this.heavy_exer = heavy_exer;
+    public void setExercise(boolean exercise) {
+        this.exercise = exercise;
     }
 
     public boolean isSodium() {
@@ -81,7 +81,7 @@ public class Entry {
                 "time_created='" + time_created + '\'' +
                 ", sys_measurement=" + sys_measurement +
                 ", dia_measurement=" + dia_measurement +
-                ", heavy_exer=" + heavy_exer +
+                ", heavy_exer=" + exercise +
                 ", sodium=" + sodium +
                 ", stress=" + stress +
                 ", notes='" + notes + '\'' +
