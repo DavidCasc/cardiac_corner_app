@@ -26,14 +26,14 @@ public class  SignInActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Key, Val);
-        editor.apply();
+        editor.commit();
     }
 
     private void signIn(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("loggedIn", true);
-        editor.apply();
+        editor.commit();
     }
 
     private boolean loggedIn(){
@@ -82,6 +82,7 @@ public class  SignInActivity extends AppCompatActivity {
                     saveData("refreshToken", response.body().getRefreshToken());
                     saveData("username", username.getText().toString());
                     saveData("password", password.getText().toString());
+                    saveData("email", response.body().getEmail());
                     Intent i = new Intent(SignInActivity.this,MainActivity.class);
                     startActivity(i);
                 } else {
