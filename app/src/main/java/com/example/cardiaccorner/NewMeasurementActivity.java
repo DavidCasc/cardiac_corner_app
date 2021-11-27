@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class NewMeasurementActivity extends AppCompatActivity {
 
     String dateTime = null; //set this somehow
@@ -88,7 +92,8 @@ public class NewMeasurementActivity extends AppCompatActivity {
 
     private void continueButtonClicked()
     {
-        // set string for notes
+        // set date and notes strings
+        setDateTime();
         notesToString();
 
         // create entry
@@ -126,5 +131,12 @@ public class NewMeasurementActivity extends AppCompatActivity {
     {
         EditText notesText = (EditText) findViewById(R.id.notes_textbox);
         notes = notesText.getText().toString();
+    }
+
+    private void setDateTime()
+    {
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        dateTime = currentDate + " " +currentTime;
     }
 }
