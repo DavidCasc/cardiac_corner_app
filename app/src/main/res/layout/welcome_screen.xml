@@ -4,61 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7AC5CD"
+    android:background="#A1D2F4"
     tools:context=".WelcomeActivity">
 
     <Button
         android:id="@+id/sign_up"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="128dp"
-        android:backgroundTint="#0C6980"
+        android:backgroundTint="#673AB7"
+        android:fontFamily="@font/rasa_bold"
         android:text="SIGN UP"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:iconTint="#000E0000"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="435dp" />
 
     <Button
         android:id="@+id/sign_in"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="56dp"
-        android:backgroundTint="#0C6980"
+        android:backgroundTint="#673AB7"
+        android:fontFamily="@font/rasa_bold"
         android:text="SIGN IN"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="512dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rectangle_shape"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="139dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/oval_shape"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="154dp" />
 
     <TextView
         android:id="@+id/cardiac_corner"
         android:layout_width="268dp"
-        android:layout_height="121dp"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="72dp"
-        android:background="#C4DBE0"
+        android:layout_height="wrap_content"
+        android:background="#D6B6FF"
+        android:fontFamily="@font/rasa_bold"
         android:text="CARDIAC CORNER"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="#673AB7"
         android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:flow_firstHorizontalStyle="spread_inside"
+        app:flow_firstVerticalStyle="spread_inside"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="229dp" />
+
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="242dp"
         android:layout_height="21dp"
-        android:layout_marginBottom="208dp"
         android:text="Blood pressure tracking app"
         android:textAlignment="center"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="752dp" />
 
     <Button
         android:id="@+id/tempBypass"

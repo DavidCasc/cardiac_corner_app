@@ -3,24 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.24177631578947367" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/activity_main.xml" value="0.18" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/bp_details_screen.xml" value="0.23157894736842105" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/bp_history_screen.xml" value="0.23157894736842105" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/breakdown_screen.xml" value="0.23157894736842105" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/graph_view_screen.xml" value="0.23157894736842105" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/main_screen.xml" value="0.25" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/new_measurement_screen.xml" value="0.25" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/settings_screen.xml" value="0.25" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/signin_screen.xml" value="0.22" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/signup_screen.xml" value="0.22" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/settings_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/signin_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/signup_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/test.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/welcome_screen.xml" value="0.25" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/welcome_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/aolor/StudioProjects/cardiac_corner_app/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1707236842105263" />
+        <entry key="..\:/Users/aolor/StudioProjects/cardiac_corner_app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1707236842105263" />
+        <entry key="..\:/Users/aolor/StudioProjects/cardiac_corner_app/app/src/main/res/drawable/oval_shape.xml" value="0.1707236842105263" />
+        <entry key="..\:/Users/aolor/StudioProjects/cardiac_corner_app/app/src/main/res/drawable/rectangle_shape.xml" value="0.1707236842105263" />
+        <entry key="..\:/Users/aolor/StudioProjects/cardiac_corner_app/app/src/main/res/layout/main_screen.xml" value="0.22171052631578947" />
+        <entry key="..\:/Users/aolor/StudioProjects/cardiac_corner_app/app/src/main/res/layout/new_measurement_screen.xml" value="0.2" />
+        <entry key="..\:/Users/aolor/StudioProjects/cardiac_corner_app/app/src/main/res/layout/welcome_screen.xml" value="0.2" />
         <entry key="..\:/Users/casci/AndroidStudioProjects/CardiacCorner/app/src/main/res/layout/test.xml" value="0.15830800405268491" />
-        <entry key="..\:/Users/casci/OneDrive/Documents/GitHub/cardiac_corner_app/app/src/main/res/layout/main_screen.xml" value="0.2817028985507246" />
-        <entry key="..\:/Users/casci/OneDrive/Documents/GitHub/cardiac_corner_app/app/src/main/res/layout/settings_screen.xml" value="0.15830800405268491" />
-        <entry key="..\:/Users/casci/OneDrive/Documents/GitHub/cardiac_corner_app/app/src/main/res/layout/signin_screen.xml" value="0.10052083333333334" />
-        <entry key="..\:/Users/casci/OneDrive/Documents/GitHub/cardiac_corner_app/app/src/main/res/layout/signup_screen.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/casci/OneDrive/Documents/GitHub/cardiac_corner_app/app/src/main/res/layout/activity_main.xml" value="0.15830800405268491" />
+        <entry key="..\:/Users/casci/OneDrive/Documents/GitHub/cardiac_corner_app/app/src/main/res/layout/settings_screen.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/casci/OneDrive/Documents/GitHub/cardiac_corner_app/app/src/main/res/layout/signin_screen.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/casci/OneDrive/Documents/GitHub/cardiac_corner_app/app/src/main/res/layout/signup_screen.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/casci/OneDrive/Documents/GitHub/cardiac_corner_app/app/src/main/res/xml/network_security_config.xml" value="0.14221014492753623" />
       </map>
     </option>
   </component>

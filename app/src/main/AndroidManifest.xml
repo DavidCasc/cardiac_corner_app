@@ -28,6 +28,10 @@
         <activity android:name=".BpHistoryActivity" />
         <activity android:name=".BpDetailsActivity" />
         <activity android:name=".GraphViewActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
