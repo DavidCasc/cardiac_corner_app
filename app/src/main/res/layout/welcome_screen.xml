@@ -11,45 +11,63 @@
         android:id="@+id/sign_up"
         android:layout_width="300dp"
         android:layout_height="60dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="435dp"
+        android:layout_marginEnd="56dp"
         android:backgroundTint="#673AB7"
         android:fontFamily="@font/rasa_bold"
         android:text="SIGN UP"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:iconTint="#000E0000"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="435dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/sign_in"
         android:layout_width="300dp"
         android:layout_height="60dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="512dp"
+        android:layout_marginEnd="56dp"
         android:backgroundTint="#673AB7"
         android:fontFamily="@font/rasa_bold"
         android:text="SIGN IN"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="512dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="139dp"
+        android:layout_marginEnd="1dp"
         android:src="@drawable/rectangle_shape"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="139dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="154dp"
+        android:layout_marginEnd="31dp"
         android:src="@drawable/oval_shape"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="154dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/cardiac_corner"
         android:layout_width="268dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="229dp"
+        android:layout_marginEnd="72dp"
         android:background="#D6B6FF"
         android:fontFamily="@font/rasa_bold"
         android:text="CARDIAC CORNER"
@@ -58,19 +76,22 @@
         android:textSize="48sp"
         app:flow_firstHorizontalStyle="spread_inside"
         app:flow_firstVerticalStyle="spread_inside"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="229dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="242dp"
         android:layout_height="21dp"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="752dp"
         android:text="Blood pressure tracking app"
         android:textAlignment="center"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="752dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/tempBypass"
