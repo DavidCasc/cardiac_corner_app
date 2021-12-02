@@ -17,7 +17,7 @@ import java.util.Locale;
 
 public class NewMeasurementActivity extends AppCompatActivity {
 
-    String dateTime = null; //set this somehow
+    String dateTime = null; // this will be set when the user presses continue
     int systolic = 0;
     int diastolic = 0;
     Boolean sodiumStatus = false;

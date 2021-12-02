@@ -22,8 +22,22 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BpHistoryActivity extends AppCompatActivity {
+
+    // temp until this info is being passed in through Entry
+    String dateTime = "27-11-2021 23:41:30";
+    int systolic = 120;
+    int diastolic = 80;
+    Boolean sodiumStatus = true;
+    Boolean stressStatus = false;
+    Boolean exerciseStatus = true;
+
+    Chip sodiumChip;
+    Chip stressChip;
+    Chip exerciseChip;
+
     String username;
     static final String SHARED_PREFS = "cardiacCornerPrefs";
+    Button detailsBtn;
 
     private void saveData(String Key, String Val) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -69,6 +83,80 @@ public class BpHistoryActivity extends AppCompatActivity {
         username = loadData("username");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bp_history_screen);
+
+        printSystolicValue();
+        printDiastolicValue();
+
+        TextView dateText = (TextView) findViewById(R.id.date_text);
+        dateText.setText(dateTime);
+
+        detailsBtn = (Button) findViewById(R.id.details);
+        detailsBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(BpHistoryActivity.this,BpDetailsActivity.class);
+                        startActivity(i);
+                    }
+                });
+
+        sodiumChip = (Chip) findViewById(R.id.chip1);
+        if(sodiumStatus == true){
+            sodiumChip.setChecked(true);
+            sodiumChip.setCheckedIconVisible(true);
+            sodiumChip.setVisibility(View.VISIBLE);
+        }
+        sodiumChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(sodiumChip.isChecked()){
+                            sodiumChip.setChecked(false);
+                        } else{
+                            sodiumChip.setChecked(true);
+                            sodiumChip.setCheckedIconVisible(true);
+                        }
+                    }
+                });
+
+        stressChip = (Chip) findViewById(R.id.chip2);
+        if(stressStatus == true){
+            stressChip.setChecked(true);
+            stressChip.setCheckedIconVisible(true);
+            stressChip.setVisibility(View.VISIBLE);
+        }
+        stressChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(stressChip.isChecked()){
+                            stressChip.setChecked(false);
+                        } else{
+                            stressChip.setChecked(true);
+                            stressChip.setCheckedIconVisible(true);
+                        }
+                    }
+                });
+
+        exerciseChip = (Chip) findViewById(R.id.chip3);
+        if(exerciseStatus == true){
+            exerciseChip.setChecked(true);
+            exerciseChip.setCheckedIconVisible(true);
+            exerciseChip.setVisibility(View.VISIBLE);
+        }
+        exerciseChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(exerciseChip.isChecked()){
+                            exerciseChip.setChecked(false);
+                        } else{
+                            exerciseChip.setChecked(true);
+                            exerciseChip.setCheckedIconVisible(true);
+                        }
+                    }
+                });
+
         if(!logsStored()) {
             fetchLogs();
         }
@@ -90,5 +178,27 @@ public class BpHistoryActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void printSystolicValue()
+    {
+        TextView textView = (TextView) findViewById(R.id.systolic);
+
+        if(systolic == 0){
+            textView.setText(null);
+        } else{
+            textView.setText(String.valueOf(systolic));
+        }
+    }
+
+    private void printDiastolicValue()
+    {
+        TextView textView = (TextView) findViewById(R.id.diastolic);
+
+        if(diastolic == 0){
+            textView.setText(null);
+        } else{
+            textView.setText(String.valueOf(diastolic));
+        }
     }
 }

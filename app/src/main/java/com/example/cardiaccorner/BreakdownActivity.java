@@ -12,6 +12,10 @@ import com.google.android.material.chip.Chip;
 
 public class BreakdownActivity extends AppCompatActivity {
 
+    Chip sodiumChip;
+    Chip stressChip;
+    Chip exerciseChip;
+
     Button finishBtn;
 
     @Override
@@ -26,6 +30,45 @@ public class BreakdownActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent i = new Intent(BreakdownActivity.this,MainActivity.class);
                         startActivity(i);
+                    }
+                });
+
+        sodiumChip = (Chip) findViewById(R.id.chip1);
+        sodiumChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(sodiumChip.isChecked()){
+                            // code to display data with sodium tag
+                        } else{
+                            // other case
+                        }
+                    }
+                });
+
+        stressChip = (Chip) findViewById(R.id.chip2);
+        stressChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(stressChip.isChecked()){
+                            // code to display data with stress tag
+                        } else{
+                            // other case
+                        }
+                    }
+                });
+
+        exerciseChip = (Chip) findViewById(R.id.chip3);
+        exerciseChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(exerciseChip.isChecked()){
+                            // code to display data with heavy exercise tag
+                        } else{
+                            // other case
+                        }
                     }
                 });
 

@@ -12,27 +12,114 @@ import com.google.android.material.chip.Chip;
 
 public class BpDetailsActivity extends AppCompatActivity {
 
-    String systolic_var = "120"; //temp until we have measurement from monitor passed in
-    String diastolic_var = "80"; //temp until we have measurement from monitor passed in
+    // temp until this info is being passed in through Entry
+    String dateTime = "27-11-2021 23:41:30";
+    int systolic = 120;
+    int diastolic = 80;
+    Boolean sodiumStatus = true;
+    Boolean stressStatus = false;
+    Boolean exerciseStatus = true;
+    String notes = "here is where the user can type lots of words!";
 
-    Chip chip1;
-    Chip chip2;
-    Chip chip3;
+    Chip sodiumChip;
+    Chip stressChip;
+    Chip exerciseChip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bp_details_screen);
 
+        printSystolicValue();
+        printDiastolicValue();
+
+        TextView notesText = (TextView) findViewById(R.id.notes_text);
+        notesText.setText(notes);
+
+        TextView dateText = (TextView) findViewById(R.id.date_text);
+        dateText.setText(dateTime);
+
+        sodiumChip = (Chip) findViewById(R.id.chip1);
+        if(sodiumStatus == true){
+            sodiumChip.setChecked(true);
+            sodiumChip.setCheckedIconVisible(true);
+        } else{
+            sodiumChip.setChecked(false);
+        }
+        sodiumChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(sodiumChip.isChecked()){
+                            sodiumChip.setChecked(false);
+                        } else{
+                            sodiumChip.setChecked(true);
+                            sodiumChip.setCheckedIconVisible(true);
+                        }
+                    }
+                });
+
+        stressChip = (Chip) findViewById(R.id.chip2);
+        if(stressStatus == true){
+            stressChip.setChecked(true);
+            stressChip.setCheckedIconVisible(true);
+        } else{
+            stressChip.setChecked(false);
+        }
+        stressChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(stressChip.isChecked()){
+                            stressChip.setChecked(false);
+                        } else{
+                            stressChip.setChecked(true);
+                            stressChip.setCheckedIconVisible(true);
+                        }
+                    }
+                });
+
+        exerciseChip = (Chip) findViewById(R.id.chip3);
+        if(exerciseStatus == true){
+            exerciseChip.setChecked(true);
+            exerciseChip.setCheckedIconVisible(true);
+        } else{
+            exerciseChip.setChecked(false);
+        }
+        exerciseChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(exerciseChip.isChecked()){
+                            exerciseChip.setChecked(false);
+                        } else{
+                            exerciseChip.setChecked(true);
+                            exerciseChip.setCheckedIconVisible(true);
+                        }
+                    }
+                });
+
+    }
+
+    private void printSystolicValue()
+    {
         TextView textView = (TextView) findViewById(R.id.systolic);
-        textView.setText(systolic_var);
 
-        TextView textView2 = (TextView) findViewById(R.id.diastolic);
-        textView2.setText(diastolic_var);
+        if(systolic == 0){
+            textView.setText(null);
+        } else{
+            textView.setText(String.valueOf(systolic));
+        }
+    }
 
-        // if chip1==true, then set chip to be checked
-        // if chip2==true, then set chip to be checked
-        // if chip3==true, then set chip to be checked
+    private void printDiastolicValue()
+    {
+        TextView textView = (TextView) findViewById(R.id.diastolic);
 
+        if(diastolic == 0){
+            textView.setText(null);
+        } else{
+            textView.setText(String.valueOf(diastolic));
+        }
     }
 }

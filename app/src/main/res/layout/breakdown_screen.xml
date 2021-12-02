@@ -18,6 +18,79 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:layout_width="410dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="63dp"
+        android:layout_marginEnd="1dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip1"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:checkable="true"
+            android:text="Sodium"
+            android:textAlignment="center"
+            android:textColor="@color/chip_text_color"
+            android:textSize="16dp"
+            app:checkedIconEnabled="true"
+            app:checkedIconTint="@color/white"
+            app:checkedIconVisible="true"
+            app:chipBackgroundColor="@color/chip_background_color"
+            app:chipEndPadding="10dp"
+            app:chipIconVisible="true"
+            app:chipMinHeight="40dp"
+            app:chipMinTouchTargetSize="40dp"
+            app:chipStartPadding="10dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip2"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:checkable="true"
+            android:text="Stress"
+            android:textAlignment="center"
+            android:textColor="@color/chip_text_color"
+            android:textSize="16dp"
+            app:checkedIconEnabled="true"
+            app:checkedIconTint="@color/white"
+            app:checkedIconVisible="true"
+            app:chipBackgroundColor="@color/chip_background_color"
+            app:chipEndPadding="10dp"
+            app:chipIconVisible="true"
+            app:chipMinHeight="40dp"
+            app:chipMinTouchTargetSize="40dp"
+            app:chipStartPadding="10dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip3"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="170dp"
+            android:layout_height="45dp"
+            android:checkable="true"
+            android:text="Heavy Exercise"
+            android:textAlignment="center"
+            android:textColor="@color/chip_text_color"
+            android:textSize="16dp"
+            app:checkedIconEnabled="true"
+            app:checkedIconTint="@color/white"
+            app:checkedIconVisible="true"
+            app:chipBackgroundColor="@color/chip_background_color"
+            app:chipEndPadding="10dp"
+            app:chipIconVisible="true"
+            app:chipMinHeight="40dp"
+            app:chipMinTouchTargetSize="40dp"
+            app:chipStartPadding="10dp" />
+
+    </LinearLayout>
+
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="291dp"
         android:layout_height="289dp"

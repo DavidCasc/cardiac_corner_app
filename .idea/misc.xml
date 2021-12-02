@@ -4,11 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/bp_entry.xml" value="0.23157894736842105" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/bp_history_screen.xml" value="0.23157894736842105" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/breakdown_screen.xml" value="0.23157894736842105" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/graph_view_screen.xml" value="0.23157894736842105" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/main_screen.xml" value="0.23157894736842105" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/settings_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/signin_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/signup_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/test.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/welcome_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/welcome_screen.xml" value="0.25" />
         <entry key="..\:/Users/aolor/StudioProjects/cardiac_corner_app/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1707236842105263" />
         <entry key="..\:/Users/aolor/StudioProjects/cardiac_corner_app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1707236842105263" />
         <entry key="..\:/Users/aolor/StudioProjects/cardiac_corner_app/app/src/main/res/drawable/oval_shape.xml" value="0.1707236842105263" />
