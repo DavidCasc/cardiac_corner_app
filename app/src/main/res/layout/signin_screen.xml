@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7AC5CD"
+    android:background="#A1D2F4"
     tools:context=".SignInActivity">
 
     <TextView
         android:id="@+id/signin_page"
         android:layout_width="180dp"
         android:layout_height="70dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="232dp"
+        android:fontFamily="@font/rasa_bold"
         android:text="SIGN IN"
         android:textAlignment="center"
         android:textColor="#000000"
