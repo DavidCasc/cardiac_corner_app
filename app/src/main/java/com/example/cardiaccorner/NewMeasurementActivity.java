@@ -19,6 +19,7 @@ import com.google.android.material.chip.Chip;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -29,7 +30,7 @@ import java.util.UUID;
 
 public class NewMeasurementActivity extends AppCompatActivity {
 
-    String dateTime = null; // this will be set when the user presses continue
+    String dateTime; // this will be set when the user presses continue
     int systolic = 0;
     int diastolic = 0;
     TextView systolicLabel;
@@ -38,6 +39,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
     Boolean stressStatus = false;
     Boolean exerciseStatus = false;
     String notes = null;
+    Entry entry;
 
     Chip sodiumChip;
     Chip stressChip;
@@ -51,6 +53,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
     private String str = "";
     BluetoothDevice monitor;
     BluetoothSocket socket;
+    private boolean timeout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +63,15 @@ public class NewMeasurementActivity extends AppCompatActivity {
         systolicLabel = (TextView) findViewById(R.id.systolic);
         diastolicLabel = (TextView) findViewById(R.id.diastolic);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String Measurement = extras.getString("measurement");
-            //The key argument here must match that used in the other activity
-        }
+        //TODO: Delete when done testing
+        systolicLabel.setText("120");
+        diastolicLabel.setText("80");
 
+        systolic = 120;
+        diastolic = 80;
+
+        //TODO: uncomment
+        /**
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -120,12 +126,9 @@ public class NewMeasurementActivity extends AppCompatActivity {
                         if(inputStream.available() > 0) {
                             break;
                         } else if (i == 99) {
-                            /**
                             Intent intent = new Intent(NewMeasurementActivity.this,MainActivity.class);
                             intent.putExtra("err", "Connection Timed Out");
                             startActivity(intent);
-                            **/
-                            timer.cancel();
                         }
                         Thread.sleep(100);
                     }
@@ -160,6 +163,8 @@ public class NewMeasurementActivity extends AppCompatActivity {
                 }
             }
         }, 100);
+        **/
+
 
         printSystolicValue();
         printDiastolicValue();
@@ -169,8 +174,17 @@ public class NewMeasurementActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        continueButtonClicked();
+
+                        //TODO post to server
                         Intent i = new Intent(NewMeasurementActivity.this,BreakdownActivity.class);
+
+                        // set date and notes strings
+                        setDateTime();
+                        notesToString();
+
+                        // create entry
+                        Entry entry = new Entry(dateTime, systolic, diastolic, sodiumStatus, stressStatus, exerciseStatus, notes);
+
                         startActivity(i);
                     }
                 });

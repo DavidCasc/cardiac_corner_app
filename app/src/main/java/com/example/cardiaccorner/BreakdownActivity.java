@@ -18,6 +18,12 @@ public class BreakdownActivity extends AppCompatActivity {
 
     Button finishBtn;
 
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

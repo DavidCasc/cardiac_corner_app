@@ -19,6 +19,6 @@ public interface UserService {
     @POST("/register")
     Call<RegisterResponse> userRegister(@Body RegisterRequest registerRequest);
 
-    @DELETE("logout/{token}")
+    @DELETE("/logout/{token}")
     Call<LogoutResponse> logout(@Path("token") String token);
 }

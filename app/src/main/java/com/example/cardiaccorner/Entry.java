@@ -1,6 +1,8 @@
 package com.example.cardiaccorner;
 
-public class Entry {
+import java.io.Serializable;
+
+public class Entry implements Serializable {
     private String time_created;
     private int sys_measurement;
     private int dia_measurement;
