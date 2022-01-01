@@ -21,4 +21,8 @@ public interface UserService {
 
     @DELETE("/logout/{token}")
     Call<LogoutResponse> logout(@Path("token") String token);
+
+    @DELETE("/deleteAll/{user}")
+    Call<ClearLogsResponse> deleteAll(@Path("user") String user);
+
 }

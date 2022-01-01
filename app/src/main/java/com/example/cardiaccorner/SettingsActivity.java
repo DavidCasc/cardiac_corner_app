@@ -15,7 +15,7 @@ import retrofit2.Response;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    Button signoutBtn;
+    Button signoutBtn, clearDataBtn;
     TextView emailText, accText;
     String emailStr, accStr, refreshToken;
 
@@ -29,6 +29,12 @@ public class SettingsActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    private void clearPrefsData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("logs", "");
+        editor.commit();
+    }
     public String loadData(String Key) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(Key, "");
@@ -61,6 +67,18 @@ public class SettingsActivity extends AppCompatActivity {
                         startActivity(i);
                     }
                 });
+
+        clearDataBtn = (Button) findViewById(R.id.clear_data);
+
+        clearDataBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        clearData();
+                        clearPrefsData();
+                    }
+                }
+        );
     }
 
     public void logoutDelete() {
@@ -77,5 +95,19 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void clearData() {
+        Call<ClearLogsResponse> ResponseCall = ApiClient.getUserService().deleteAll(accStr);
+        ResponseCall.enqueue(new Callback<ClearLogsResponse>() {
+            @Override
+            public void onResponse(Call<ClearLogsResponse> call, Response<ClearLogsResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ClearLogsResponse> call, Throwable t) {
+
+            }
+        });
     }
 }
