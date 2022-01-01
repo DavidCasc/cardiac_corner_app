@@ -25,4 +25,7 @@ public interface UserService {
     @DELETE("/deleteAll/{user}")
     Call<ClearLogsResponse> deleteAll(@Path("user") String user);
 
+    @POST("/addLog")
+    Call<LogPostResponse> addLogs(@Body LogPostRequest logPostRequest);
+
 }
