@@ -204,7 +204,9 @@ public class NewMeasurementActivity extends AppCompatActivity {
                         //get username
                         String user = loadData("username");
 
+                        //Store logs
                         addLog(entry,user);
+                        storeLogs(logs);
                         startActivity(i);
                     }
                 });

@@ -97,7 +97,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
     public void clearData() {
-        Call<ClearLogsResponse> ResponseCall = ApiClient.getUserService().deleteAll(accStr);
+        Call<ClearLogsResponse> ResponseCall = ApiClient.getUserService().deleteAll(loadData("username"));
         ResponseCall.enqueue(new Callback<ClearLogsResponse>() {
             @Override
             public void onResponse(Call<ClearLogsResponse> call, Response<ClearLogsResponse> response) {
