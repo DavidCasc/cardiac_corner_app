@@ -193,7 +193,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
                         notesToString();
 
                         // create entry
-                        Entry entry = new Entry(dateTime, systolic, diastolic, sodiumStatus, stressStatus, exerciseStatus, notes);
+                        Entry entry = new Entry(dateTime, systolic, diastolic, sodiumStatus, stressStatus, exerciseStatus, notes, true);
 
                         //load logs
                         ArrayList<Entry> logs = retrieveLogs();
@@ -263,7 +263,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
         notesToString();
 
         // create entry
-        Entry newEntry = new Entry(dateTime, systolic, diastolic, sodiumStatus, stressStatus, exerciseStatus, notes);
+        Entry newEntry = new Entry(dateTime, systolic, diastolic, sodiumStatus, stressStatus, exerciseStatus, notes, true);
 
         //save to db
         System.out.println(newEntry);
@@ -313,12 +313,24 @@ public class NewMeasurementActivity extends AppCompatActivity {
         logPostCall.enqueue(new Callback<LogPostResponse>() {
             @Override
             public void onResponse(Call<LogPostResponse> call, Response<LogPostResponse> response) {
+                //load logs
+                ArrayList<Entry> logs = retrieveLogs();
 
+                //Add logs
+                logs.add(entry);
+                storeLogs(logs);
             }
 
             @Override
             public void onFailure(Call<LogPostResponse> call, Throwable t) {
+                System.out.println("Post Failed");
+                entry.setSynced(false);
+                //load logs
+                ArrayList<Entry> logs = retrieveLogs();
 
+                //Add logs
+                logs.add(entry);
+                storeLogs(logs);
             }
         });
     }

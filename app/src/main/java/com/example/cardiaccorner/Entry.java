@@ -10,8 +10,9 @@ public class Entry implements Serializable {
     private boolean sodium;
     private boolean stress;
     private String notes;
+    private Boolean synced;
 
-    public Entry(String time_created, int sys_measurement, int dia_measurement, boolean exercise, boolean sodium, boolean stress, String notes) {
+    public Entry(String time_created, int sys_measurement, int dia_measurement, boolean exercise, boolean sodium, boolean stress, String notes, Boolean synced) {
         this.time_created = time_created;
         this.sys_measurement = sys_measurement;
         this.dia_measurement = dia_measurement;
@@ -19,6 +20,7 @@ public class Entry implements Serializable {
         this.sodium = sodium;
         this.stress = stress;
         this.notes = notes;
+        this.synced = synced;
     }
 
     public String getTime_created() {
@@ -77,16 +79,25 @@ public class Entry implements Serializable {
         this.notes = notes;
     }
 
+    public Boolean getSynced() {
+        return synced;
+    }
+
+    public void setSynced(Boolean synced) {
+        this.synced = synced;
+    }
+
     @Override
     public String toString() {
         return "Entry{" +
                 "time_created='" + time_created + '\'' +
                 ", sys_measurement=" + sys_measurement +
                 ", dia_measurement=" + dia_measurement +
-                ", heavy_exer=" + exercise +
+                ", exercise=" + exercise +
                 ", sodium=" + sodium +
                 ", stress=" + stress +
                 ", notes='" + notes + '\'' +
+                ", synced=" + synced +
                 '}';
     }
 }
