@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
@@ -15,18 +16,26 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewMeasurementActivity extends AppCompatActivity {
 
@@ -54,6 +63,9 @@ public class NewMeasurementActivity extends AppCompatActivity {
     BluetoothDevice monitor;
     BluetoothSocket socket;
     private boolean timeout;
+
+    String username;
+    static final String SHARED_PREFS = "cardiacCornerPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,8 +186,6 @@ public class NewMeasurementActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        //TODO post to server
                         Intent i = new Intent(NewMeasurementActivity.this,BreakdownActivity.class);
 
                         // set date and notes strings
@@ -185,6 +195,16 @@ public class NewMeasurementActivity extends AppCompatActivity {
                         // create entry
                         Entry entry = new Entry(dateTime, systolic, diastolic, sodiumStatus, stressStatus, exerciseStatus, notes);
 
+                        //load logs
+                        ArrayList<Entry> logs = retrieveLogs();
+
+                        //Add logs
+                        logs.add(entry);
+
+                        //get username
+                        String user = loadData("username");
+
+                        addLog(entry,user);
                         startActivity(i);
                     }
                 });
@@ -249,6 +269,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
         //go to next page / prompt user / anything else
     }
 
+
     private void printSystolicValue()
     {
         TextView textView = (TextView) findViewById(R.id.systolic);
@@ -283,4 +304,58 @@ public class NewMeasurementActivity extends AppCompatActivity {
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         dateTime = currentDate + " " +currentTime;
     }
+
+    private void addLog(Entry entry, String user) {
+        LogPostRequest logPostRequest = new LogPostRequest(entry, user);
+        Call<LogPostResponse> logPostCall = ApiClient.getUserService().addLogs(logPostRequest);
+        logPostCall.enqueue(new Callback<LogPostResponse>() {
+            @Override
+            public void onResponse(Call<LogPostResponse> call, Response<LogPostResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<LogPostResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void saveData(String Key, String Val) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Key, Val);
+        editor.commit();
+    }
+    public String loadData(String Key) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getString(Key, "");
+    }
+    public Boolean logsStored(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.contains("logs");
+    }
+    public void storeLogs(ArrayList<Entry> log){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String arr = gson.toJson(log);
+        editor.putString("logs", arr);
+        editor.commit();
+    }
+    public ArrayList<Entry> retrieveLogs(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String arr = sharedPreferences.getString("logs", null);
+        Type type = new TypeToken<ArrayList<Entry>>() {}.getType();
+
+        ArrayList<Entry> log = gson.fromJson(arr, type);
+
+        if (log == null) {
+            log = new ArrayList<Entry>();
+        }
+
+        return log;
+    }
+    ArrayList<Entry> logs;
 }
