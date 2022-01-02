@@ -5,31 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A1D2F4"
-    tools:context=".BpHistoryActivity">>
+    tools:context=".BpHistoryActivity"><![CDATA[>
+
+
+
+
+
+    ]]>
 
     <TextView
         android:id="@+id/breakdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="55dp"
         android:text="BLOOD PRESSURE HISTORY"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="56dp"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,9 +32,32 @@
         android:id="@+id/logScroll"
         android:layout_width="409dp"
         android:layout_height="593dp"
+        android:layout_marginTop="11dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:layout_constraintTop_toBottomOf="@+id/SearchText"
         tools:listitem="@layout/bp_entry" />
+
+    <EditText
+        android:id="@+id/SearchText"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Search"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/breakdown" />
+
+    <ImageView
+        android:id="@+id/SearchIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@+id/SearchText"
+        app:layout_constraintTop_toBottomOf="@+id/breakdown"
+        app:srcCompat="@drawable/ic_baseline_search_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

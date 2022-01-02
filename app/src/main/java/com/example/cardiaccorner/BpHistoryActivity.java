@@ -9,12 +9,16 @@ import android.content.SharedPreferences;
 import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -33,13 +37,18 @@ public class BpHistoryActivity extends AppCompatActivity {
     Boolean stressStatus = false;
     Boolean exerciseStatus = true;
 
+
+    ImageView searchIcon;
+
+    TextView searchView;
+
     Chip sodiumChip;
     Chip stressChip;
     Chip exerciseChip;
 
     String username;
     static final String SHARED_PREFS = "cardiacCornerPrefs";
-    Button detailsBtn;
+    Button detailsBtn, searchBtn;
     RecyclerView recyclerView;
 
     @Override
@@ -88,10 +97,46 @@ public class BpHistoryActivity extends AppCompatActivity {
     ArrayList<Entry> logs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         username = loadData("username");
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.bp_history_screen);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null && bundle.getSerializable("entries") != null){
+            ArrayList<Entry> entries = (ArrayList<Entry>) bundle.getSerializable("entries");
+            logs = entries;
+        } else {
+            if (!logsStored()) {
+                fetchLogs();
+            }
+            logs = retrieveLogs();
+        }
+        System.out.println(logs);
+
+        searchView = (TextView) findViewById(R.id.SearchText);
+        searchIcon = (ImageView) findViewById(R.id.SearchIcon);
+
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<Entry> filteredList = new ArrayList<Entry>();
+                for(Entry e: retrieveLogs()){
+                    if(String.valueOf(e.getDia_measurement()).contains(searchView.getText().toString())){
+                        filteredList.add(e);
+                    } else if (String.valueOf(e.getSys_measurement()).contains(searchView.getText().toString())){
+                        filteredList.add(e);
+                    } else if (e.getTime_created().contains(searchView.getText().toString())){
+                        filteredList.add(e);
+                    }
+                }
+
+                Intent i = new Intent(BpHistoryActivity.this, BpHistoryActivity.class);
+                i.putExtra("entries", filteredList);
+                startActivity(i);
+            }
+        });
+
+
         /**
         printSystolicValue();
         printDiastolicValue();
@@ -167,11 +212,6 @@ public class BpHistoryActivity extends AppCompatActivity {
                 });
         **/
 
-        if(!logsStored()) {
-            fetchLogs();
-        }
-        logs = retrieveLogs();
-        System.out.println(logs);
 
         recyclerView = (RecyclerView) findViewById(R.id.logScroll);
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(this, logs);
