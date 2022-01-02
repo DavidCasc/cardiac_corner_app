@@ -16,6 +16,7 @@ public class BreakdownActivity extends AppCompatActivity {
     Chip exerciseChip;
 
     Button finishBtn;
+    Button backBtn;
 
     @Override
     public void onBackPressed() {
@@ -35,6 +36,16 @@ public class BreakdownActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(BreakdownActivity.this,MainActivity.class);
+                        startActivity(i);
+                    }
+                });
+
+        backBtn = (Button) findViewById(R.id.back_button);
+        backBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(BreakdownActivity.this,NewMeasurementActivity.class);
                         startActivity(i);
                     }
                 });

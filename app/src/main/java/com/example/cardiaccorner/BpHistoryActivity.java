@@ -48,7 +48,7 @@ public class BpHistoryActivity extends AppCompatActivity {
 
     String username;
     static final String SHARED_PREFS = "cardiacCornerPrefs";
-    Button detailsBtn, searchBtn;
+    Button detailsBtn, searchBtn, backBtn;
     RecyclerView recyclerView;
 
     @Override
@@ -112,6 +112,17 @@ public class BpHistoryActivity extends AppCompatActivity {
             logs = retrieveLogs();
         }
         System.out.println(logs);
+
+        backBtn = (Button) findViewById(R.id.back_button);
+        backBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(BpHistoryActivity.this,MainActivity.class);
+                        startActivity(i);
+
+                    }
+                });
 
         searchView = (TextView) findViewById(R.id.SearchText);
         searchIcon = (ImageView) findViewById(R.id.SearchIcon);

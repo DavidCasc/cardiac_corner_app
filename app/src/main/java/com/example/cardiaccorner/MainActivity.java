@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     Button newMeasurementBtn;
     Button bpHistoryBtn;
     Button graphViewBtn;
+    Button backBtn;
     static final String SHARED_PREFS = "cardiacCornerPrefs";
     String username;
 
@@ -65,6 +66,17 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent i = new Intent(MainActivity.this,SettingsActivity.class);
                         startActivity(i);
+                    }
+                });
+
+        backBtn = (Button) findViewById(R.id.back_button);
+        backBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(MainActivity.this,WelcomeActivity.class);
+                        startActivity(i);
+
                     }
                 });
 

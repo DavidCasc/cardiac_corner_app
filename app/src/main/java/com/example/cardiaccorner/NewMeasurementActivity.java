@@ -47,6 +47,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
     Chip exerciseChip;
 
     Button continueBtn;
+    Button backBtn;
     String Measurement;
 
     private UUID SerialUUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
@@ -193,6 +194,17 @@ public class NewMeasurementActivity extends AppCompatActivity {
                         //Store logs
                         addLog(entry,user);
                         startActivity(i);
+                    }
+                });
+
+        backBtn = (Button) findViewById(R.id.back_button);
+        backBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(NewMeasurementActivity.this,MainActivity.class);
+                        startActivity(i);
+
                     }
                 });
 
