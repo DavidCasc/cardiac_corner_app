@@ -42,6 +42,12 @@ public class BpHistoryActivity extends AppCompatActivity {
     Button detailsBtn;
     RecyclerView recyclerView;
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(BpHistoryActivity.this, MainActivity.class);
+    }
+
     private void saveData(String Key, String Val) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

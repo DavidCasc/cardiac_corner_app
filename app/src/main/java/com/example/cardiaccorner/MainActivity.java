@@ -48,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
     BluetoothSocket socket;
 
     @Override
+    public void onBackPressed() {
+        
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         username = loadData("username");
         super.onCreate(savedInstanceState);

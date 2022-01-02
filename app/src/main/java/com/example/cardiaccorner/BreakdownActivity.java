@@ -17,10 +17,11 @@ public class BreakdownActivity extends AppCompatActivity {
 
     Button finishBtn;
 
-
     @Override
     public void onBackPressed() {
-
+        super.onBackPressed();
+        Intent i = new Intent(BreakdownActivity.this, MainActivity.class);
+        startActivity(i);
     }
 
     @Override
