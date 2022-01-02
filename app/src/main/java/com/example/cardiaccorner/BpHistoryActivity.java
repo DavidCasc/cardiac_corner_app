@@ -1,6 +1,8 @@
 package com.example.cardiaccorner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,6 +40,7 @@ public class BpHistoryActivity extends AppCompatActivity {
     String username;
     static final String SHARED_PREFS = "cardiacCornerPrefs";
     Button detailsBtn;
+    RecyclerView recyclerView;
 
     private void saveData(String Key, String Val) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -83,7 +86,7 @@ public class BpHistoryActivity extends AppCompatActivity {
         username = loadData("username");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bp_history_screen);
-
+        /**
         printSystolicValue();
         printDiastolicValue();
 
@@ -100,7 +103,7 @@ public class BpHistoryActivity extends AppCompatActivity {
                     }
                 });
 
-        sodiumChip = (Chip) findViewById(R.id.chip1);
+        sodiumChip = (Chip) findViewById(R.id.chip1_card);
         if(sodiumStatus == true){
             sodiumChip.setChecked(true);
             sodiumChip.setCheckedIconVisible(true);
@@ -119,7 +122,7 @@ public class BpHistoryActivity extends AppCompatActivity {
                     }
                 });
 
-        stressChip = (Chip) findViewById(R.id.chip2);
+        stressChip = (Chip) findViewById(R.id.chip2_card);
         if(stressStatus == true){
             stressChip.setChecked(true);
             stressChip.setCheckedIconVisible(true);
@@ -138,7 +141,7 @@ public class BpHistoryActivity extends AppCompatActivity {
                     }
                 });
 
-        exerciseChip = (Chip) findViewById(R.id.chip3);
+        exerciseChip = (Chip) findViewById(R.id.chip3_card);
         if(exerciseStatus == true){
             exerciseChip.setChecked(true);
             exerciseChip.setCheckedIconVisible(true);
@@ -156,13 +159,21 @@ public class BpHistoryActivity extends AppCompatActivity {
                         }
                     }
                 });
+        **/
 
         if(!logsStored()) {
             fetchLogs();
         }
         logs = retrieveLogs();
         System.out.println(logs);
+
+        recyclerView = (RecyclerView) findViewById(R.id.logScroll);
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(this, logs);
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
+
 
     public void fetchLogs() {
         Call<LogsResponse> logsRequestCall = ApiClient.getUserService().fetchLogs(username);

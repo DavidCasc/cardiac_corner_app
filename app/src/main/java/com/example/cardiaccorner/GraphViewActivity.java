@@ -2,11 +2,8 @@ package com.example.cardiaccorner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.view.View;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
 
@@ -21,7 +18,7 @@ public class GraphViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_view_screen);
 
-        sodiumChip = (Chip) findViewById(R.id.chip1);
+        sodiumChip = (Chip) findViewById(R.id.chip1_card);
         sodiumChip.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -34,7 +31,7 @@ public class GraphViewActivity extends AppCompatActivity {
                     }
                 });
 
-        stressChip = (Chip) findViewById(R.id.chip2);
+        stressChip = (Chip) findViewById(R.id.chip2_card);
         stressChip.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -47,7 +44,7 @@ public class GraphViewActivity extends AppCompatActivity {
                     }
                 });
 
-        exerciseChip = (Chip) findViewById(R.id.chip3);
+        exerciseChip = (Chip) findViewById(R.id.chip3_card);
         exerciseChip.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

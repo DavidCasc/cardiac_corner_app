@@ -1,6 +1,7 @@
 package com.example.cardiaccorner;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Entry implements Serializable {
     private String time_created;
@@ -99,5 +100,18 @@ public class Entry implements Serializable {
                 ", notes='" + notes + '\'' +
                 ", synced=" + synced +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Entry)) return false;
+        Entry entry = (Entry) o;
+        return getSys_measurement() == entry.getSys_measurement() && getDia_measurement() == entry.getDia_measurement() && isExercise() == entry.isExercise() && isSodium() == entry.isSodium() && isStress() == entry.isStress() && getTime_created().equals(entry.getTime_created()) && getNotes().equals(entry.getNotes()) && getSynced().equals(entry.getSynced());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTime_created(), getSys_measurement(), getDia_measurement(), isExercise(), isSodium(), isStress(), getNotes(), getSynced());
     }
 }

@@ -3,144 +3,166 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="140dp">
+    android:layout_height="132dp"
+    android:background="#00FFFFFF">
 
-    <TextView
-        android:id="@+id/line_text"
-        android:layout_width="140dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="44dp"
-        android:text="- - - - -"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/diastolic"
-        android:layout_width="140dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="72dp"
-        android:text="80"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/systolic"
-        android:layout_width="140dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="120"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/date_text"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="38dp"
-        android:gravity="center"
-        android:text="XX/XX/XXXX\t\t\thh:mm:ss"
-        android:textColor="#000000"
-        android:textSize="18sp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/details"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#EDE3FF"
-        android:text="view more"
-        android:textColor="@color/black"
-        android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:layout_width="128dp"
-        android:layout_height="73dp"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="51dp"
-        android:gravity="top"
-        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.chip.ChipGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:chipSpacing="4dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip1"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:checked="true"
-                android:text="Sodium"
+            <TextView
+                android:id="@+id/line_text"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="44dp"
+                android:text="- - - - -"
                 android:textAlignment="center"
-                android:textColor="@color/chip_text_color"
-                android:textSize="11dp"
-                android:visibility="gone"
-                app:checkedIconEnabled="true"
-                app:checkedIconTint="@color/white"
-                app:checkedIconVisible="true"
-                app:chipBackgroundColor="@color/chip_background_color"
-                app:chipIconVisible="true"
-                app:chipMinTouchTargetSize="30dp" />
+                android:textColor="#000000"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip2"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:checked="true"
-                android:text="Stress"
+            <TextView
+                android:id="@+id/diastolic"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="72dp"
+                android:text="80"
                 android:textAlignment="center"
-                android:textColor="@color/chip_text_color"
-                android:textSize="11dp"
-                android:visibility="gone"
-                app:checkedIconEnabled="true"
-                app:checkedIconTint="@color/white"
-                app:checkedIconVisible="true"
-                app:chipBackgroundColor="@color/chip_background_color"
-                app:chipEndPadding="10dp"
-                app:chipMinTouchTargetSize="30dp" />
+                android:textColor="#000000"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip3"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:checked="true"
-                android:text="Heavy Exercise"
+            <TextView
+                android:id="@+id/systolic"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:text="120"
                 android:textAlignment="center"
-                android:textColor="@color/chip_text_color"
-                android:textSize="11dp"
-                android:visibility="gone"
-                app:checkedIconEnabled="true"
-                app:checkedIconTint="@color/white"
-                app:checkedIconVisible="true"
-                app:chipBackgroundColor="@color/chip_background_color"
-                app:chipIconVisible="true"
-                app:chipMinTouchTargetSize="30dp" />
-        </com.google.android.material.chip.ChipGroup>
+                android:textColor="#000000"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/date_text"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="38dp"
+                android:gravity="center"
+                android:text="XX/XX/XXXX\t\t\thh:mm:ss"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <Button
+                android:id="@+id/details"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="88dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#EDE3FF"
+                android:text="view more"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <Button
+                android:id="@+id/sync"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#EDE3FF"
+                android:text="SYNC"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chips"
+                android:layout_width="120dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="150dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="150dp"
+                app:chipSpacing="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip1_card"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:checked="true"
+                    android:text="Sodium"
+                    android:textAlignment="center"
+                    android:textColor="@color/chip_text_color"
+                    android:textSize="11dp"
+                    android:visibility="gone"
+                    app:checkedIconEnabled="true"
+                    app:checkedIconTint="@color/white"
+                    app:checkedIconVisible="true"
+                    app:chipBackgroundColor="@color/chip_background_color"
+                    app:chipIconVisible="true"
+                    app:chipMinTouchTargetSize="30dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip2_card"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:checked="true"
+                    android:text="Stress"
+                    android:textAlignment="center"
+                    android:textColor="@color/chip_text_color"
+                    android:textSize="11dp"
+                    android:visibility="gone"
+                    app:checkedIconEnabled="true"
+                    app:checkedIconTint="@color/white"
+                    app:checkedIconVisible="true"
+                    app:chipBackgroundColor="@color/chip_background_color"
+                    app:chipEndPadding="10dp"
+                    app:chipMinTouchTargetSize="30dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip3_card"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:checked="true"
+                    android:text="Heavy Exercise"
+                    android:textAlignment="center"
+                    android:textColor="@color/chip_text_color"
+                    android:textSize="11dp"
+                    android:visibility="gone"
+                    app:checkedIconEnabled="true"
+                    app:checkedIconTint="@color/white"
+                    app:checkedIconVisible="true"
+                    app:chipBackgroundColor="@color/chip_background_color"
+                    app:chipIconVisible="true"
+                    app:chipMinTouchTargetSize="30dp" />
+            </com.google.android.material.chip.ChipGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

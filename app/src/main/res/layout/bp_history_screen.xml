@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#A1D2F4"
+    tools:context=".BpHistoryActivity">>
 
     <TextView
         android:id="@+id/breakdown"
@@ -20,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
+        android:id="@+id/searchView"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="55dp"
@@ -30,21 +33,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:layout_width="410dp"
-        android:layout_height="600dp"
-        android:layout_marginTop="174dp"
-        android:layout_marginEnd="1dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/logScroll"
+        android:layout_width="409dp"
+        android:layout_height="593dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include
-            android:id="@+id/bp_entry"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/bp_entry" />
-
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        tools:listitem="@layout/bp_entry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

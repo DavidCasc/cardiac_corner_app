@@ -4,7 +4,6 @@ import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
@@ -19,18 +18,11 @@ import com.google.android.material.chip.Chip;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.UUID;
 
 import retrofit2.Call;
@@ -195,23 +187,16 @@ public class NewMeasurementActivity extends AppCompatActivity {
                         // create entry
                         Entry entry = new Entry(dateTime, systolic, diastolic, sodiumStatus, stressStatus, exerciseStatus, notes, true);
 
-                        //load logs
-                        ArrayList<Entry> logs = retrieveLogs();
-
-                        //Add logs
-                        logs.add(entry);
-
                         //get username
                         String user = loadData("username");
 
                         //Store logs
                         addLog(entry,user);
-                        storeLogs(logs);
                         startActivity(i);
                     }
                 });
 
-        sodiumChip = (Chip) findViewById(R.id.chip1);
+        sodiumChip = (Chip) findViewById(R.id.chip1_card);
         sodiumChip.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -224,7 +209,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
                     }
                 });
 
-        stressChip = (Chip) findViewById(R.id.chip2);
+        stressChip = (Chip) findViewById(R.id.chip2_card);
         stressChip.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -237,7 +222,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
                     }
                 });
 
-        exerciseChip = (Chip) findViewById(R.id.chip3);
+        exerciseChip = (Chip) findViewById(R.id.chip3_card);
         exerciseChip.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -371,5 +356,4 @@ public class NewMeasurementActivity extends AppCompatActivity {
 
         return log;
     }
-    ArrayList<Entry> logs;
 }
