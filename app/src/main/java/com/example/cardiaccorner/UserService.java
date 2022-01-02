@@ -28,4 +28,7 @@ public interface UserService {
     @POST("/addLog")
     Call<LogPostResponse> addLogs(@Body LogPostRequest logPostRequest);
 
+    @DELETE("/deleteLog/{user}/{date}")
+    Call<DeleteLogResponse> deleteLog(@Path("user") String user, @Path("date") String date);
+
 }

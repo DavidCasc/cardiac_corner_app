@@ -2,8 +2,11 @@ package com.example.cardiaccorner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
@@ -26,9 +29,8 @@ public class BpDetailsActivity extends AppCompatActivity {
     Boolean exerciseStatus;
     String notes;
 
-    Chip sodiumChip;
-    Chip stressChip;
-    Chip exerciseChip;
+    Chip sodiumChip, stressChip, exerciseChip;
+    Button deleteBtn;
 
     Entry entry;
 
@@ -48,6 +50,9 @@ public class BpDetailsActivity extends AppCompatActivity {
         exerciseChip = (Chip) findViewById(R.id.chip3_card);
         TextView diastolic = (TextView) findViewById(R.id.systolic);
         TextView systolic = (TextView) findViewById(R.id.diastolic);
+        deleteBtn = (Button) findViewById(R.id.delete);
+
+
 
         Bundle bundle = getIntent().getExtras();
 
@@ -70,6 +75,37 @@ public class BpDetailsActivity extends AppCompatActivity {
 
         diastolic.setText(String.valueOf(entry.getDia_measurement()));
         systolic.setText(String.valueOf(entry.getSys_measurement()));
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call<DeleteLogResponse> deleteLogResponseCall = ApiClient.getUserService().deleteLog(loadData("username"), entry.getTime_created());
+                deleteLogResponseCall.enqueue(new Callback<DeleteLogResponse>() {
+                    @Override
+                    public void onResponse(Call<DeleteLogResponse> call, Response<DeleteLogResponse> response) {
+                        ArrayList<Entry> logs = retrieveLogs();
+                        logs.remove(entry);
+                        storeLogs(logs);
+                    }
+
+                    @Override
+                    public void onFailure(Call<DeleteLogResponse> call, Throwable t) {
+
+                    }
+                });
+
+                Intent i = new Intent(BpDetailsActivity.this, BpHistoryActivity.class);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                startActivity(i);
+
+            }
+
+        });
+
     }
 
     private void printSystolicValue()
@@ -95,33 +131,6 @@ public class BpDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void addLog(Entry entry, String user) {
-        LogPostRequest logPostRequest = new LogPostRequest(entry, user);
-        Call<LogPostResponse> logPostCall = ApiClient.getUserService().addLogs(logPostRequest);
-        logPostCall.enqueue(new Callback<LogPostResponse>() {
-            @Override
-            public void onResponse(Call<LogPostResponse> call, Response<LogPostResponse> response) {
-                //load logs
-                ArrayList<Entry> logs = retrieveLogs();
-
-                //Add logs
-                logs.add(entry);
-                storeLogs(logs);
-            }
-
-            @Override
-            public void onFailure(Call<LogPostResponse> call, Throwable t) {
-                System.out.println("Post Failed");
-                entry.setSynced(false);
-                //load logs
-                ArrayList<Entry> logs = retrieveLogs();
-
-                //Add logs
-                logs.add(entry);
-                storeLogs(logs);
-            }
-        });
-    }
     private void saveData(String Key, String Val) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
