@@ -93,13 +93,17 @@ public class BpDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<DeleteLogResponse> call, Response<DeleteLogResponse> response) {
                         ArrayList<Entry> logs = retrieveLogs();
+                        System.out.println(logs);
                         logs.remove(entry);
                         storeLogs(logs);
                     }
 
                     @Override
                     public void onFailure(Call<DeleteLogResponse> call, Throwable t) {
-
+                        ArrayList<Entry> logs = retrieveLogs();
+                        System.out.println(logs);
+                        logs.remove(entry);
+                        storeLogs(logs);
                     }
                 });
 
