@@ -10,9 +10,9 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="55dp"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="32dp"
         android:text="BLOOD PRESSURE HISTORY"
         android:textColor="#000000"
         android:textSize="24sp"
@@ -24,9 +24,9 @@
         android:id="@+id/graph_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="238dp"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="66dp"
+        android:layout_marginEnd="215dp"
         android:text="GRAPH VIEW"
         android:textColor="#9B64FF"
         android:textSize="20sp"
@@ -132,5 +132,17 @@
             android:layout_gravity="bottom" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#F6F5F5"
+        app:icon="@drawable/ic_baseline_arrow_back_ios_24"
+        app:iconTint="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

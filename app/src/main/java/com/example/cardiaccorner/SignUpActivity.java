@@ -17,6 +17,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     // temporarily added this code so that I can get into the main part of the app without having to log in
     Button btnRegister;
+    Button backBtn;
     EditText username, password, email;
 
     @Override
@@ -34,6 +35,17 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         register();
+                    }
+                });
+
+        backBtn = (Button) findViewById(R.id.back_button);
+        backBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(SignUpActivity.this,WelcomeActivity.class);
+                        startActivity(i);
+
                     }
                 });
 

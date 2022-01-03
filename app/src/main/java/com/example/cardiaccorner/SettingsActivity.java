@@ -15,7 +15,7 @@ import retrofit2.Response;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    Button signoutBtn, clearDataBtn;
+    Button signoutBtn, clearDataBtn, backBtn;
     TextView emailText, accText;
     String emailStr, accStr, refreshToken;
 
@@ -79,6 +79,17 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        backBtn = (Button) findViewById(R.id.back_button);
+        backBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(SettingsActivity.this,MainActivity.class);
+                        startActivity(i);
+
+                    }
+                });
     }
 
     public void logoutDelete() {

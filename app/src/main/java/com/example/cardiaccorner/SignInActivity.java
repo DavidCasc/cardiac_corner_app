@@ -20,6 +20,7 @@ public class  SignInActivity extends AppCompatActivity {
 
     EditText username, password;
     Button btnLogin;
+    Button backBtn;
     static final String SHARED_PREFS = "cardiacCornerPrefs";
 
     private void saveData(String Key, String Val) {
@@ -62,9 +63,19 @@ public class  SignInActivity extends AppCompatActivity {
                 } else {
                     login();
                 }
-
             }
         });
+
+        backBtn = (Button) findViewById(R.id.back_button);
+        backBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(SignInActivity.this,WelcomeActivity.class);
+                        startActivity(i);
+
+                    }
+                });
     }
     public void login() {
         LoginRequest loginRequest = new LoginRequest();

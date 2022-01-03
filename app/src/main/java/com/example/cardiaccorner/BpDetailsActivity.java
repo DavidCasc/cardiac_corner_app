@@ -31,6 +31,7 @@ public class BpDetailsActivity extends AppCompatActivity {
 
     Chip sodiumChip, stressChip, exerciseChip;
     Button deleteBtn;
+    Button backBtn;
 
     Entry entry;
 
@@ -41,7 +42,15 @@ public class BpDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bp_details_screen);
 
-
+        backBtn = (Button) findViewById(R.id.back_button);
+        backBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(BpDetailsActivity.this,BpHistoryActivity.class);
+                        startActivity(i);
+                    }
+                });
 
         TextView notesText = (TextView) findViewById(R.id.notes_text);
         TextView dateText = (TextView) findViewById(R.id.date_text);
