@@ -1,8 +1,10 @@
 package com.example.cardiaccorner;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Integer.valueOf;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -46,8 +48,14 @@ public class NewMeasurementActivity extends AppCompatActivity {
     Chip stressChip;
     Chip exerciseChip;
 
-    Button continueBtn;
+    CardView cardView;
+    TextView statusText, textView, textView1;
+
+    EditText diaEntry, sysEntry;
+    Button continueBtn, mesSubmit;
     String Measurement;
+
+
 
     private UUID SerialUUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     private int tries = 0;
@@ -60,120 +68,38 @@ public class NewMeasurementActivity extends AppCompatActivity {
     static final String SHARED_PREFS = "cardiacCornerPrefs";
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(NewMeasurementActivity.this, MainActivity.class);
+        startActivity(i);
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_measurement_screen);
 
         systolicLabel = (TextView) findViewById(R.id.systolic);
         diastolicLabel = (TextView) findViewById(R.id.diastolic);
+        cardView = (CardView) findViewById(R.id.btProgressPanel);
+        statusText = (TextView) findViewById(R.id.status);
 
-        //TODO: Delete when done testing
-        systolicLabel.setText("120");
-        diastolicLabel.setText("80");
+        Bundle bundle = getIntent().getExtras();
 
-        systolic = 120;
-        diastolic = 80;
-
-        //TODO: uncomment
-        /**
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                BluetoothAdapter BTAdapter = BluetoothAdapter.getDefaultAdapter();
-                Set<BluetoothDevice> pairedDevices = BTAdapter.getBondedDevices();
-                for (BluetoothDevice device : pairedDevices){
-                    System.out.println(device.getName());
-                    if(device.getName().equals("Cardiac Corner Monitor")) {
-                        monitor = BTAdapter.getRemoteDevice(device.getAddress());
-                    }
-                }
-
-                if(!monitor.getName().equals("Cardiac Corner Monitor")){
-                    Intent intent = new Intent(NewMeasurementActivity.this,MainActivity.class);
-                    intent.putExtra("err", "Could not obtain connection");
-                    startActivity(intent);
-                }
-
-                do {
-                    try {
-                        socket = monitor.createRfcommSocketToServiceRecord(SerialUUID);
-                        socket.connect();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        Intent intent = new Intent(NewMeasurementActivity.this,MainActivity.class);
-                        intent.putExtra("err", "Could not obtain connection");
-                        startActivity(intent);
-                    }
-                } while (!socket.isConnected() && tries < 3);
-
-                //Send a character to start the transmission
-                try {
-                    OutputStream outputStream = socket.getOutputStream();
-                    outputStream.write(111);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Intent intent = new Intent(NewMeasurementActivity.this,MainActivity.class);
-                    intent.putExtra("err", "Could not Obtain Connection");
-                    startActivity(intent);
-                }
-
-                //Receive the bit stream from the bluetooth transmission
-                try {
-
-                    //Read the transmission
-                    InputStream inputStream = socket.getInputStream();
-                    inputStream.skip(inputStream.available());
-
-                    for(int i = 0; i < 100; i++){
-                        System.out.println(inputStream.available());
-                        if(inputStream.available() > 0) {
-                            break;
-                        } else if (i == 99) {
-                            Intent intent = new Intent(NewMeasurementActivity.this,MainActivity.class);
-                            intent.putExtra("err", "Connection Timed Out");
-                            startActivity(intent);
-                        }
-                        Thread.sleep(100);
-                    }
-
-                    for(int i = 0; i < 7; i++){
-                        byte b = (byte) inputStream.read();
-                        System.out.println(b);
-
-                        //If the byte is the ending character break
-                        if(b == 'n'){
-                            break;
-                        } else {
-                            //Concat to the string
-                            str = str + (char)b;
-                        }
-                    }
-
-                    systolic = parseInt(str.substring(0,str.indexOf("/")));
-                    diastolic = parseInt(str.substring(str.indexOf("/")+1, str.length()));
-
-                    systolicLabel.setText(str.substring(0,str.indexOf("/")));
-                    diastolicLabel.setText(str.substring(str.indexOf("/")+1, str.length()));
-
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        if(bundle != null){
+            if(bundle.getInt("sys")!= 0 && bundle.getInt("dia")!= 0 )
+            {
+                systolic = bundle.getInt("sys");
+                diastolic = bundle.getInt("dia");
             }
-        }, 100);
-        **/
-
+        }
 
         printSystolicValue();
         printDiastolicValue();
 
         continueBtn = (Button) findViewById(R.id.continue_button);
+        continueBtn.setVisibility(View.GONE);
         continueBtn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

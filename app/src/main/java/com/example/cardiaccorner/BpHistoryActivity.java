@@ -55,6 +55,7 @@ public class BpHistoryActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent i = new Intent(BpHistoryActivity.this, MainActivity.class);
+        startActivity(i);
     }
 
     private void saveData(String Key, String Val) {

@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         **/
 
-                        Intent i = new Intent(MainActivity.this,NewMeasurementActivity.class);
+                        Intent i = new Intent(MainActivity.this,BluetoothScreenActivity.class);
                         //i.putExtra("measurement", str);
                         startActivity(i);
                     }
