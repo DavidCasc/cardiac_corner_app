@@ -99,7 +99,6 @@ public class NewMeasurementActivity extends AppCompatActivity {
         printDiastolicValue();
 
         continueBtn = (Button) findViewById(R.id.continue_button);
-        continueBtn.setVisibility(View.GONE);
         continueBtn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

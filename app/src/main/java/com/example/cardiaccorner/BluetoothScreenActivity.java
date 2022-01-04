@@ -62,114 +62,117 @@ public class BluetoothScreenActivity extends AppCompatActivity {
                 }
 
                 statusText.setText("FINDING");
-
-                if (!monitor.getName().equals("Cardiac Corner Monitor")) {
+                if(monitor == null){
                     intent = new Intent(BluetoothScreenActivity.this, ManualEntryActivity.class);
                     startActivity(intent);
-                }
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                statusText.setText("CONNECTING");
-                tries = 0;
-                do {
+                } else if (!monitor.getName().equals("Cardiac Corner Monitor")) {
+                    intent = new Intent(BluetoothScreenActivity.this, ManualEntryActivity.class);
+                    startActivity(intent);
+                } else {
                     try {
-                        socket = monitor.createRfcommSocketToServiceRecord(SerialUUID);
-                        socket.connect();
-                        failed = false;
-                    } catch (IOException e) {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
-                        System.out.println("AAAAAH");
                     }
 
-                    if (!socket.isConnected()) {
+                    statusText.setText("CONNECTING");
+                    tries = 0;
+                    do {
                         try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException e) {
+                            socket = monitor.createRfcommSocketToServiceRecord(SerialUUID);
+                            socket.connect();
+                            failed = false;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            System.out.println("AAAAAH");
+                        }
+
+                        if (!socket.isConnected()) {
+                            try {
+                                Thread.sleep(500);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        if (tries == 5) {
+                            failed = true;
+                        }
+                        tries++;
+                    } while (!socket.isConnected() && tries <= 5);
+
+                    statusText.setText("CONNECTED");
+
+                    //Send a character to start the transmission
+                    if (!failed) {
+                        try {
+                            OutputStream outputStream = socket.getOutputStream();
+                            outputStream.write(111);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            intent = new Intent(BluetoothScreenActivity.this, ManualEntryActivity.class);
+                            startActivity(intent);
+                        }
+
+                        //Receive the bit stream from the bluetooth transmission
+                        try {
+
+                            //Read the transmission
+                            InputStream inputStream = socket.getInputStream();
+                            inputStream.skip(inputStream.available());
+
+                            for (int i = 0; i < 100; i++) {
+                                System.out.println(inputStream.available());
+                                if (inputStream.available() > 0) {
+                                    break;
+                                } else if (i == 99) {
+                                    intent = new Intent(BluetoothScreenActivity.this, ManualEntryActivity.class);
+                                    startActivity(intent);
+                                }
+                                Thread.sleep(100);
+                            }
+
+                            for (int i = 0; i < 7; i++) {
+                                byte b = (byte) inputStream.read();
+                                System.out.println(b);
+
+                                //If the byte is the ending character break
+                                if (b == 'n') {
+                                    break;
+                                } else {
+                                    //Concat to the string
+                                    str = str + (char) b;
+                                }
+                            }
+
+                            systolic = parseInt(str.substring(0, str.indexOf("/")));
+                            diastolic = parseInt(str.substring(str.indexOf("/") + 1, str.length()));
+
+
+                        } catch (IOException | InterruptedException e) {
                             e.printStackTrace();
                         }
-                    }
 
-                    if (tries == 5) {
-                        failed = true;
-                    }
-                    tries++;
-                } while (!socket.isConnected() && tries <= 5);
+                        try {
+                            socket.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
-                statusText.setText("CONNECTED");
+                        Intent i = new Intent(BluetoothScreenActivity.this, NewMeasurementActivity.class);
+                        i.putExtra("sys", systolic);
+                        i.putExtra("dia", diastolic);
+                        startActivity(i);
 
-                //Send a character to start the transmission
-                if (!failed) {
-                    try {
-                        OutputStream outputStream = socket.getOutputStream();
-                        outputStream.write(111);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } else {
                         intent = new Intent(BluetoothScreenActivity.this, ManualEntryActivity.class);
                         startActivity(intent);
                     }
 
-                    //Receive the bit stream from the bluetooth transmission
-                    try {
-
-                        //Read the transmission
-                        InputStream inputStream = socket.getInputStream();
-                        inputStream.skip(inputStream.available());
-
-                        for (int i = 0; i < 100; i++) {
-                            System.out.println(inputStream.available());
-                            if (inputStream.available() > 0) {
-                                break;
-                            } else if (i == 99) {
-                                intent = new Intent(BluetoothScreenActivity.this, ManualEntryActivity.class);
-                                startActivity(intent);
-                            }
-                            Thread.sleep(100);
-                        }
-
-                        for (int i = 0; i < 7; i++) {
-                            byte b = (byte) inputStream.read();
-                            System.out.println(b);
-
-                            //If the byte is the ending character break
-                            if (b == 'n') {
-                                break;
-                            } else {
-                                //Concat to the string
-                                str = str + (char) b;
-                            }
-                        }
-
-                        systolic = parseInt(str.substring(0, str.indexOf("/")));
-                        diastolic = parseInt(str.substring(str.indexOf("/") + 1, str.length()));
-
-
-                    } catch (IOException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        socket.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    Intent i = new Intent(BluetoothScreenActivity.this, NewMeasurementActivity.class);
-                    i.putExtra("sys", systolic);
-                    i.putExtra("dia", diastolic);
-                    startActivity(i);
-
-                } else {
-                    intent = new Intent(BluetoothScreenActivity.this, ManualEntryActivity.class);
-                    startActivity(intent);
+                    statusText.setText("COMPLETE");
                 }
-
-                statusText.setText("COMPLETE");
-
             }
         }, 100);
     }
+
 }
