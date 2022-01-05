@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300dp">
+    android:layout_height="360dp">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="233dp"
-        android:layout_height="287dp"
-        android:text="GRAPH\nWILL\nGO\nHERE\n:)\n:)\n:)"
-        android:textAlignment="center"
-        android:textSize="34sp"
-        tools:layout_editor_absoluteX="89dp"
-        tools:layout_editor_absoluteY="7dp" />
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/line_chart"
+        android:layout_width="410dp"
+        android:layout_height="300dp"
+        android:layout_marginEnd="1dp"
+        android:background="@color/white"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,7 +52,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
     TextView statusText, textView, textView1;
 
     EditText diaEntry, sysEntry;
-    Button continueBtn, mesSubmit;
+    Button continueBtn, mesSubmit, backBtn;
     String Measurement;
 
 
@@ -117,6 +117,16 @@ public class NewMeasurementActivity extends AppCompatActivity {
 
                         //Store logs
                         addLog(entry,user);
+                        startActivity(i);
+                    }
+                });
+
+        backBtn = (Button) findViewById(R.id.back_button);
+        backBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(NewMeasurementActivity.this,MainActivity.class);
                         startActivity(i);
                     }
                 });
