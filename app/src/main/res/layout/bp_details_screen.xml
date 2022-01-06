@@ -116,15 +116,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="410dp"
         android:layout_height="62dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="299dp"
+        android:layout_marginTop="502dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip1_card"
@@ -132,7 +132,6 @@
             android:layout_width="120dp"
             android:layout_height="45dp"
             android:checkable="true"
-            android:checked="false"
             android:text="Sodium"
             android:textAlignment="center"
             android:textColor="@color/chip_text_color"
@@ -153,7 +152,6 @@
             android:layout_width="110dp"
             android:layout_height="45dp"
             android:checkable="true"
-            android:checked="false"
             android:text="Stress"
             android:textAlignment="center"
             android:textColor="@color/chip_text_color"
@@ -174,7 +172,6 @@
             android:layout_width="170dp"
             android:layout_height="45dp"
             android:checkable="true"
-            android:checked="false"
             android:text="Heavy Exercise"
             android:textAlignment="center"
             android:textColor="@color/chip_text_color"

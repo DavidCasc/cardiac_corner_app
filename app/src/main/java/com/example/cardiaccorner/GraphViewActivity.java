@@ -3,6 +3,7 @@ package com.example.cardiaccorner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -105,7 +106,7 @@ public class GraphViewActivity extends AppCompatActivity {
                 });
 
 
-        // line chart code below
+        // systolic line chart
 
         int[] colors = {R.color.dark_blue, R.color.medium_blue, R.color.light_blue, R.color.yellow, R.color.orange, R.color.red};
 
@@ -116,57 +117,101 @@ public class GraphViewActivity extends AppCompatActivity {
         systolicLineDataSet.setDrawCircleHole(false);
         systolicLineDataSet.setCircleRadius(4f);
 
-        LineDataSet diastolicLineDataSet = new LineDataSet(diastolicValues(),"Diastolic");
+        LineData systolicData = new LineData(systolicLineDataSet);
+        LineChart systolicLineChart = findViewById(R.id.systolic_line_chart);
+        systolicLineChart.setData(systolicData);
 
+        systolicLineChart.setTouchEnabled(true);
+        systolicLineChart.setPinchZoom(false);
+        systolicLineChart.getAxisRight().setDrawLabels(false);
+        systolicLineChart.getDescription().setEnabled(false);
+        systolicLineChart.setVisibleXRangeMaximum(5);
+        systolicLineChart.setHorizontalScrollBarEnabled(true);
+        systolicLineChart.setVerticalScrollBarEnabled(false);
+        systolicLineChart.moveViewToX(systolicLineDataSet.getEntryCount()-1);
+
+        XAxis x = systolicLineChart.getXAxis();
+        x.setPosition(XAxis.XAxisPosition.BOTTOM);
+        x.enableGridDashedLine(6f, 6f, 0f);
+        x.setTextSize(16f);
+        x.setLabelCount(5, true);
+
+        YAxis y = systolicLineChart.getAxisLeft();
+        y.enableGridDashedLine(10f, 10f, 0f);
+        y.setTextSize(16f);
+
+        Legend legend = systolicLineChart.getLegend();
+        legend.setEnabled(false);
+
+        LinearGradient linearGradient = new LinearGradient(
+                0, 0, 0, 500,
+                new int[]{Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
+                new float[]{0.1f, 0.3f, 0.5f, 0.6f, 0.7f, 0.9f},
+                Shader.TileMode.CLAMP);
+
+        Paint paint = systolicLineChart.getRenderer().getPaintRender();
+        paint.setShader(linearGradient);
+
+
+        // diastolic line chart
+
+        LineDataSet diastolicLineDataSet = new LineDataSet(diastolicValues(),"Diastolic");
         diastolicLineDataSet.setValueTextSize(0f);
         diastolicLineDataSet.setLineWidth(6);
         diastolicLineDataSet.setCircleColor(Color.BLACK);
         diastolicLineDataSet.setDrawCircleHole(false);
         diastolicLineDataSet.setCircleRadius(4f);
 
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(systolicLineDataSet);
-        dataSets.add(diastolicLineDataSet);
+        LineData diastolicData = new LineData(diastolicLineDataSet);
+        LineChart diastolicLineChart = findViewById(R.id.diastolic_line_chart);
+        diastolicLineChart.setData(diastolicData);
 
+        diastolicLineChart.setTouchEnabled(true);
+        diastolicLineChart.setPinchZoom(false);
+        diastolicLineChart.getAxisRight().setDrawLabels(false);
+        diastolicLineChart.getDescription().setEnabled(false);
+        diastolicLineChart.setVisibleXRangeMaximum(5);
+        diastolicLineChart.setHorizontalScrollBarEnabled(true);
+        diastolicLineChart.setVerticalScrollBarEnabled(false);
+        diastolicLineChart.moveViewToX(diastolicLineDataSet.getEntryCount()-1);
 
-        LineData data = new LineData(dataSets);
-        LineChart lineChart = findViewById(R.id.line_chart);
-        lineChart.setData(data);
+        XAxis x2 = diastolicLineChart.getXAxis();
+        x2.setPosition(XAxis.XAxisPosition.BOTTOM);
+        x2.enableGridDashedLine(6f, 6f, 0f);
+        x2.setTextSize(16f);
+        x2.setLabelCount(5, true);
 
-        lineChart.setTouchEnabled(true);
-        lineChart.setPinchZoom(false);
-        lineChart.getAxisRight().setDrawLabels(false);
-        lineChart.getDescription().setEnabled(false);
-        lineChart.setVisibleXRangeMaximum(5);
-        lineChart.setHorizontalScrollBarEnabled(true);
-        lineChart.setVerticalScrollBarEnabled(false);
-        lineChart.moveViewToX(systolicLineDataSet.getEntryCount()-1);
+        YAxis y2 = diastolicLineChart.getAxisLeft();
+        y2.enableGridDashedLine(10f, 10f, 0f);
+        y2.setTextSize(16f);
 
-        XAxis x = lineChart.getXAxis();
-        x.setPosition(XAxis.XAxisPosition.BOTTOM);
-        x.enableGridDashedLine(6f, 6f, 0f);
-        x.setTextSize(16f);
-        x.setLabelCount(5, true);
+        Legend legend2 = diastolicLineChart.getLegend();
+        legend2.setEnabled(false);
 
-        YAxis y = lineChart.getAxisLeft();
-        y.enableGridDashedLine(10f, 10f, 0f);
-        y.setTextSize(16f);
+        LinearGradient linearGradient2 = new LinearGradient(
+                0, 0, 0, 500,
+                new int[]{Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
+                new float[]{0.1f, 0.3f, 0.5f, 0.6f, 0.7f, 0.9f},
+                Shader.TileMode.CLAMP);
 
-        Legend legend = lineChart.getLegend();
-        legend.setTextSize(16f);
+        Paint paint2 = diastolicLineChart.getRenderer().getPaintRender();
+        paint2.setShader(linearGradient2);
+
 
     }
 
     private ArrayList<Entry> systolicValues()
     {
         ArrayList<Entry> sysVals = new ArrayList<Entry>();
-        sysVals.add(new Entry(0,120));
-        sysVals.add(new Entry(1,110));
-        sysVals.add(new Entry(2,150));
-        sysVals.add(new Entry(3,80));
-        sysVals.add(new Entry(4,170));
-        sysVals.add(new Entry(5,126));
-        sysVals.add(new Entry(6,185));
+        sysVals.add(new Entry(0,50));
+        sysVals.add(new Entry(1,70));
+        sysVals.add(new Entry(2,90));
+        sysVals.add(new Entry(3,110));
+        sysVals.add(new Entry(4,130));
+        sysVals.add(new Entry(5,150));
+        sysVals.add(new Entry(6,170));
+        sysVals.add(new Entry(7,190));
+        sysVals.add(new Entry(8,210));
 
         return sysVals;
     }
@@ -181,6 +226,8 @@ public class GraphViewActivity extends AppCompatActivity {
         diaVals.add(new Entry(4,105));
         diaVals.add(new Entry(5,67));
         diaVals.add(new Entry(6,115));
+        diaVals.add(new Entry(7,90));
+        diaVals.add(new Entry(8,76));
 
         return diaVals;
     }

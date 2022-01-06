@@ -75,8 +75,11 @@ public class BpDetailsActivity extends AppCompatActivity {
         notesText.setText(entry.getNotes());
         dateText.setText(entry.getTime_created());
         sodiumChip.setChecked(entry.isSodium());
+        sodiumChip.setCheckedIconVisible(entry.isSodium());
         stressChip.setChecked(entry.isStress());
+        stressChip.setCheckedIconVisible(entry.isStress());
         exerciseChip.setChecked(entry.isExercise());
+        exerciseChip.setCheckedIconVisible(entry.isExercise());
 
         sodiumChip.setCheckable(false);
         stressChip.setCheckable(false);
