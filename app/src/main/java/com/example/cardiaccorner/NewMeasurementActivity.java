@@ -110,7 +110,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
                         notesToString();
 
                         // create entry
-                        Entry entry = new Entry(dateTime, systolic, diastolic, sodiumStatus, stressStatus, exerciseStatus, notes, true);
+                        Entry entry = new Entry(dateTime, systolic, diastolic, exerciseStatus, sodiumStatus, stressStatus,  notes, true);
 
                         //get username
                         String user = loadData("username");
@@ -183,7 +183,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
         notesToString();
 
         // create entry
-        Entry newEntry = new Entry(dateTime, systolic, diastolic, sodiumStatus, stressStatus, exerciseStatus, notes, true);
+        Entry newEntry =  new Entry(dateTime, systolic, diastolic, exerciseStatus, sodiumStatus, stressStatus,  notes, true);
 
         //save to db
         System.out.println(newEntry);
