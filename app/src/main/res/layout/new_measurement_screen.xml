@@ -183,15 +183,6 @@
             app:chipMinTouchTargetSize="40dp"
             app:chipStartPadding="10dp" />
 
-        <EditText
-            android:id="@+id/editTextTextPersonName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
-
     </LinearLayout>
 
     <Button
