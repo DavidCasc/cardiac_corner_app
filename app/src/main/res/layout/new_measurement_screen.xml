@@ -86,7 +86,7 @@
         android:layout_height="123dp"
         android:layout_marginStart="80dp"
         android:layout_marginEnd="81dp"
-        android:layout_marginBottom="85dp"
+        android:layout_marginBottom="208dp"
         android:ems="10"
         android:gravity="top|left"
         android:inputType="textMultiLine"
@@ -95,6 +95,7 @@
         android:minLines="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
