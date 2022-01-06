@@ -36,12 +36,19 @@ public class BpDetailsActivity extends AppCompatActivity {
     Entry entry;
 
     static final String SHARED_PREFS = "cardiacCornerPrefs";
+    ArrayList<Entry> logs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bp_details_screen);
 
+        if(logsStored()){
+            logs = retrieveLogs();
+        } else {
+            logs = new ArrayList<>();
+        }
+        System.out.println(logs);
         backBtn = (Button) findViewById(R.id.back_button);
         backBtn.setOnClickListener(
                 new View.OnClickListener() {

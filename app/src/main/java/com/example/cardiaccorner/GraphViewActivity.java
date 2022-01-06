@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
@@ -29,8 +30,11 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.chip.Chip;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,11 +54,50 @@ public class GraphViewActivity extends AppCompatActivity {
     Button backBtn;
     String dateTime;
 
+    public void storeLogs(ArrayList<com.example.cardiaccorner.Entry> log){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String arr = gson.toJson(log);
+        editor.putString("logs", arr);
+        editor.commit();
+    }
+
+    public ArrayList<com.example.cardiaccorner.Entry> retrieveLogs(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String arr = sharedPreferences.getString("logs", null);
+        Type type = new TypeToken<ArrayList<com.example.cardiaccorner.Entry>>() {}.getType();
+
+        ArrayList<com.example.cardiaccorner.Entry> log = gson.fromJson(arr, type);
+
+        if (log == null) {
+            log = new ArrayList<com.example.cardiaccorner.Entry>();
+        }
+
+        return log;
+    }
+
+    public Boolean logsStored(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.contains("logs");
+    }
+
+    ArrayList<com.example.cardiaccorner.Entry> logs;
+    static final String SHARED_PREFS = "cardiacCornerPrefs";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_view_screen);
 
+        if(logsStored()){
+            logs = retrieveLogs();
+        } else {
+            //You can use this for node testing/dummy code
+            logs = new ArrayList<>();
+        }
+        System.out.println(logs);
         backBtn = (Button) findViewById(R.id.back_button);
         backBtn.setOnClickListener(
                 new View.OnClickListener() {
