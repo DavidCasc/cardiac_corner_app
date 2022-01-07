@@ -106,18 +106,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.bpEntr
             Chip chip = (Chip)holder.chips.getChildAt(i);
             if(chip.getText().equals("Heavy Exercise") && entry.isExercise()){
                 chip.setChecked(true);
-                chip.setCheckable(false);
                 chip.setVisibility(View.VISIBLE);
             }
             if(chip.getText().equals("Stress") && entry.isStress()){
                 chip.setChecked(true);
-                chip.setCheckable(false);
                 chip.setVisibility(View.VISIBLE);
             }
             if(chip.getText().equals("Sodium") && entry.isSodium()){
                 chip.setChecked(true);
-                chip.setCheckable(false);
                 chip.setVisibility(View.VISIBLE);
+            }
+            if(chip.getVisibility() == View.VISIBLE){
+                chip.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        chip.setChecked(true);
+                    }
+                });
             }
         }
 
