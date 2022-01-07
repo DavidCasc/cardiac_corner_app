@@ -43,12 +43,6 @@ public class BpDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bp_details_screen);
 
-        if(logsStored()){
-            logs = retrieveLogs();
-        } else {
-            logs = new ArrayList<>();
-        }
-        System.out.println(logs);
         backBtn = (Button) findViewById(R.id.back_button);
         backBtn.setOnClickListener(
                 new View.OnClickListener() {
