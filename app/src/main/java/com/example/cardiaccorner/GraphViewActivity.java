@@ -185,14 +185,16 @@ public class GraphViewActivity extends AppCompatActivity {
         YAxis y = systolicLineChart.getAxisLeft();
         y.enableGridDashedLine(10f, 10f, 0f);
         y.setTextSize(16f);
+        y.setAxisMinimum(60);
+        y.setAxisMaximum(200);
 
         Legend legend = systolicLineChart.getLegend();
         legend.setEnabled(false);
 
         LinearGradient linearGradient = new LinearGradient(
                 0, 0, 0, 500,
-                new int[]{Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.1f, 0.3f, 0.5f, 0.6f, 0.7f, 0.9f},
+                new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
+                new float[]{0.01f,0.1f, 0.3f, 0.5f, 0.6f, 0.7f, 0.9f},
                 Shader.TileMode.CLAMP);
 
         Paint paint = systolicLineChart.getRenderer().getPaintRender();
@@ -230,14 +232,16 @@ public class GraphViewActivity extends AppCompatActivity {
         YAxis y2 = diastolicLineChart.getAxisLeft();
         y2.enableGridDashedLine(10f, 10f, 0f);
         y2.setTextSize(16f);
+        y2.setAxisMinimum(30);
+        y2.setAxisMaximum(140);
 
         Legend legend2 = diastolicLineChart.getLegend();
         legend2.setEnabled(false);
 
         LinearGradient linearGradient2 = new LinearGradient(
                 0, 0, 0, 500,
-                new int[]{Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.1f, 0.3f, 0.5f, 0.6f, 0.7f, 0.9f},
+                new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
+                new float[]{0.01f,0.1f, 0.3f, 0.5f, 0.6f, 0.7f, 0.9f},
                 Shader.TileMode.CLAMP);
 
         Paint paint2 = diastolicLineChart.getRenderer().getPaintRender();
