@@ -154,7 +154,9 @@ public class GraphViewActivity extends AppCompatActivity {
 
         int[] colors = {R.color.dark_blue, R.color.medium_blue, R.color.light_blue, R.color.yellow, R.color.orange, R.color.red};
 
-        LineDataSet systolicLineDataSet = new LineDataSet(systolicValues(),"Systolic");
+        ArrayList<com.example.cardiaccorner.Entry> logs = retrieveLogs();
+
+        LineDataSet systolicLineDataSet = new LineDataSet(getSystolicDataSet(logs),"Systolic");
         systolicLineDataSet.setValueTextSize(0f);
         systolicLineDataSet.setLineWidth(6);
         systolicLineDataSet.setCircleColor(Color.BLACK);
@@ -199,7 +201,7 @@ public class GraphViewActivity extends AppCompatActivity {
 
         // diastolic line chart
 
-        LineDataSet diastolicLineDataSet = new LineDataSet(diastolicValues(),"Diastolic");
+        LineDataSet diastolicLineDataSet = new LineDataSet(getDiastolicDataSet(logs),"Diastolic");
         diastolicLineDataSet.setValueTextSize(0f);
         diastolicLineDataSet.setLineWidth(6);
         diastolicLineDataSet.setCircleColor(Color.BLACK);
@@ -260,6 +262,38 @@ public class GraphViewActivity extends AppCompatActivity {
         sysVals.add(new Entry(8,210));
 
         return sysVals;
+    }
+
+    private ArrayList<Entry> getSystolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
+        ArrayList<Entry> sysVals = new ArrayList<Entry>();
+        for(int i = 0; i<logs.size(); i++)
+        {
+            sysVals.add(makeSystolicEntryFromLog(logs.get(i), i));
+        }
+
+        return sysVals;
+    }
+
+    private Entry makeSystolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
+    {
+        Entry newEntry = new Entry(xVal, entry.getSys_measurement());
+        return newEntry;
+    }
+
+    private ArrayList<Entry> getDiastolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
+        ArrayList<Entry> diaVals = new ArrayList<Entry>();
+        for(int i = 0; i<logs.size(); i++)
+        {
+            diaVals.add(makeDiastolicEntryFromLog(logs.get(i), i));
+        }
+
+        return diaVals;
+    }
+
+    private Entry makeDiastolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
+    {
+        Entry newEntry = new Entry(xVal, entry.getDia_measurement());
+        return newEntry;
     }
 
     private ArrayList<Entry> diastolicValues()
