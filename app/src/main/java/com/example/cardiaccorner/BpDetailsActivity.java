@@ -82,15 +82,48 @@ public class BpDetailsActivity extends AppCompatActivity {
         notesText.setText(entry.getNotes());
         dateText.setText(entry.getTime_created());
         sodiumChip.setChecked(entry.isSodium());
-        sodiumChip.setCheckedIconVisible(entry.isSodium());
         stressChip.setChecked(entry.isStress());
-        stressChip.setCheckedIconVisible(entry.isStress());
         exerciseChip.setChecked(entry.isExercise());
-        exerciseChip.setCheckedIconVisible(entry.isExercise());
 
-        sodiumChip.setCheckable(false);
-        stressChip.setCheckable(false);
-        exerciseChip.setCheckable(false);
+        sodiumChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(sodiumChip.isChecked()){
+                            sodiumChip.setChecked(false);
+                        } else{
+                            sodiumChip.setChecked(true);
+                            sodiumChip.setCheckedIconVisible(true);
+                        }
+                    }
+                });
+
+        stressChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(stressChip.isChecked()){
+                            stressChip.setChecked(false);
+                        } else{
+                            stressChip.setChecked(true);
+                            stressChip.setCheckedIconVisible(true);
+                        }
+                    }
+                });
+
+        exerciseChip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(exerciseChip.isChecked()){
+                            exerciseChip.setChecked(false);
+                        } else{
+                            exerciseChip.setChecked(true);
+                            exerciseChip.setCheckedIconVisible(true);
+                        }
+                    }
+                });
+
 
         diastolic.setText(String.valueOf(entry.getDia_measurement()));
         systolic.setText(String.valueOf(entry.getSys_measurement()));

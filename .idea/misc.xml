@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/bp_details_screen.xml" value="0.25" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/bp_entry.xml" value="0.2226775956284153" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/graph.xml" value="0.2226775956284153" />
+        <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/new_measurement_screen.xml" value="0.2226775956284153" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/settings_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/signin_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Laura/StudioProjects/cardiac_corner_app/app/src/main/res/layout/signup_screen.xml" value="0.36666666666666664" />
