@@ -15,6 +15,7 @@ import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
@@ -241,6 +242,8 @@ public class GraphViewActivity extends AppCompatActivity {
         paint2.setShader(linearGradient2);
 
 
+        systolicLineChart.setOnChartGestureListener(new MultiChartGestureListener(systolicLineChart, new Chart[] {diastolicLineChart}));
+        diastolicLineChart.setOnChartGestureListener(new MultiChartGestureListener(diastolicLineChart, new Chart[] {systolicLineChart}));
     }
 
     private ArrayList<Entry> systolicValues()
@@ -274,5 +277,7 @@ public class GraphViewActivity extends AppCompatActivity {
 
         return diaVals;
     }
+
+
 
 }
