@@ -70,7 +70,7 @@ public class BluetoothScreenActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(250);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -97,6 +97,11 @@ public class BluetoothScreenActivity extends AppCompatActivity {
 
                         if (tries == 5) {
                             failed = true;
+                            try {
+                                socket.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                         tries++;
                     } while (!socket.isConnected() && tries <= 5);
