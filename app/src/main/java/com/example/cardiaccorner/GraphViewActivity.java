@@ -156,6 +156,8 @@ public class GraphViewActivity extends AppCompatActivity {
 
         ArrayList<com.example.cardiaccorner.Entry> logs = retrieveLogs();
 
+        ArrayList<String> dates = getDatesDataSet(logs);
+
         LineDataSet systolicLineDataSet = new LineDataSet(getSystolicDataSet(logs),"Systolic");
         systolicLineDataSet.setValueTextSize(0f);
         systolicLineDataSet.setLineWidth(6);
@@ -171,22 +173,22 @@ public class GraphViewActivity extends AppCompatActivity {
         systolicLineChart.setPinchZoom(false);
         systolicLineChart.getAxisRight().setDrawLabels(false);
         systolicLineChart.getDescription().setEnabled(false);
-        systolicLineChart.setVisibleXRangeMaximum(5);
+        systolicLineChart.setVisibleXRangeMaximum(4);
         systolicLineChart.setHorizontalScrollBarEnabled(true);
         systolicLineChart.setVerticalScrollBarEnabled(false);
         systolicLineChart.moveViewToX(systolicLineDataSet.getEntryCount()-1);
+        systolicLineChart.getXAxis().setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
 
         XAxis x = systolicLineChart.getXAxis();
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
-        x.enableGridDashedLine(6f, 6f, 0f);
         x.setTextSize(16f);
-        x.setLabelCount(5, true);
+        x.setLabelCount(4, true);
+        x.setLabelRotationAngle(-45);
 
         YAxis y = systolicLineChart.getAxisLeft();
-        y.enableGridDashedLine(10f, 10f, 0f);
         y.setTextSize(16f);
         y.setAxisMinimum(60);
-        y.setAxisMaximum(200);
+        y.setAxisMaximum(210);
 
         Legend legend = systolicLineChart.getLegend();
         legend.setEnabled(false);
@@ -194,7 +196,7 @@ public class GraphViewActivity extends AppCompatActivity {
         LinearGradient linearGradient = new LinearGradient(
                 0, 0, 0, 500,
                 new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.01f,0.1f, 0.3f, 0.5f, 0.6f, 0.7f, 0.9f},
+                new float[]{0.01f, 0.1f, 0.25f, 0.4f, 0.45f, 0.65f, 0.85f},
                 Shader.TileMode.CLAMP);
 
         Paint paint = systolicLineChart.getRenderer().getPaintRender();
@@ -218,19 +220,19 @@ public class GraphViewActivity extends AppCompatActivity {
         diastolicLineChart.setPinchZoom(false);
         diastolicLineChart.getAxisRight().setDrawLabels(false);
         diastolicLineChart.getDescription().setEnabled(false);
-        diastolicLineChart.setVisibleXRangeMaximum(5);
+        diastolicLineChart.setVisibleXRangeMaximum(4);
         diastolicLineChart.setHorizontalScrollBarEnabled(true);
         diastolicLineChart.setVerticalScrollBarEnabled(false);
         diastolicLineChart.moveViewToX(diastolicLineDataSet.getEntryCount()-1);
+        diastolicLineChart.getXAxis().setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
 
         XAxis x2 = diastolicLineChart.getXAxis();
         x2.setPosition(XAxis.XAxisPosition.BOTTOM);
-        x2.enableGridDashedLine(6f, 6f, 0f);
         x2.setTextSize(16f);
-        x2.setLabelCount(5, true);
+        x2.setLabelCount(4, true);
+        x2.setLabelRotationAngle(-45);
 
         YAxis y2 = diastolicLineChart.getAxisLeft();
-        y2.enableGridDashedLine(10f, 10f, 0f);
         y2.setTextSize(16f);
         y2.setAxisMinimum(30);
         y2.setAxisMaximum(140);
@@ -241,7 +243,7 @@ public class GraphViewActivity extends AppCompatActivity {
         LinearGradient linearGradient2 = new LinearGradient(
                 0, 0, 0, 500,
                 new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.01f,0.1f, 0.3f, 0.5f, 0.6f, 0.7f, 0.9f},
+                new float[]{0.01f, 0.1f, 0.25f, 0.4f, 0.45f, 0.65f, 0.85f},
                 Shader.TileMode.CLAMP);
 
         Paint paint2 = diastolicLineChart.getRenderer().getPaintRender();
@@ -250,22 +252,6 @@ public class GraphViewActivity extends AppCompatActivity {
 
         systolicLineChart.setOnChartGestureListener(new MultiChartGestureListener(systolicLineChart, new Chart[] {diastolicLineChart}));
         diastolicLineChart.setOnChartGestureListener(new MultiChartGestureListener(diastolicLineChart, new Chart[] {systolicLineChart}));
-    }
-
-    private ArrayList<Entry> systolicValues()
-    {
-        ArrayList<Entry> sysVals = new ArrayList<Entry>();
-        sysVals.add(new Entry(0,50));
-        sysVals.add(new Entry(1,70));
-        sysVals.add(new Entry(2,90));
-        sysVals.add(new Entry(3,110));
-        sysVals.add(new Entry(4,130));
-        sysVals.add(new Entry(5,150));
-        sysVals.add(new Entry(6,170));
-        sysVals.add(new Entry(7,190));
-        sysVals.add(new Entry(8,210));
-
-        return sysVals;
     }
 
     private ArrayList<Entry> getSystolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
@@ -284,6 +270,18 @@ public class GraphViewActivity extends AppCompatActivity {
         return newEntry;
     }
 
+    private ArrayList<String> getDatesDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
+        ArrayList<String> dates = new ArrayList<String>();
+        for(int i = 0; i<logs.size(); i++)
+        {
+            String[] splitDate = logs.get(i).getTime_created().split(" ");
+            dates.add(splitDate[0]);
+        }
+
+        System.out.println(dates);
+        return dates;
+    }
+
     private ArrayList<Entry> getDiastolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
         ArrayList<Entry> diaVals = new ArrayList<Entry>();
         for(int i = 0; i<logs.size(); i++)
@@ -298,6 +296,22 @@ public class GraphViewActivity extends AppCompatActivity {
     {
         Entry newEntry = new Entry(xVal, entry.getDia_measurement());
         return newEntry;
+    }
+
+    private ArrayList<Entry> systolicValues()
+    {
+        ArrayList<Entry> sysVals = new ArrayList<Entry>();
+        sysVals.add(new Entry(0,50));
+        sysVals.add(new Entry(1,70));
+        sysVals.add(new Entry(2,90));
+        sysVals.add(new Entry(3,110));
+        sysVals.add(new Entry(4,130));
+        sysVals.add(new Entry(5,150));
+        sysVals.add(new Entry(6,170));
+        sysVals.add(new Entry(7,190));
+        sysVals.add(new Entry(8,210));
+
+        return sysVals;
     }
 
     private ArrayList<Entry> diastolicValues()
