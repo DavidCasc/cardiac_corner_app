@@ -186,6 +186,7 @@ public class GraphViewActivity extends AppCompatActivity {
         x.setLabelRotationAngle(-35);
         x.setDrawGridLines(false);
         x.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
+        x.setGranularityEnabled(true);
 
         YAxis y = systolicLineChart.getAxisLeft();
         y.setTextSize(15f);
@@ -234,6 +235,7 @@ public class GraphViewActivity extends AppCompatActivity {
         x2.setLabelRotationAngle(-35);
         x2.setDrawGridLines(false);
         x2.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
+        x2.setGranularityEnabled(true);
 
         YAxis y2 = diastolicLineChart.getAxisLeft();
         y2.setTextSize(15f);
