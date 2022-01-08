@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.model.GradientColor;
@@ -173,22 +175,23 @@ public class GraphViewActivity extends AppCompatActivity {
         systolicLineChart.setPinchZoom(false);
         systolicLineChart.getAxisRight().setDrawLabels(false);
         systolicLineChart.getDescription().setEnabled(false);
-        systolicLineChart.setVisibleXRangeMaximum(4);
+        systolicLineChart.setVisibleXRangeMaximum(5);
         systolicLineChart.setHorizontalScrollBarEnabled(true);
         systolicLineChart.setVerticalScrollBarEnabled(false);
         systolicLineChart.moveViewToX(systolicLineDataSet.getEntryCount()-1);
-        systolicLineChart.getXAxis().setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
 
         XAxis x = systolicLineChart.getXAxis();
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
-        x.setTextSize(16f);
-        x.setLabelCount(4, true);
-        x.setLabelRotationAngle(-45);
+        x.setTextSize(13f);
+        x.setLabelRotationAngle(-35);
+        x.setDrawGridLines(false);
+        x.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
 
         YAxis y = systolicLineChart.getAxisLeft();
-        y.setTextSize(16f);
+        y.setTextSize(15f);
         y.setAxisMinimum(60);
         y.setAxisMaximum(210);
+        y.setDrawGridLines(false);
 
         Legend legend = systolicLineChart.getLegend();
         legend.setEnabled(false);
@@ -220,22 +223,23 @@ public class GraphViewActivity extends AppCompatActivity {
         diastolicLineChart.setPinchZoom(false);
         diastolicLineChart.getAxisRight().setDrawLabels(false);
         diastolicLineChart.getDescription().setEnabled(false);
-        diastolicLineChart.setVisibleXRangeMaximum(4);
+        diastolicLineChart.setVisibleXRangeMaximum(5);
         diastolicLineChart.setHorizontalScrollBarEnabled(true);
         diastolicLineChart.setVerticalScrollBarEnabled(false);
         diastolicLineChart.moveViewToX(diastolicLineDataSet.getEntryCount()-1);
-        diastolicLineChart.getXAxis().setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
 
         XAxis x2 = diastolicLineChart.getXAxis();
         x2.setPosition(XAxis.XAxisPosition.BOTTOM);
-        x2.setTextSize(16f);
-        x2.setLabelCount(4, true);
-        x2.setLabelRotationAngle(-45);
+        x2.setTextSize(13f);
+        x2.setLabelRotationAngle(-35);
+        x2.setDrawGridLines(false);
+        x2.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
 
         YAxis y2 = diastolicLineChart.getAxisLeft();
-        y2.setTextSize(16f);
+        y2.setTextSize(15f);
         y2.setAxisMinimum(30);
         y2.setAxisMaximum(140);
+        y2.setDrawGridLines(false);
 
         Legend legend2 = diastolicLineChart.getLegend();
         legend2.setEnabled(false);
