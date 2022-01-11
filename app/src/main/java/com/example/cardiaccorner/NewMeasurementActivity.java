@@ -103,8 +103,6 @@ public class NewMeasurementActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(NewMeasurementActivity.this,BreakdownActivity.class);
-
                         // set date and notes strings
                         setDateTime();
                         notesToString();
@@ -115,8 +113,17 @@ public class NewMeasurementActivity extends AppCompatActivity {
                         //get username
                         String user = loadData("username");
 
+                        //load logs
+                        ArrayList<Entry> logs = retrieveLogs();
+
+                        //Add logs
+                        logs.add(entry);
+                        storeLogs(logs);
+
                         //Store logs
                         addLog(entry,user);
+
+                        Intent i = new Intent(NewMeasurementActivity.this,BreakdownActivity.class);
                         startActivity(i);
                     }
                 });
@@ -233,23 +240,19 @@ public class NewMeasurementActivity extends AppCompatActivity {
         logPostCall.enqueue(new Callback<LogPostResponse>() {
             @Override
             public void onResponse(Call<LogPostResponse> call, Response<LogPostResponse> response) {
-                //load logs
-                ArrayList<Entry> logs = retrieveLogs();
 
-                //Add logs
-                logs.add(entry);
-                storeLogs(logs);
             }
 
             @Override
             public void onFailure(Call<LogPostResponse> call, Throwable t) {
                 System.out.println("Post Failed");
-                entry.setSynced(false);
                 //load logs
                 ArrayList<Entry> logs = retrieveLogs();
 
                 //Add logs
-                logs.add(entry);
+                int index = logs.indexOf(entry);
+                entry.setSynced(false);
+                logs.set(index, entry);
                 storeLogs(logs);
             }
         });
@@ -259,7 +262,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Key, Val);
-        editor.commit();
+        editor.apply();
     }
     public String loadData(String Key) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -275,7 +278,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String arr = gson.toJson(log);
         editor.putString("logs", arr);
-        editor.commit();
+        editor.apply();
     }
     public ArrayList<Entry> retrieveLogs(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
