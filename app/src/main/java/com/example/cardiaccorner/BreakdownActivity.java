@@ -172,6 +172,8 @@ public class BreakdownActivity extends AppCompatActivity {
         systolicLineChart.setHorizontalScrollBarEnabled(true);
         systolicLineChart.setVerticalScrollBarEnabled(false);
         systolicLineChart.moveViewToX(systolicLineDataSet.getEntryCount()-1);
+        systolicLineChart.setExtraBottomOffset(10);
+        systolicLineChart.setExtraRightOffset(32);
 
         XAxis x = systolicLineChart.getXAxis();
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -221,6 +223,8 @@ public class BreakdownActivity extends AppCompatActivity {
         diastolicLineChart.setHorizontalScrollBarEnabled(true);
         diastolicLineChart.setVerticalScrollBarEnabled(false);
         diastolicLineChart.moveViewToX(diastolicLineDataSet.getEntryCount()-1);
+        diastolicLineChart.setExtraBottomOffset(10);
+        diastolicLineChart.setExtraRightOffset(32);
 
         XAxis x2 = diastolicLineChart.getXAxis();
         x2.setPosition(XAxis.XAxisPosition.BOTTOM);

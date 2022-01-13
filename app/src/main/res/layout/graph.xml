@@ -3,16 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="420dp">
+    android:layout_height="440dp">
 
     <LinearLayout
         android:layout_width="410dp"
-        android:layout_height="420dp"
+        android:layout_height="440dp"
         android:layout_marginEnd="1dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Systolic BP Level (mmHg)"
+            android:textColor="#000000"
+            android:background="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/systolic_line_chart"
@@ -20,11 +30,21 @@
             android:layout_height="200dp"
             android:layout_marginEnd="1dp"
             android:background="@color/white"
-            android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Diastolic BP Level (mmHg)"
+            android:textColor="#000000"
+            android:background="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/diastolic_line_chart"
@@ -32,7 +52,6 @@
             android:layout_height="200dp"
             android:layout_marginEnd="1dp"
             android:background="@color/white"
-            android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

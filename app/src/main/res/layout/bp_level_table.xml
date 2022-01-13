@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="260dp">
+    android:layout_height="250dp">
 
     <LinearLayout
         android:layout_width="291dp"
@@ -17,18 +17,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/colour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="6dp"
                 android:text="Colour"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_column="0"
                 app:layout_row="0" />
@@ -37,11 +38,11 @@
                 android:id="@+id/bp_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="18dp"
                 android:layout_marginTop="6dp"
                 android:text="BP Level"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_column="1"
                 app:layout_row="0" />
@@ -50,7 +51,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="26dp"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
@@ -62,20 +63,21 @@
                 android:layout_marginTop="6dp"
                 android:background="#4575b4"
                 android:text="           "
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_column="0"
                 app:layout_row="1" />
+
 
             <TextView
                 android:id="@+id/hypotension"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="26dp"
                 android:layout_marginTop="6dp"
                 android:text="Hypotension"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -83,7 +85,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="26dp"
             android:orientation="horizontal">
 
             <TextView
@@ -94,7 +96,7 @@
                 android:layout_marginTop="6dp"
                 android:background="#91bfdb"
                 android:text="           "
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_column="0"
                 app:layout_row="2" />
@@ -103,11 +105,11 @@
                 android:id="@+id/desired"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="26dp"
                 android:layout_marginTop="6dp"
                 android:text="Desired"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_column="1"
                 app:layout_row="2" />
 
@@ -115,7 +117,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="26dp"
             android:orientation="horizontal">
 
             <TextView
@@ -126,7 +128,7 @@
                 android:layout_marginTop="6dp"
                 android:background="#e0f3f8"
                 android:text="           "
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_column="0"
                 app:layout_row="3" />
@@ -135,11 +137,11 @@
                 android:id="@+id/prehypertension"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="26dp"
                 android:layout_marginTop="6dp"
                 android:text="Prehypertension"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_column="1"
                 app:layout_row="3" />
 
@@ -147,7 +149,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="26dp"
             android:orientation="horizontal">
 
             <TextView
@@ -158,7 +160,7 @@
                 android:layout_marginTop="6dp"
                 android:background="#fee090"
                 android:text="           "
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_column="0"
                 app:layout_row="4" />
@@ -167,11 +169,11 @@
                 android:id="@+id/stage1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="26dp"
                 android:layout_marginTop="6dp"
                 android:text="Stage 1 hypertension"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_column="1"
                 app:layout_row="4" />
 
@@ -179,7 +181,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="26dp"
             android:orientation="horizontal">
 
             <TextView
@@ -190,7 +192,7 @@
                 android:layout_marginTop="6dp"
                 android:background="#fc8d59"
                 android:text="           "
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_column="0"
                 app:layout_row="5" />
@@ -199,11 +201,11 @@
                 android:id="@+id/stage2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="26dp"
                 android:layout_marginTop="6dp"
                 android:text="Stage 2 hypertension"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_column="1"
                 app:layout_row="5" />
 
@@ -211,7 +213,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="26dp"
             android:orientation="horizontal">
 
             <TextView
@@ -222,7 +224,7 @@
                 android:layout_marginTop="6dp"
                 android:background="#d73027"
                 android:text="           "
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_column="0"
                 app:layout_row="6" />
@@ -231,11 +233,11 @@
                 android:id="@+id/hypertensive_emerg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="26dp"
                 android:layout_marginTop="6dp"
                 android:text="Hypertensive emergency"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_column="1"
                 app:layout_row="6" />
 
