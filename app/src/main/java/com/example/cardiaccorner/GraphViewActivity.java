@@ -161,7 +161,7 @@ public class GraphViewActivity extends AppCompatActivity {
         ArrayList<String> dates = getDatesDataSet(logs);
 
         LineDataSet systolicLineDataSet = new LineDataSet(getSystolicDataSet(logs),"Systolic");
-        systolicLineDataSet.setValueTextSize(0f);
+        systolicLineDataSet.setValueTextSize(12f);
         systolicLineDataSet.setLineWidth(6);
         systolicLineDataSet.setCircleColor(Color.BLACK);
         systolicLineDataSet.setDrawCircleHole(false);
@@ -180,15 +180,14 @@ public class GraphViewActivity extends AppCompatActivity {
         systolicLineChart.setVerticalScrollBarEnabled(false);
         systolicLineChart.moveViewToX(systolicLineDataSet.getEntryCount()-1);
         systolicLineChart.setExtraBottomOffset(10);
+        systolicLineChart.setExtraTopOffset(30);
         systolicLineChart.setExtraRightOffset(32);
 
         XAxis x = systolicLineChart.getXAxis();
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
-        x.setTextSize(13f);
-        x.setLabelRotationAngle(-45);
+        x.setTextSize(0f);
         x.setDrawGridLines(false);
-        x.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
-        x.setGranularityEnabled(true);
+        x.setEnabled(false);
 
         YAxis y = systolicLineChart.getAxisLeft();
         y.setTextSize(15f);
@@ -212,7 +211,7 @@ public class GraphViewActivity extends AppCompatActivity {
         // diastolic line chart
 
         LineDataSet diastolicLineDataSet = new LineDataSet(getDiastolicDataSet(logs),"Diastolic");
-        diastolicLineDataSet.setValueTextSize(0f);
+        diastolicLineDataSet.setValueTextSize(12f);
         diastolicLineDataSet.setLineWidth(6);
         diastolicLineDataSet.setCircleColor(Color.BLACK);
         diastolicLineDataSet.setDrawCircleHole(false);
@@ -231,6 +230,7 @@ public class GraphViewActivity extends AppCompatActivity {
         diastolicLineChart.setVerticalScrollBarEnabled(false);
         diastolicLineChart.moveViewToX(diastolicLineDataSet.getEntryCount()-1);
         diastolicLineChart.setExtraBottomOffset(20);
+        systolicLineChart.setExtraTopOffset(30);
         diastolicLineChart.setExtraRightOffset(32);
 
         XAxis x2 = diastolicLineChart.getXAxis();

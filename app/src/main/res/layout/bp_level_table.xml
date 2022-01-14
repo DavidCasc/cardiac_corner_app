@@ -3,23 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp">
+    android:layout_height="200dp">
 
-    <LinearLayout
-        android:layout_width="291dp"
-        android:layout_height="240dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="6dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+        <TableRow>
 
             <TextView
                 android:id="@+id/colour"
@@ -29,31 +19,53 @@
                 android:layout_marginTop="6dp"
                 android:text="Colour"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/systolic_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="6dp"
+                android:text="Systolic"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_column="1"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/diastolic_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="6dp"
+                android:text="Diastolic"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_column="1"
                 app:layout_row="0" />
 
             <TextView
                 android:id="@+id/bp_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="6dp"
                 android:text="BP Level"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_column="1"
                 app:layout_row="0" />
 
-        </LinearLayout>
+        </TableRow>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="26dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+        <TableRow>
 
             <TextView
                 android:id="@+id/colour1"
@@ -68,12 +80,35 @@
                 app:layout_column="0"
                 app:layout_row="1" />
 
+            <TextView
+                android:id="@+id/range1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="&lt;90"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
+
+            <TextView
+                android:id="@+id/range2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="&lt;60"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
 
             <TextView
                 android:id="@+id/hypotension"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="6dp"
                 android:text="Hypotension"
                 android:textColor="#000000"
@@ -81,12 +116,9 @@
                 app:layout_column="1"
                 app:layout_row="1" />
 
-        </LinearLayout>
+        </TableRow>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="26dp"
-            android:orientation="horizontal">
+        <TableRow>
 
             <TextView
                 android:id="@+id/colour2"
@@ -99,26 +131,47 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_column="0"
-                app:layout_row="2" />
+                app:layout_row="1" />
+
+            <TextView
+                android:id="@+id/range3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="90-119"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
+
+            <TextView
+                android:id="@+id/range4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="60-79"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
 
             <TextView
                 android:id="@+id/desired"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="6dp"
                 android:text="Desired"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_column="1"
-                app:layout_row="2" />
+                app:layout_row="1" />
 
-        </LinearLayout>
+        </TableRow>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="26dp"
-            android:orientation="horizontal">
+        <TableRow>
 
             <TextView
                 android:id="@+id/colour3"
@@ -131,26 +184,47 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_column="0"
-                app:layout_row="3" />
+                app:layout_row="1" />
+
+            <TextView
+                android:id="@+id/range5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="120-139"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
+
+            <TextView
+                android:id="@+id/range6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="80-89"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
 
             <TextView
                 android:id="@+id/prehypertension"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="6dp"
                 android:text="Prehypertension"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_column="1"
-                app:layout_row="3" />
+                app:layout_row="1" />
 
-        </LinearLayout>
+        </TableRow>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="26dp"
-            android:orientation="horizontal">
+        <TableRow>
 
             <TextView
                 android:id="@+id/colour4"
@@ -166,10 +240,34 @@
                 app:layout_row="4" />
 
             <TextView
+                android:id="@+id/range7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="140-159"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
+
+            <TextView
+                android:id="@+id/range8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="90-99"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
+
+            <TextView
                 android:id="@+id/stage1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="6dp"
                 android:text="Stage 1 hypertension"
                 android:textColor="#000000"
@@ -177,12 +275,9 @@
                 app:layout_column="1"
                 app:layout_row="4" />
 
-        </LinearLayout>
+        </TableRow>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="26dp"
-            android:orientation="horizontal">
+        <TableRow>
 
             <TextView
                 android:id="@+id/colour5"
@@ -198,10 +293,34 @@
                 app:layout_row="5" />
 
             <TextView
+                android:id="@+id/range9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="160-179"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
+
+            <TextView
+                android:id="@+id/range10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="100-109"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
+
+            <TextView
                 android:id="@+id/stage2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="6dp"
                 android:text="Stage 2 hypertension"
                 android:textColor="#000000"
@@ -209,12 +328,9 @@
                 app:layout_column="1"
                 app:layout_row="5" />
 
-        </LinearLayout>
+        </TableRow>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="26dp"
-            android:orientation="horizontal">
+        <TableRow>
 
             <TextView
                 android:id="@+id/colour6"
@@ -230,10 +346,34 @@
                 app:layout_row="6" />
 
             <TextView
+                android:id="@+id/range11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="&gt;=180"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
+
+            <TextView
+                android:id="@+id/range12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="&gt;=110"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_column="1"
+                app:layout_row="1" />
+
+            <TextView
                 android:id="@+id/hypertensive_emerg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="6dp"
                 android:text="Hypertensive emergency"
                 android:textColor="#000000"
@@ -241,8 +381,8 @@
                 app:layout_column="1"
                 app:layout_row="6" />
 
-        </LinearLayout>
+        </TableRow>
 
-    </LinearLayout>
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

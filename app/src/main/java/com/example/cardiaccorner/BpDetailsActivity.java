@@ -58,8 +58,8 @@ public class BpDetailsActivity extends AppCompatActivity {
         sodiumChip = (Chip) findViewById(R.id.chip1_card);
         stressChip = (Chip) findViewById(R.id.chip2_card);
         exerciseChip = (Chip) findViewById(R.id.chip3_card);
-        TextView diastolic = (TextView) findViewById(R.id.systolic);
-        TextView systolic = (TextView) findViewById(R.id.diastolic);
+        TextView systolic = (TextView) findViewById(R.id.systolic);
+        TextView diastolic = (TextView) findViewById(R.id.diastolic);
         deleteBtn = (Button) findViewById(R.id.delete);
 
 
