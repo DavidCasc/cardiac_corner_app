@@ -375,7 +375,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="6dp"
-                android:text="Hypertensive emergency"
+                android:text="Hypertensive emergency*"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_column="1"
