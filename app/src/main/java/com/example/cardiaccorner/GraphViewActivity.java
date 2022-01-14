@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
@@ -29,7 +30,12 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.model.GradientColor;
+import com.github.mikephil.charting.renderer.XAxisRenderer;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.MPPointF;
+import com.github.mikephil.charting.utils.Transformer;
+import com.github.mikephil.charting.utils.Utils;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.android.material.chip.Chip;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -191,7 +197,7 @@ public class GraphViewActivity extends AppCompatActivity {
 
         YAxis y = systolicLineChart.getAxisLeft();
         y.setTextSize(15f);
-        y.setAxisMinimum(60);
+        y.setAxisMinimum(30);
         y.setAxisMaximum(210);
         y.setDrawGridLines(false);
 
@@ -201,7 +207,7 @@ public class GraphViewActivity extends AppCompatActivity {
         LinearGradient linearGradient = new LinearGradient(
                 0, 0, 0, 500,
                 new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.01f, 0.1f, 0.25f, 0.4f, 0.45f, 0.65f, 0.85f},
+                new float[]{0.01f, 0.2f, 0.3f, 0.35f, 0.45f, 0.6f, 0.7f},
                 Shader.TileMode.CLAMP);
 
         Paint paint = systolicLineChart.getRenderer().getPaintRender();
@@ -229,9 +235,9 @@ public class GraphViewActivity extends AppCompatActivity {
         diastolicLineChart.setHorizontalScrollBarEnabled(true);
         diastolicLineChart.setVerticalScrollBarEnabled(false);
         diastolicLineChart.moveViewToX(diastolicLineDataSet.getEntryCount()-1);
-        diastolicLineChart.setExtraBottomOffset(20);
         systolicLineChart.setExtraTopOffset(30);
         diastolicLineChart.setExtraRightOffset(32);
+        diastolicLineChart.setXAxisRenderer(new CustomXAxisRenderer(diastolicLineChart.getViewPortHandler(), diastolicLineChart.getXAxis(), diastolicLineChart.getTransformer(YAxis.AxisDependency.LEFT)));
 
         XAxis x2 = diastolicLineChart.getXAxis();
         x2.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -244,7 +250,7 @@ public class GraphViewActivity extends AppCompatActivity {
         YAxis y2 = diastolicLineChart.getAxisLeft();
         y2.setTextSize(15f);
         y2.setAxisMinimum(30);
-        y2.setAxisMaximum(140);
+        y2.setAxisMaximum(210);
         y2.setDrawGridLines(false);
 
         Legend legend2 = diastolicLineChart.getLegend();
@@ -253,7 +259,7 @@ public class GraphViewActivity extends AppCompatActivity {
         LinearGradient linearGradient2 = new LinearGradient(
                 0, 0, 0, 500,
                 new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.01f, 0.1f, 0.25f, 0.4f, 0.45f, 0.65f, 0.85f},
+                new float[]{0.01f, 0.4f, 0.45f, 0.5f, 0.55f, 0.6f, 0.65f},
                 Shader.TileMode.CLAMP);
 
         Paint paint2 = diastolicLineChart.getRenderer().getPaintRender();
@@ -285,7 +291,8 @@ public class GraphViewActivity extends AppCompatActivity {
         for(int i = 0; i<logs.size(); i++)
         {
             String[] splitDate = logs.get(i).getTime_created().split(" ");
-            dates.add(splitDate[0]);
+            String[] splitTime = splitDate[1].split(":");
+            dates.add(splitDate[0] + "\n" + splitTime[0] + ":" + splitTime[1]);
         }
 
         System.out.println(dates);
@@ -308,38 +315,17 @@ public class GraphViewActivity extends AppCompatActivity {
         return newEntry;
     }
 
-    private ArrayList<Entry> systolicValues()
-    {
-        ArrayList<Entry> sysVals = new ArrayList<Entry>();
-        sysVals.add(new Entry(0,50));
-        sysVals.add(new Entry(1,70));
-        sysVals.add(new Entry(2,90));
-        sysVals.add(new Entry(3,110));
-        sysVals.add(new Entry(4,130));
-        sysVals.add(new Entry(5,150));
-        sysVals.add(new Entry(6,170));
-        sysVals.add(new Entry(7,190));
-        sysVals.add(new Entry(8,210));
+    public class CustomXAxisRenderer extends XAxisRenderer {
+        public CustomXAxisRenderer(ViewPortHandler viewPortHandler, XAxis xAxis, Transformer trans) {
+            super(viewPortHandler, xAxis, trans);
+        }
 
-        return sysVals;
+        @Override
+        protected void drawLabel(Canvas c, String formattedLabel, float x, float y, MPPointF anchor, float angleDegrees) {
+            String line[] = formattedLabel.split("\n");
+            Utils.drawXAxisValue(c, line[0], x, y, mAxisLabelPaint, anchor, angleDegrees);
+            Utils.drawXAxisValue(c, line[1], x + mAxisLabelPaint.getTextSize(), y + mAxisLabelPaint.getTextSize(), mAxisLabelPaint, anchor, angleDegrees);
+        }
     }
-
-    private ArrayList<Entry> diastolicValues()
-    {
-        ArrayList<Entry> diaVals = new ArrayList<Entry>();
-        diaVals.add(new Entry(0,80));
-        diaVals.add(new Entry(1,70));
-        diaVals.add(new Entry(2,95));
-        diaVals.add(new Entry(3,55));
-        diaVals.add(new Entry(4,105));
-        diaVals.add(new Entry(5,67));
-        diaVals.add(new Entry(6,115));
-        diaVals.add(new Entry(7,90));
-        diaVals.add(new Entry(8,76));
-
-        return diaVals;
-    }
-
-
 
 }
