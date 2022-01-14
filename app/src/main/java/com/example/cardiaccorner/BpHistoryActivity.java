@@ -51,6 +51,8 @@ public class BpHistoryActivity extends AppCompatActivity {
     Button detailsBtn, searchBtn, backBtn;
     RecyclerView recyclerView;
 
+    RecyclerAdapter recyclerAdapter;
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -112,6 +114,7 @@ public class BpHistoryActivity extends AppCompatActivity {
             }
             logs = retrieveLogs();
         }
+
         System.out.println(logs);
 
         backBtn = (Button) findViewById(R.id.back_button);
@@ -131,102 +134,29 @@ public class BpHistoryActivity extends AppCompatActivity {
         searchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Entry> filteredList = new ArrayList<Entry>();
+                logs.clear();
                 for(Entry e: retrieveLogs()){
                     if(String.valueOf(e.getDia_measurement()).contains(searchView.getText().toString())){
-                        filteredList.add(e);
+                        logs.add(e);
                     } else if (String.valueOf(e.getSys_measurement()).contains(searchView.getText().toString())){
-                        filteredList.add(e);
+                        logs.add(e);
                     } else if (e.getTime_created().contains(searchView.getText().toString())){
-                        filteredList.add(e);
+                        logs.add(e);
+                    } else if (searchView.getText().toString().toLowerCase().equals("sodium") && e.isSodium()){
+                        logs.add(e);
+                    } else if (searchView.getText().toString().toLowerCase().equals("stress") && e.isStress()){
+                        logs.add(e);
+                    } else if (searchView.getText().toString().toLowerCase().equals("exercise") && e.isExercise()){
+                        logs.add(e);
                     }
                 }
-
-                Intent i = new Intent(BpHistoryActivity.this, BpHistoryActivity.class);
-                i.putExtra("entries", filteredList);
-                startActivity(i);
+                recyclerAdapter.notifyDataSetChanged();
             }
         });
 
 
-        /**
-        printSystolicValue();
-        printDiastolicValue();
-
-        TextView dateText = (TextView) findViewById(R.id.date_text);
-        dateText.setText(dateTime);
-
-        detailsBtn = (Button) findViewById(R.id.details);
-        detailsBtn.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(BpHistoryActivity.this,BpDetailsActivity.class);
-                        startActivity(i);
-                    }
-                });
-
-        sodiumChip = (Chip) findViewById(R.id.chip1_card);
-        if(sodiumStatus == true){
-            sodiumChip.setChecked(true);
-            sodiumChip.setCheckedIconVisible(true);
-            sodiumChip.setVisibility(View.VISIBLE);
-        }
-        sodiumChip.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(sodiumChip.isChecked()){
-                            sodiumChip.setChecked(false);
-                        } else{
-                            sodiumChip.setChecked(true);
-                            sodiumChip.setCheckedIconVisible(true);
-                        }
-                    }
-                });
-
-        stressChip = (Chip) findViewById(R.id.chip2_card);
-        if(stressStatus == true){
-            stressChip.setChecked(true);
-            stressChip.setCheckedIconVisible(true);
-            stressChip.setVisibility(View.VISIBLE);
-        }
-        stressChip.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(stressChip.isChecked()){
-                            stressChip.setChecked(false);
-                        } else{
-                            stressChip.setChecked(true);
-                            stressChip.setCheckedIconVisible(true);
-                        }
-                    }
-                });
-
-        exerciseChip = (Chip) findViewById(R.id.chip3_card);
-        if(exerciseStatus == true){
-            exerciseChip.setChecked(true);
-            exerciseChip.setCheckedIconVisible(true);
-            exerciseChip.setVisibility(View.VISIBLE);
-        }
-        exerciseChip.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(exerciseChip.isChecked()){
-                            exerciseChip.setChecked(false);
-                        } else{
-                            exerciseChip.setChecked(true);
-                            exerciseChip.setCheckedIconVisible(true);
-                        }
-                    }
-                });
-        **/
-
-
         recyclerView = (RecyclerView) findViewById(R.id.logScroll);
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(this, logs);
+        recyclerAdapter = new RecyclerAdapter(this, logs);
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

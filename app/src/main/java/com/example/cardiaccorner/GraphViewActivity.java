@@ -18,20 +18,13 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.github.mikephil.charting.charts.Chart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.model.GradientColor;
 import com.github.mikephil.charting.renderer.XAxisRenderer;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.Utils;
@@ -63,6 +56,9 @@ public class GraphViewActivity extends AppCompatActivity {
     Button backBtn;
     String dateTime;
 
+    LineChart systolicLineChart, diastolicLineChart;
+    ArrayList<com.example.cardiaccorner.Entry> logs, historicLogs;
+
     public void storeLogs(ArrayList<com.example.cardiaccorner.Entry> log){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -92,7 +88,6 @@ public class GraphViewActivity extends AppCompatActivity {
         return sharedPreferences.contains("logs");
     }
 
-    ArrayList<com.example.cardiaccorner.Entry> logs;
     static final String SHARED_PREFS = "cardiacCornerPrefs";
 
     @Override
@@ -102,10 +97,13 @@ public class GraphViewActivity extends AppCompatActivity {
 
         if(logsStored()){
             logs = retrieveLogs();
+            historicLogs = retrieveLogs();
         } else {
             //You can use this for node testing/dummy code
             logs = new ArrayList<>();
+            historicLogs = new ArrayList<>();
         }
+
         System.out.println(logs);
         backBtn = (Button) findViewById(R.id.back_button);
         backBtn.setOnClickListener(
@@ -123,11 +121,7 @@ public class GraphViewActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(sodiumChip.isChecked()){
-                            // code to display data with sodium tag
-                        } else{
-                            // other case
-                        }
+                        filterList();
                     }
                 });
 
@@ -136,11 +130,7 @@ public class GraphViewActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(stressChip.isChecked()){
-                            // code to display data with stress tag
-                        } else{
-                            // other case
-                        }
+                        filterList();
                     }
                 });
 
@@ -149,20 +139,98 @@ public class GraphViewActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(exerciseChip.isChecked()){
-                            // code to display data with heavy exercise tag
-                        } else{
-                            // other case
-                        }
+                        filterList();
                     }
                 });
 
 
+        systolicLineChart = findViewById(R.id.systolic_line_chart);
+        diastolicLineChart = findViewById(R.id.diastolic_line_chart);
+        createGraphs(logs);
+
+    }
+
+    private ArrayList<Entry> getSystolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
+        ArrayList<Entry> sysVals = new ArrayList<Entry>();
+        for(int i = 0; i<logs.size(); i++)
+        {
+            sysVals.add(makeSystolicEntryFromLog(logs.get(i), i));
+        }
+
+        return sysVals;
+    }
+
+    private Entry makeSystolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
+    {
+        Entry newEntry = new Entry(xVal, entry.getSys_measurement());
+        return newEntry;
+    }
+
+    private ArrayList<String> getDatesDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
+        ArrayList<String> dates = new ArrayList<String>();
+        for(int i = 0; i<logs.size(); i++)
+        {
+            String[] splitDate = logs.get(i).getTime_created().split(" ");
+            String[] splitTime = splitDate[1].split(":");
+            dates.add(splitDate[0] + "\n" + splitTime[0] + ":" + splitTime[1]);
+        }
+
+        System.out.println(dates);
+        return dates;
+    }
+
+    private ArrayList<Entry> getDiastolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
+        ArrayList<Entry> diaVals = new ArrayList<Entry>();
+        for(int i = 0; i<logs.size(); i++)
+        {
+            diaVals.add(makeDiastolicEntryFromLog(logs.get(i), i));
+        }
+
+        return diaVals;
+    }
+
+    private Entry makeDiastolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
+    {
+        Entry newEntry = new Entry(xVal, entry.getDia_measurement());
+        return newEntry;
+    }
+
+    private ArrayList<Entry> systolicValues()
+    {
+        ArrayList<Entry> sysVals = new ArrayList<Entry>();
+        sysVals.add(new Entry(0,50));
+        sysVals.add(new Entry(1,70));
+        sysVals.add(new Entry(2,90));
+        sysVals.add(new Entry(3,110));
+        sysVals.add(new Entry(4,130));
+        sysVals.add(new Entry(5,150));
+        sysVals.add(new Entry(6,170));
+        sysVals.add(new Entry(7,190));
+        sysVals.add(new Entry(8,210));
+
+        return sysVals;
+    }
+
+    private ArrayList<Entry> diastolicValues()
+    {
+        ArrayList<Entry> diaVals = new ArrayList<Entry>();
+        diaVals.add(new Entry(0,80));
+        diaVals.add(new Entry(1,70));
+        diaVals.add(new Entry(2,95));
+        diaVals.add(new Entry(3,55));
+        diaVals.add(new Entry(4,105));
+        diaVals.add(new Entry(5,67));
+        diaVals.add(new Entry(6,115));
+        diaVals.add(new Entry(7,90));
+        diaVals.add(new Entry(8,76));
+
+        return diaVals;
+    }
+
+    public void createGraphs(ArrayList<com.example.cardiaccorner.Entry> logs){
         // systolic line chart
 
         int[] colors = {R.color.dark_blue, R.color.medium_blue, R.color.light_blue, R.color.yellow, R.color.orange, R.color.red};
-
-        ArrayList<com.example.cardiaccorner.Entry> logs = retrieveLogs();
 
         ArrayList<String> dates = getDatesDataSet(logs);
 
@@ -174,7 +242,7 @@ public class GraphViewActivity extends AppCompatActivity {
         systolicLineDataSet.setCircleRadius(4f);
 
         LineData systolicData = new LineData(systolicLineDataSet);
-        LineChart systolicLineChart = findViewById(R.id.systolic_line_chart);
+
         systolicLineChart.setData(systolicData);
 
         systolicLineChart.setTouchEnabled(true);
@@ -224,7 +292,6 @@ public class GraphViewActivity extends AppCompatActivity {
         diastolicLineDataSet.setCircleRadius(4f);
 
         LineData diastolicData = new LineData(diastolicLineDataSet);
-        LineChart diastolicLineChart = findViewById(R.id.diastolic_line_chart);
         diastolicLineChart.setData(diastolicData);
 
         diastolicLineChart.setTouchEnabled(true);
@@ -270,51 +337,6 @@ public class GraphViewActivity extends AppCompatActivity {
         diastolicLineChart.setOnChartGestureListener(new MultiChartGestureListener(diastolicLineChart, new Chart[] {systolicLineChart}));
     }
 
-    private ArrayList<Entry> getSystolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
-        ArrayList<Entry> sysVals = new ArrayList<Entry>();
-        for(int i = 0; i<logs.size(); i++)
-        {
-            sysVals.add(makeSystolicEntryFromLog(logs.get(i), i));
-        }
-
-        return sysVals;
-    }
-
-    private Entry makeSystolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
-    {
-        Entry newEntry = new Entry(xVal, entry.getSys_measurement());
-        return newEntry;
-    }
-
-    private ArrayList<String> getDatesDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
-        ArrayList<String> dates = new ArrayList<String>();
-        for(int i = 0; i<logs.size(); i++)
-        {
-            String[] splitDate = logs.get(i).getTime_created().split(" ");
-            String[] splitTime = splitDate[1].split(":");
-            dates.add(splitDate[0] + "\n" + splitTime[0] + ":" + splitTime[1]);
-        }
-
-        System.out.println(dates);
-        return dates;
-    }
-
-    private ArrayList<Entry> getDiastolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
-        ArrayList<Entry> diaVals = new ArrayList<Entry>();
-        for(int i = 0; i<logs.size(); i++)
-        {
-            diaVals.add(makeDiastolicEntryFromLog(logs.get(i), i));
-        }
-
-        return diaVals;
-    }
-
-    private Entry makeDiastolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
-    {
-        Entry newEntry = new Entry(xVal, entry.getDia_measurement());
-        return newEntry;
-    }
-
     public class CustomXAxisRenderer extends XAxisRenderer {
         public CustomXAxisRenderer(ViewPortHandler viewPortHandler, XAxis xAxis, Transformer trans) {
             super(viewPortHandler, xAxis, trans);
@@ -326,6 +348,26 @@ public class GraphViewActivity extends AppCompatActivity {
             Utils.drawXAxisValue(c, line[0], x, y, mAxisLabelPaint, anchor, angleDegrees);
             Utils.drawXAxisValue(c, line[1], x + mAxisLabelPaint.getTextSize(), y + mAxisLabelPaint.getTextSize(), mAxisLabelPaint, anchor, angleDegrees);
         }
+    }
+
+    public void filterList() {
+        logs.clear();
+        for(com.example.cardiaccorner.Entry e: historicLogs){
+            if(stressChip.isChecked() && e.isStress()){
+                logs.add(e);
+            } else if(sodiumChip.isChecked() && e.isSodium()){
+                logs.add(e);
+            } else if(exerciseChip.isChecked() && e.isSodium()){
+                logs.add(e);
+            }
+        }
+        if(!stressChip.isChecked() && !exerciseChip.isChecked() && !sodiumChip.isChecked()){
+            logs = new ArrayList<>(historicLogs);
+        }
+
+        createGraphs(logs);
+        systolicLineChart.invalidate();
+        diastolicLineChart.invalidate();
     }
 
 }
