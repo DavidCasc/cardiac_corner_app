@@ -34,9 +34,10 @@ public class BreakdownActivity extends AppCompatActivity {
 
     Button finishBtn;
     Button backBtn;
+    LineChart systolicLineChart, diastolicLineChart;
+    ArrayList<com.example.cardiaccorner.Entry> logs, historicLogs;
 
     static final String SHARED_PREFS = "cardiacCornerPrefs";
-    ArrayList<Entry> logs;
 
     public Boolean logsStored(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -79,8 +80,10 @@ public class BreakdownActivity extends AppCompatActivity {
 
         if(logsStored()){
             logs = retrieveLogs();
+            historicLogs = retrieveLogs();
         } else {
             logs = new ArrayList<>();
+            historicLogs = new ArrayList<>();
         }
         System.out.println("HERE");
         System.out.println(logs);
@@ -110,11 +113,7 @@ public class BreakdownActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(sodiumChip.isChecked()){
-                            // code to display data with sodium tag
-                        } else{
-                            // other case
-                        }
+                        filterList();
                     }
                 });
 
@@ -123,11 +122,7 @@ public class BreakdownActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(stressChip.isChecked()){
-                            // code to display data with stress tag
-                        } else{
-                            // other case
-                        }
+                        filterList();
                     }
                 });
 
@@ -136,125 +131,13 @@ public class BreakdownActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(exerciseChip.isChecked()){
-                            // code to display data with heavy exercise tag
-                        } else{
-                            // other case
-                        }
+                        filterList();
                     }
                 });
 
-
-        // systolic line chart
-
-        int[] colors = {R.color.dark_blue, R.color.medium_blue, R.color.light_blue, R.color.yellow, R.color.orange, R.color.red};
-
-        ArrayList<com.example.cardiaccorner.Entry> logs = retrieveLogs();
-
-        ArrayList<String> dates = getDatesDataSet(logs);
-
-        LineDataSet systolicLineDataSet = new LineDataSet(getSystolicDataSet(logs),"Systolic");
-        systolicLineDataSet.setValueTextSize(0f);
-        systolicLineDataSet.setLineWidth(6);
-        systolicLineDataSet.setCircleColor(Color.BLACK);
-        systolicLineDataSet.setDrawCircleHole(false);
-        systolicLineDataSet.setCircleRadius(4f);
-
-        LineData systolicData = new LineData(systolicLineDataSet);
-        LineChart systolicLineChart = findViewById(R.id.systolic_line_chart);
-        systolicLineChart.setData(systolicData);
-
-        systolicLineChart.setTouchEnabled(true);
-        systolicLineChart.setPinchZoom(false);
-        systolicLineChart.getAxisRight().setDrawLabels(false);
-        systolicLineChart.getDescription().setEnabled(false);
-        systolicLineChart.setVisibleXRangeMaximum(5);
-        systolicLineChart.setHorizontalScrollBarEnabled(true);
-        systolicLineChart.setVerticalScrollBarEnabled(false);
-        systolicLineChart.moveViewToX(systolicLineDataSet.getEntryCount()-1);
-        systolicLineChart.setExtraBottomOffset(10);
-        systolicLineChart.setExtraRightOffset(32);
-
-        XAxis x = systolicLineChart.getXAxis();
-        x.setPosition(XAxis.XAxisPosition.BOTTOM);
-        x.setTextSize(13f);
-        x.setLabelRotationAngle(-45);
-        x.setDrawGridLines(false);
-        x.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
-        x.setGranularityEnabled(true);
-
-        YAxis y = systolicLineChart.getAxisLeft();
-        y.setTextSize(15f);
-        y.setAxisMinimum(60);
-        y.setAxisMaximum(210);
-        y.setDrawGridLines(false);
-
-        Legend legend = systolicLineChart.getLegend();
-        legend.setEnabled(false);
-
-        LinearGradient linearGradient = new LinearGradient(
-                0, 0, 0, 500,
-                new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.01f, 0.1f, 0.25f, 0.4f, 0.45f, 0.65f, 0.85f},
-                Shader.TileMode.CLAMP);
-
-        Paint paint = systolicLineChart.getRenderer().getPaintRender();
-        paint.setShader(linearGradient);
-
-
-        // diastolic line chart
-
-        LineDataSet diastolicLineDataSet = new LineDataSet(getDiastolicDataSet(logs),"Diastolic");
-        diastolicLineDataSet.setValueTextSize(0f);
-        diastolicLineDataSet.setLineWidth(6);
-        diastolicLineDataSet.setCircleColor(Color.BLACK);
-        diastolicLineDataSet.setDrawCircleHole(false);
-        diastolicLineDataSet.setCircleRadius(4f);
-
-        LineData diastolicData = new LineData(diastolicLineDataSet);
-        LineChart diastolicLineChart = findViewById(R.id.diastolic_line_chart);
-        diastolicLineChart.setData(diastolicData);
-
-        diastolicLineChart.setTouchEnabled(true);
-        diastolicLineChart.setPinchZoom(false);
-        diastolicLineChart.getAxisRight().setDrawLabels(false);
-        diastolicLineChart.getDescription().setEnabled(false);
-        diastolicLineChart.setVisibleXRangeMaximum(5);
-        diastolicLineChart.setHorizontalScrollBarEnabled(true);
-        diastolicLineChart.setVerticalScrollBarEnabled(false);
-        diastolicLineChart.moveViewToX(diastolicLineDataSet.getEntryCount()-1);
-        diastolicLineChart.setExtraBottomOffset(10);
-        diastolicLineChart.setExtraRightOffset(32);
-
-        XAxis x2 = diastolicLineChart.getXAxis();
-        x2.setPosition(XAxis.XAxisPosition.BOTTOM);
-        x2.setTextSize(13f);
-        x2.setLabelRotationAngle(-45);
-        x2.setDrawGridLines(false);
-        x2.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
-        x2.setGranularityEnabled(true);
-
-        YAxis y2 = diastolicLineChart.getAxisLeft();
-        y2.setTextSize(15f);
-        y2.setAxisMinimum(30);
-        y2.setAxisMaximum(140);
-        y2.setDrawGridLines(false);
-
-        Legend legend2 = diastolicLineChart.getLegend();
-        legend2.setEnabled(false);
-
-        LinearGradient linearGradient2 = new LinearGradient(
-                0, 0, 0, 500,
-                new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.01f, 0.1f, 0.25f, 0.4f, 0.45f, 0.65f, 0.85f},
-                Shader.TileMode.CLAMP);
-
-        Paint paint2 = diastolicLineChart.getRenderer().getPaintRender();
-        paint2.setShader(linearGradient2);
-
-
-        systolicLineChart.setOnChartGestureListener(new MultiChartGestureListener(systolicLineChart, new Chart[] {diastolicLineChart}));
-        diastolicLineChart.setOnChartGestureListener(new MultiChartGestureListener(diastolicLineChart, new Chart[] {systolicLineChart}));
+        systolicLineChart = findViewById(R.id.systolic_line_chart);
+        diastolicLineChart = findViewById(R.id.diastolic_line_chart);
+        createGraphs(logs);
     }
 
     private ArrayList<com.github.mikephil.charting.data.Entry> getSystolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
@@ -300,5 +183,133 @@ public class BreakdownActivity extends AppCompatActivity {
         com.github.mikephil.charting.data.Entry newEntry = new com.github.mikephil.charting.data.Entry(xVal, entry.getDia_measurement());
         return newEntry;
     }
+    public void createGraphs(ArrayList<com.example.cardiaccorner.Entry> logs){
+        // systolic line chart
 
+        int[] colors = {R.color.dark_blue, R.color.medium_blue, R.color.light_blue, R.color.yellow, R.color.orange, R.color.red};
+
+        ArrayList<String> dates = getDatesDataSet(logs);
+
+        LineDataSet systolicLineDataSet = new LineDataSet(getSystolicDataSet(logs),"Systolic");
+        systolicLineDataSet.setValueTextSize(12f);
+        systolicLineDataSet.setLineWidth(6);
+        systolicLineDataSet.setCircleColor(Color.BLACK);
+        systolicLineDataSet.setDrawCircleHole(false);
+        systolicLineDataSet.setCircleRadius(4f);
+
+        LineData systolicData = new LineData(systolicLineDataSet);
+
+        systolicLineChart.setData(systolicData);
+
+        systolicLineChart.setTouchEnabled(true);
+        systolicLineChart.setPinchZoom(false);
+        systolicLineChart.getAxisRight().setDrawLabels(false);
+        systolicLineChart.getDescription().setEnabled(false);
+        systolicLineChart.setVisibleXRangeMaximum(5);
+        systolicLineChart.setHorizontalScrollBarEnabled(true);
+        systolicLineChart.setVerticalScrollBarEnabled(false);
+        systolicLineChart.moveViewToX(systolicLineDataSet.getEntryCount()-1);
+        systolicLineChart.setExtraBottomOffset(10);
+        systolicLineChart.setExtraTopOffset(30);
+        systolicLineChart.setExtraRightOffset(32);
+
+        XAxis x = systolicLineChart.getXAxis();
+        x.setPosition(XAxis.XAxisPosition.BOTTOM);
+        x.setTextSize(0f);
+        x.setDrawGridLines(false);
+        x.setEnabled(false);
+
+        YAxis y = systolicLineChart.getAxisLeft();
+        y.setTextSize(15f);
+        y.setAxisMinimum(60);
+        y.setAxisMaximum(210);
+        y.setDrawGridLines(false);
+
+        Legend legend = systolicLineChart.getLegend();
+        legend.setEnabled(false);
+
+        LinearGradient linearGradient = new LinearGradient(
+                0, 0, 0, 500,
+                new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
+                new float[]{0.01f, 0.1f, 0.25f, 0.4f, 0.45f, 0.65f, 0.85f},
+                Shader.TileMode.CLAMP);
+
+        Paint paint = systolicLineChart.getRenderer().getPaintRender();
+        paint.setShader(linearGradient);
+
+
+        // diastolic line chart
+
+        LineDataSet diastolicLineDataSet = new LineDataSet(getDiastolicDataSet(logs),"Diastolic");
+        diastolicLineDataSet.setValueTextSize(12f);
+        diastolicLineDataSet.setLineWidth(6);
+        diastolicLineDataSet.setCircleColor(Color.BLACK);
+        diastolicLineDataSet.setDrawCircleHole(false);
+        diastolicLineDataSet.setCircleRadius(4f);
+
+        LineData diastolicData = new LineData(diastolicLineDataSet);
+        diastolicLineChart.setData(diastolicData);
+
+        diastolicLineChart.setTouchEnabled(true);
+        diastolicLineChart.setPinchZoom(false);
+        diastolicLineChart.getAxisRight().setDrawLabels(false);
+        diastolicLineChart.getDescription().setEnabled(false);
+        diastolicLineChart.setVisibleXRangeMaximum(5);
+        diastolicLineChart.setHorizontalScrollBarEnabled(true);
+        diastolicLineChart.setVerticalScrollBarEnabled(false);
+        diastolicLineChart.moveViewToX(diastolicLineDataSet.getEntryCount()-1);
+        diastolicLineChart.setExtraBottomOffset(20);
+        systolicLineChart.setExtraTopOffset(30);
+        diastolicLineChart.setExtraRightOffset(32);
+
+        XAxis x2 = diastolicLineChart.getXAxis();
+        x2.setPosition(XAxis.XAxisPosition.BOTTOM);
+        x2.setTextSize(13f);
+        x2.setLabelRotationAngle(-45);
+        x2.setDrawGridLines(false);
+        x2.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
+        x2.setGranularityEnabled(true);
+
+        YAxis y2 = diastolicLineChart.getAxisLeft();
+        y2.setTextSize(15f);
+        y2.setAxisMinimum(30);
+        y2.setAxisMaximum(140);
+        y2.setDrawGridLines(false);
+
+        Legend legend2 = diastolicLineChart.getLegend();
+        legend2.setEnabled(false);
+
+        LinearGradient linearGradient2 = new LinearGradient(
+                0, 0, 0, 500,
+                new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
+                new float[]{0.01f, 0.1f, 0.25f, 0.4f, 0.45f, 0.65f, 0.85f},
+                Shader.TileMode.CLAMP);
+
+        Paint paint2 = diastolicLineChart.getRenderer().getPaintRender();
+        paint2.setShader(linearGradient2);
+
+
+        systolicLineChart.setOnChartGestureListener(new MultiChartGestureListener(systolicLineChart, new Chart[] {diastolicLineChart}));
+        diastolicLineChart.setOnChartGestureListener(new MultiChartGestureListener(diastolicLineChart, new Chart[] {systolicLineChart}));
+    }
+
+    public void filterList() {
+        logs.clear();
+        for(com.example.cardiaccorner.Entry e: historicLogs){
+            if(stressChip.isChecked() && e.isStress()){
+                logs.add(e);
+            } else if(sodiumChip.isChecked() && e.isSodium()){
+                logs.add(e);
+            } else if(exerciseChip.isChecked() && e.isSodium()){
+                logs.add(e);
+            }
+        }
+        if(!stressChip.isChecked() && !exerciseChip.isChecked() && !sodiumChip.isChecked()){
+            logs = new ArrayList<>(historicLogs);
+        }
+
+        createGraphs(logs);
+        systolicLineChart.invalidate();
+        diastolicLineChart.invalidate();
+    }
 }
