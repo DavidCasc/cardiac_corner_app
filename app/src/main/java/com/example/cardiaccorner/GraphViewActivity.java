@@ -369,5 +369,4 @@ public class GraphViewActivity extends AppCompatActivity {
         systolicLineChart.invalidate();
         diastolicLineChart.invalidate();
     }
-
 }
