@@ -6,51 +6,43 @@
     android:layout_height="match_parent"
     android:background="#F6F5F5">
 
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="803dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/rasa_bold"
         android:gravity="center"
         android:text="BLOOD PRESSURE HISTORY"
         android:textColor="#000000"
         android:textSize="26sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_button"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/graph_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="66dp"
-        android:layout_marginEnd="222dp"
-        android:layout_marginBottom="776dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="-15dp"
         android:fontFamily="@font/rasa_bold"
         android:text="GRAPH VIEW"
         android:textColor="#9B64FF"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintStart_toEndOf="@+id/back_button"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="410dp"
         android:layout_height="62dp"
-        android:layout_marginTop="104dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/graph_view">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip1_card"
@@ -117,17 +109,16 @@
     <LinearLayout
         android:layout_width="410dp"
         android:layout_height="680dp"
-        android:layout_marginTop="173dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <include
             android:id="@+id/graph"
             layout="@layout/graph"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="421dp" />
 
         <include
             android:id="@+id/bp_level_table"
@@ -157,7 +148,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#F6F5F5"
         app:icon="@drawable/ic_baseline_arrow_back_ios_24"
         app:iconTint="#000000"

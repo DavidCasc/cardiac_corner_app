@@ -16,13 +16,13 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="23dp"
+            android:background="@color/white"
+            android:gravity="center"
             android:text="Systolic BP Level (mmHg)"
             android:textColor="#000000"
-            android:background="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:textStyle="bold" />
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/systolic_line_chart"
@@ -37,14 +37,14 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="23dp"
             android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:gravity="center"
             android:text="Diastolic BP Level (mmHg)"
             android:textColor="#000000"
-            android:background="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:textStyle="bold" />
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/diastolic_line_chart"

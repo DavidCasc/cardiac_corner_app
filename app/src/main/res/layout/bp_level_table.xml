@@ -88,7 +88,7 @@
                 android:layout_marginTop="6dp"
                 android:text="&lt;90"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -100,7 +100,7 @@
                 android:layout_marginTop="6dp"
                 android:text="&lt;60"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -112,7 +112,7 @@
                 android:layout_marginTop="6dp"
                 android:text="Hypotension"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -141,7 +141,7 @@
                 android:layout_marginTop="6dp"
                 android:text="90-119"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -153,7 +153,7 @@
                 android:layout_marginTop="6dp"
                 android:text="60-79"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -165,7 +165,7 @@
                 android:layout_marginTop="6dp"
                 android:text="Desired"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -194,7 +194,7 @@
                 android:layout_marginTop="6dp"
                 android:text="120-139"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -206,7 +206,7 @@
                 android:layout_marginTop="6dp"
                 android:text="80-89"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -218,7 +218,7 @@
                 android:layout_marginTop="6dp"
                 android:text="Prehypertension"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -247,7 +247,7 @@
                 android:layout_marginTop="6dp"
                 android:text="140-159"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -259,7 +259,7 @@
                 android:layout_marginTop="6dp"
                 android:text="90-99"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -271,7 +271,7 @@
                 android:layout_marginTop="6dp"
                 android:text="Stage 1 hypertension"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="4" />
 
@@ -300,7 +300,7 @@
                 android:layout_marginTop="6dp"
                 android:text="160-179"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -312,7 +312,7 @@
                 android:layout_marginTop="6dp"
                 android:text="100-109"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -324,7 +324,7 @@
                 android:layout_marginTop="6dp"
                 android:text="Stage 2 hypertension"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="5" />
 
@@ -353,7 +353,7 @@
                 android:layout_marginTop="6dp"
                 android:text="&gt;=180"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -365,7 +365,7 @@
                 android:layout_marginTop="6dp"
                 android:text="&gt;=110"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="1" />
 
@@ -377,7 +377,7 @@
                 android:layout_marginTop="6dp"
                 android:text="Hypertensive emergency*"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_column="1"
                 app:layout_row="6" />
 
