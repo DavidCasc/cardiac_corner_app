@@ -114,4 +114,22 @@ public class Entry implements Serializable {
     public int hashCode() {
         return Objects.hash(getTime_created(), getSys_measurement(), getDia_measurement(), isExercise(), isSodium(), isStress(), getNotes(), getSynced());
     }
+
+    public String getTags() {
+
+        String tags = "";
+
+        if (sodium){
+            tags = "sodium";
+        }
+        if (stress){
+            tags = tags + "\n" + "stress";
+        }
+        if (exercise){
+            tags = tags + "\n" + "exercise";
+        }
+
+        return tags;
+    }
+
 }

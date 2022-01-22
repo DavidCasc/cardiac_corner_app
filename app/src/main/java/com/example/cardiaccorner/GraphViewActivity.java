@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
@@ -16,14 +17,20 @@ import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.renderer.XAxisRenderer;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Transformer;
@@ -162,7 +169,7 @@ public class GraphViewActivity extends AppCompatActivity {
 
     private Entry makeSystolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
     {
-        Entry newEntry = new Entry(xVal, entry.getSys_measurement());
+        Entry newEntry = new Entry(xVal, entry.getSys_measurement(), entry);
         return newEntry;
     }
 
@@ -179,6 +186,16 @@ public class GraphViewActivity extends AppCompatActivity {
         return dates;
     }
 
+    private ArrayList<String> getTagsDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
+        ArrayList<String> tags = new ArrayList<String>();
+        for(int i = 0; i<logs.size(); i++)
+        {
+            String getTags = logs.get(i).getTags();
+            tags.add(getTags);
+        }
+        return tags;
+    }
+
     private ArrayList<Entry> getDiastolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
         ArrayList<Entry> diaVals = new ArrayList<Entry>();
         for(int i = 0; i<logs.size(); i++)
@@ -191,40 +208,8 @@ public class GraphViewActivity extends AppCompatActivity {
 
     private Entry makeDiastolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
     {
-        Entry newEntry = new Entry(xVal, entry.getDia_measurement());
+        Entry newEntry = new Entry(xVal, entry.getDia_measurement(), entry);
         return newEntry;
-    }
-
-    private ArrayList<Entry> systolicValues()
-    {
-        ArrayList<Entry> sysVals = new ArrayList<Entry>();
-        sysVals.add(new Entry(0,50));
-        sysVals.add(new Entry(1,70));
-        sysVals.add(new Entry(2,90));
-        sysVals.add(new Entry(3,110));
-        sysVals.add(new Entry(4,130));
-        sysVals.add(new Entry(5,150));
-        sysVals.add(new Entry(6,170));
-        sysVals.add(new Entry(7,190));
-        sysVals.add(new Entry(8,210));
-
-        return sysVals;
-    }
-
-    private ArrayList<Entry> diastolicValues()
-    {
-        ArrayList<Entry> diaVals = new ArrayList<Entry>();
-        diaVals.add(new Entry(0,80));
-        diaVals.add(new Entry(1,70));
-        diaVals.add(new Entry(2,95));
-        diaVals.add(new Entry(3,55));
-        diaVals.add(new Entry(4,105));
-        diaVals.add(new Entry(5,67));
-        diaVals.add(new Entry(6,115));
-        diaVals.add(new Entry(7,90));
-        diaVals.add(new Entry(8,76));
-
-        return diaVals;
     }
 
     public void createGraphs(ArrayList<com.example.cardiaccorner.Entry> logs){
@@ -233,6 +218,7 @@ public class GraphViewActivity extends AppCompatActivity {
         int[] colors = {R.color.dark_blue, R.color.medium_blue, R.color.light_blue, R.color.yellow, R.color.orange, R.color.red};
 
         ArrayList<String> dates = getDatesDataSet(logs);
+        ArrayList<String> tags = getTagsDataSet(logs);
 
         LineDataSet systolicLineDataSet = new LineDataSet(getSystolicDataSet(logs),"Systolic");
         systolicLineDataSet.setValueTextSize(12f);
@@ -256,6 +242,9 @@ public class GraphViewActivity extends AppCompatActivity {
         systolicLineChart.setExtraBottomOffset(10);
         systolicLineChart.setExtraTopOffset(30);
         systolicLineChart.setExtraRightOffset(32);
+
+        CustomMarkerView mv = new CustomMarkerView(getApplicationContext(), R.layout.custom_marker_view_layout);
+        systolicLineChart.setMarker(mv);
 
         XAxis x = systolicLineChart.getXAxis();
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -305,6 +294,8 @@ public class GraphViewActivity extends AppCompatActivity {
         systolicLineChart.setExtraTopOffset(30);
         diastolicLineChart.setExtraRightOffset(32);
         diastolicLineChart.setXAxisRenderer(new CustomXAxisRenderer(diastolicLineChart.getViewPortHandler(), diastolicLineChart.getXAxis(), diastolicLineChart.getTransformer(YAxis.AxisDependency.LEFT)));
+
+        diastolicLineChart.setMarker(mv);
 
         XAxis x2 = diastolicLineChart.getXAxis();
         x2.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -369,4 +360,30 @@ public class GraphViewActivity extends AppCompatActivity {
         systolicLineChart.invalidate();
         diastolicLineChart.invalidate();
     }
+
+    public class CustomMarkerView extends MarkerView {
+
+        private TextView tvContent;
+
+        public CustomMarkerView (Context context, int layoutResource) {
+            super(context, layoutResource);
+            // this markerview only displays a textview
+            tvContent = (TextView) findViewById(R.id.tvContent);
+        }
+
+        // callbacks everytime the MarkerView is redrawn, can be used to update the
+        // content (user-interface)
+        @Override
+        public void refreshContent(Entry e, Highlight highlight) {
+
+            tvContent.setText(((com.example.cardiaccorner.Entry) e.getData()).getTags()); // set the entry-value as the display text
+        }
+
+        @Override
+        public MPPointF getOffset() {
+            return new MPPointF(-(getWidth() / 2), -getHeight());
+        }
+
+    }
+
 }
