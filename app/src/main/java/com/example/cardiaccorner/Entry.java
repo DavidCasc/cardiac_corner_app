@@ -121,13 +121,28 @@ public class Entry implements Serializable {
 
         if (sodium){
             tags = "sodium";
+
+            if (stress){
+                tags = tags + "\n" + "stress" ;
+            }
+            if (exercise){
+                tags = tags + "\n" + "exercise" ;
+            }
         }
-        if (stress){
-            tags = tags + "\n" + "stress";
+        if (!sodium){
+            if (stress){
+                tags = "stress" ;
+
+                if (exercise){
+                    tags = tags + "\n" + "exercise" ;
+                }
+            } else {
+                if (exercise){
+                    tags = "exercise" ;
+                }
+            }
         }
-        if (exercise){
-            tags = tags + "\n" + "exercise";
-        }
+
 
         return tags;
     }

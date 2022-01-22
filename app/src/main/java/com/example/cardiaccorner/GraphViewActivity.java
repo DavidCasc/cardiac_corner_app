@@ -377,6 +377,7 @@ public class GraphViewActivity extends AppCompatActivity {
         public void refreshContent(Entry e, Highlight highlight) {
 
             tvContent.setText(((com.example.cardiaccorner.Entry) e.getData()).getTags()); // set the entry-value as the display text
+            super.refreshContent(e, highlight);
         }
 
         @Override
