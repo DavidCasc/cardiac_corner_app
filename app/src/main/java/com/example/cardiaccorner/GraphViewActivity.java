@@ -28,6 +28,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -226,6 +227,7 @@ public class GraphViewActivity extends AppCompatActivity {
         systolicLineDataSet.setCircleColor(Color.BLACK);
         systolicLineDataSet.setDrawCircleHole(false);
         systolicLineDataSet.setCircleRadius(4f);
+        systolicLineDataSet.setValueFormatter(new MyValueFormatter());
 
         LineData systolicData = new LineData(systolicLineDataSet);
 
@@ -279,6 +281,7 @@ public class GraphViewActivity extends AppCompatActivity {
         diastolicLineDataSet.setCircleColor(Color.BLACK);
         diastolicLineDataSet.setDrawCircleHole(false);
         diastolicLineDataSet.setCircleRadius(4f);
+        diastolicLineDataSet.setValueFormatter(new MyValueFormatter());
 
         LineData diastolicData = new LineData(diastolicLineDataSet);
         diastolicLineChart.setData(diastolicData);
@@ -317,7 +320,7 @@ public class GraphViewActivity extends AppCompatActivity {
         LinearGradient linearGradient2 = new LinearGradient(
                 0, 0, 0, 500,
                 new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.01f, 0.4f, 0.45f, 0.5f, 0.55f, 0.6f, 0.65f},
+                new float[]{0.01f, 0.4f, 0.44f, 0.48f, 0.50f, 0.55f, 0.65f},
                 Shader.TileMode.CLAMP);
 
         Paint paint2 = diastolicLineChart.getRenderer().getPaintRender();
@@ -385,6 +388,16 @@ public class GraphViewActivity extends AppCompatActivity {
             return new MPPointF(-(getWidth() / 2), -getHeight());
         }
 
+    }
+
+    class MyValueFormatter extends ValueFormatter {
+
+        @Override
+        public String getFormattedValue(float value) {
+
+            int intVal = (int) value;
+            return String.valueOf(intVal);
+        }
     }
 
 }
