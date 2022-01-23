@@ -2,6 +2,7 @@ package com.example.cardiaccorner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
@@ -12,14 +13,18 @@ import android.graphics.Shader;
 import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.renderer.XAxisRenderer;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Transformer;
@@ -158,7 +163,7 @@ public class BreakdownActivity extends AppCompatActivity {
 
     private com.github.mikephil.charting.data.Entry makeSystolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
     {
-        com.github.mikephil.charting.data.Entry newEntry = new com.github.mikephil.charting.data.Entry(xVal, entry.getSys_measurement());
+        com.github.mikephil.charting.data.Entry newEntry = new com.github.mikephil.charting.data.Entry(xVal, entry.getSys_measurement(), entry);
         return newEntry;
     }
 
@@ -175,6 +180,16 @@ public class BreakdownActivity extends AppCompatActivity {
         return dates;
     }
 
+    private ArrayList<String> getTagsDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
+        ArrayList<String> tags = new ArrayList<String>();
+        for(int i = 0; i<logs.size(); i++)
+        {
+            String getTags = logs.get(i).getTags();
+            tags.add(getTags);
+        }
+        return tags;
+    }
+
     private ArrayList<com.github.mikephil.charting.data.Entry> getDiastolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
         ArrayList<com.github.mikephil.charting.data.Entry> diaVals = new ArrayList<com.github.mikephil.charting.data.Entry>();
         for(int i = 0; i<logs.size(); i++)
@@ -187,7 +202,7 @@ public class BreakdownActivity extends AppCompatActivity {
 
     private com.github.mikephil.charting.data.Entry makeDiastolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
     {
-        com.github.mikephil.charting.data.Entry newEntry = new com.github.mikephil.charting.data.Entry(xVal, entry.getDia_measurement());
+        com.github.mikephil.charting.data.Entry newEntry = new com.github.mikephil.charting.data.Entry(xVal, entry.getDia_measurement(), entry);
         return newEntry;
     }
     public void createGraphs(ArrayList<com.example.cardiaccorner.Entry> logs){
@@ -196,6 +211,7 @@ public class BreakdownActivity extends AppCompatActivity {
         int[] colors = {R.color.dark_blue, R.color.medium_blue, R.color.light_blue, R.color.yellow, R.color.orange, R.color.red};
 
         ArrayList<String> dates = getDatesDataSet(logs);
+        ArrayList<String> tags = getTagsDataSet(logs);
 
         LineDataSet systolicLineDataSet = new LineDataSet(getSystolicDataSet(logs),"Systolic");
         systolicLineDataSet.setValueTextSize(12f);
@@ -203,6 +219,7 @@ public class BreakdownActivity extends AppCompatActivity {
         systolicLineDataSet.setCircleColor(Color.BLACK);
         systolicLineDataSet.setDrawCircleHole(false);
         systolicLineDataSet.setCircleRadius(4f);
+        systolicLineDataSet.setValueFormatter(new BreakdownActivity.MyValueFormatter());
 
         LineData systolicData = new LineData(systolicLineDataSet);
 
@@ -219,6 +236,9 @@ public class BreakdownActivity extends AppCompatActivity {
         systolicLineChart.setExtraBottomOffset(10);
         systolicLineChart.setExtraTopOffset(30);
         systolicLineChart.setExtraRightOffset(32);
+
+        BreakdownActivity.CustomMarkerView mv = new BreakdownActivity.CustomMarkerView(getApplicationContext(), R.layout.custom_marker_view_layout);
+        systolicLineChart.setMarker(mv);
 
         XAxis x = systolicLineChart.getXAxis();
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -253,6 +273,7 @@ public class BreakdownActivity extends AppCompatActivity {
         diastolicLineDataSet.setCircleColor(Color.BLACK);
         diastolicLineDataSet.setDrawCircleHole(false);
         diastolicLineDataSet.setCircleRadius(4f);
+        diastolicLineDataSet.setValueFormatter(new BreakdownActivity.MyValueFormatter());
 
         LineData diastolicData = new LineData(diastolicLineDataSet);
         diastolicLineChart.setData(diastolicData);
@@ -268,6 +289,8 @@ public class BreakdownActivity extends AppCompatActivity {
         systolicLineChart.setExtraTopOffset(30);
         diastolicLineChart.setExtraRightOffset(32);
         diastolicLineChart.setXAxisRenderer(new BreakdownActivity.CustomXAxisRenderer(diastolicLineChart.getViewPortHandler(), diastolicLineChart.getXAxis(), diastolicLineChart.getTransformer(YAxis.AxisDependency.LEFT)));
+
+        diastolicLineChart.setMarker(mv);
 
         XAxis x2 = diastolicLineChart.getXAxis();
         x2.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -289,7 +312,7 @@ public class BreakdownActivity extends AppCompatActivity {
         LinearGradient linearGradient2 = new LinearGradient(
                 0, 0, 0, 500,
                 new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.01f, 0.4f, 0.45f, 0.5f, 0.55f, 0.6f, 0.65f},
+                new float[]{0.01f, 0.4f, 0.44f, 0.48f, 0.50f, 0.55f, 0.65f},
                 Shader.TileMode.CLAMP);
 
         Paint paint2 = diastolicLineChart.getRenderer().getPaintRender();
@@ -329,6 +352,42 @@ public class BreakdownActivity extends AppCompatActivity {
             String line[] = formattedLabel.split("\n");
             Utils.drawXAxisValue(c, line[0], x, y, mAxisLabelPaint, anchor, angleDegrees);
             Utils.drawXAxisValue(c, line[1], x + mAxisLabelPaint.getTextSize(), y + mAxisLabelPaint.getTextSize(), mAxisLabelPaint, anchor, angleDegrees);
+        }
+    }
+
+    public class CustomMarkerView extends MarkerView {
+
+        private TextView tvContent;
+
+        public CustomMarkerView (Context context, int layoutResource) {
+            super(context, layoutResource);
+            // this markerview only displays a textview
+            tvContent = (TextView) findViewById(R.id.tvContent);
+        }
+
+        // callbacks everytime the MarkerView is redrawn, can be used to update the
+        // content (user-interface)
+        @Override
+        public void refreshContent(com.github.mikephil.charting.data.Entry e, Highlight highlight) {
+
+            tvContent.setText(((com.example.cardiaccorner.Entry) e.getData()).getTags()); // set the entry-value as the display text
+            super.refreshContent(e, highlight);
+        }
+
+        @Override
+        public MPPointF getOffset() {
+            return new MPPointF(-(getWidth() / 2), -getHeight());
+        }
+
+    }
+
+    class MyValueFormatter extends ValueFormatter {
+
+        @Override
+        public String getFormattedValue(float value) {
+
+            int intVal = (int) value;
+            return String.valueOf(intVal);
         }
     }
 }
