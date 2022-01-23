@@ -387,7 +387,7 @@ public class BreakdownActivity extends AppCompatActivity {
         public String getFormattedValue(float value) {
 
             int intVal = (int) value;
-            return String.valueOf(intVal);
+            return "      " + String.valueOf(intVal);
         }
     }
 }
