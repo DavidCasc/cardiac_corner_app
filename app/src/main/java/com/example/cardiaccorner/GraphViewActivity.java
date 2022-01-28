@@ -338,7 +338,7 @@ public class GraphViewActivity extends AppCompatActivity {
 
         @Override
         protected void drawLabel(Canvas c, String formattedLabel, float x, float y, MPPointF anchor, float angleDegrees) {
-            String line[] = formattedLabel.split("\n");
+            String line[] = formattedLabel.split("(?<=\\G.{10})");
             Utils.drawXAxisValue(c, line[0], x, y, mAxisLabelPaint, anchor, angleDegrees);
             Utils.drawXAxisValue(c, line[1], x + mAxisLabelPaint.getTextSize(), y + mAxisLabelPaint.getTextSize(), mAxisLabelPaint, anchor, angleDegrees);
         }
