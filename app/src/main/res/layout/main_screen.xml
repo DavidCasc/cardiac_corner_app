@@ -73,9 +73,9 @@
         android:layout_marginTop="15dp"
         android:backgroundTint="#673AB7"
         android:fontFamily="@font/rasa_bold"
-        android:text="BLOOD PRESSURE HISTORY"
+        android:text="BLOOD PRESSURE HISTORY          LIST VIEW"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_measurement" />
@@ -87,9 +87,9 @@
         android:layout_marginTop="15dp"
         android:backgroundTint="#673AB7"
         android:fontFamily="@font/rasa_bold"
-        android:text="GRAPH VIEW"
+        android:text="BLOOD PRESSURE HISTORY        GRAPH VIEW"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bp_history" />
