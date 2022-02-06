@@ -225,7 +225,7 @@ public class BreakdownActivity extends AppCompatActivity {
             }
             catch(ParseException e)
             {
-                //David help pls
+                System.out.println(e);
             }
         }
         return -1;

@@ -231,7 +231,7 @@ public class GraphViewActivity extends AppCompatActivity {
             }
             catch(ParseException e)
             {
-                //David help pls
+                System.out.println(e);
             }
         }
         return -1;
