@@ -35,13 +35,18 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class BreakdownActivity extends AppCompatActivity {
 
     Chip sodiumChip;
     Chip stressChip;
     Chip exerciseChip;
+    TextView dateGapText;
 
     Button finishBtn;
     Button backBtn;
@@ -88,6 +93,8 @@ public class BreakdownActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.breakdown_screen);
+
+        dateGapText = (TextView) findViewById(R.id.date_gap);
 
         if(logsStored()){
             logs = retrieveLogs();
@@ -169,15 +176,59 @@ public class BreakdownActivity extends AppCompatActivity {
 
     private ArrayList<String> getDatesDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
         ArrayList<String> dates = new ArrayList<String>();
+
+        //logs.add(new com.example.cardiaccorner.Entry("23-06-2022 16:23:07", 120, 80, true, true, true, "hi", true));
+        //logs.add(new com.example.cardiaccorner.Entry("27-10-2022 18:27:28", 120, 80, true, true, true, "hi", true));
+
+        com.example.cardiaccorner.Entry prevEntry = null;
         for(int i = 0; i<logs.size(); i++)
         {
-            String[] splitDate = logs.get(i).getTime_created().split(" ");
+            com.example.cardiaccorner.Entry currEntry = logs.get(i);
+            long diff = getDateDiff(prevEntry, currEntry);
+
+            String[] splitDate = currEntry.getTime_created().split(" ");
             String[] splitTime = splitDate[1].split(":");
-            dates.add(splitDate[0] + "\n" + splitTime[0] + ":" + splitTime[1]);
+
+            if(diff > 90)
+            {
+                dateGapText.setVisibility(View.VISIBLE);
+                dates.add(splitDate[0] + "\n" + splitTime[0] + ":" + splitTime[1] + "*");
+            }
+            else
+            {
+                dates.add(splitDate[0] + "\n" + splitTime[0] + ":" + splitTime[1]);
+            }
+            prevEntry = currEntry;
         }
 
         System.out.println(dates);
         return dates;
+    }
+
+    private long getDateDiff(com.example.cardiaccorner.Entry prevEntry, com.example.cardiaccorner.Entry currEntry)
+    {
+        if(prevEntry != null)
+        {
+            System.out.println("prevEntry: " + prevEntry.getTime_created());
+            System.out.println("currEntry: " + currEntry.getTime_created());
+            try {
+                Date prevDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(prevEntry.getTime_created());
+                Date currDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(currEntry.getTime_created());
+
+                long diffInMilli = Math.abs(prevDate.getTime() - currDate.getTime());
+                long diff = TimeUnit.DAYS.convert(diffInMilli, TimeUnit.MILLISECONDS);
+
+                System.out.println("prevDate: " + prevDate.toString());
+                System.out.println("currDate: " + currDate.toString());
+
+                return diff;
+            }
+            catch(ParseException e)
+            {
+                //David help pls
+            }
+        }
+        return -1;
     }
 
     private ArrayList<String> getTagsDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){

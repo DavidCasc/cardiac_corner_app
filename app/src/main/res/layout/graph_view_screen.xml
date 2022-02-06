@@ -118,7 +118,7 @@
             android:id="@+id/graph"
             layout="@layout/graph"
             android:layout_width="fill_parent"
-            android:layout_height="421dp" />
+            android:layout_height="420dp" />
 
         <include
             android:id="@+id/bp_level_table"
