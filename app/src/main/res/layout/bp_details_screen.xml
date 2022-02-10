@@ -81,11 +81,12 @@
         android:id="@+id/systolic"
         android:layout_width="210dp"
         android:layout_height="90dp"
-        android:layout_marginTop="181dp"
+        android:layout_marginTop="192dp"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -181,7 +182,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="608dp"
         android:textColor="#000000"
-        android:textSize="17sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"

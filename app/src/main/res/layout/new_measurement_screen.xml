@@ -42,12 +42,13 @@
         android:layout_width="297dp"
         android:layout_height="51dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="33dp"
+        android:fontFamily="@font/rasa_bold"
         android:gravity="center"
         android:text="NEW MEASUREMENT"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -86,6 +87,7 @@
         android:layout_height="123dp"
         android:ems="10"
         android:gravity="top|left"
+        android:textColor="#000000"
         android:inputType="textMultiLine"
         android:lines="6"
         android:maxLines="6"
