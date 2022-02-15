@@ -48,7 +48,6 @@ public class BreakdownActivity extends AppCompatActivity {
     Chip exerciseChip;
     TextView dateGapText;
 
-    Button finishBtn;
     Button backBtn;
     LineChart systolicLineChart, diastolicLineChart;
     ArrayList<com.example.cardiaccorner.Entry> logs, historicLogs;
@@ -106,22 +105,12 @@ public class BreakdownActivity extends AppCompatActivity {
         System.out.println("HERE");
         System.out.println(logs);
 
-        finishBtn = (Button) findViewById(R.id.finish_button);
-        finishBtn.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(BreakdownActivity.this,MainActivity.class);
-                        startActivity(i);
-                    }
-                });
-
         backBtn = (Button) findViewById(R.id.back_button);
         backBtn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(BreakdownActivity.this,NewMeasurementActivity.class);
+                        Intent i = new Intent(BreakdownActivity.this,MainActivity.class);
                         startActivity(i);
                     }
                 });
