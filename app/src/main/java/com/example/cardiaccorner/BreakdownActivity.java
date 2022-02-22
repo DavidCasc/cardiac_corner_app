@@ -267,6 +267,7 @@ public class BreakdownActivity extends AppCompatActivity {
 
         systolicLineChart.setTouchEnabled(true);
         systolicLineChart.setPinchZoom(false);
+        systolicLineChart.getAxisRight().setDrawGridLines(false);
         systolicLineChart.getAxisRight().setDrawLabels(false);
         systolicLineChart.getDescription().setEnabled(false);
         systolicLineChart.setVisibleXRangeMaximum(5);
@@ -298,7 +299,7 @@ public class BreakdownActivity extends AppCompatActivity {
         LinearGradient linearGradient = new LinearGradient(
                 0, 0, 0, 500,
                 new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.01f, 0.2f, 0.3f, 0.35f, 0.45f, 0.6f, 0.7f},
+                new float[]{0.01f, 0.2f, 0.3f, 0.35f, 0.45f, 0.6f, 0.65f},
                 Shader.TileMode.CLAMP);
 
         Paint paint = systolicLineChart.getRenderer().getPaintRender();
@@ -320,6 +321,7 @@ public class BreakdownActivity extends AppCompatActivity {
 
         diastolicLineChart.setTouchEnabled(true);
         diastolicLineChart.setPinchZoom(false);
+        diastolicLineChart.getAxisRight().setDrawGridLines(false);
         diastolicLineChart.getAxisRight().setDrawLabels(false);
         diastolicLineChart.getDescription().setEnabled(false);
         diastolicLineChart.setVisibleXRangeMaximum(5);
@@ -352,7 +354,7 @@ public class BreakdownActivity extends AppCompatActivity {
         LinearGradient linearGradient2 = new LinearGradient(
                 0, 0, 0, 500,
                 new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
-                new float[]{0.01f, 0.4f, 0.44f, 0.48f, 0.50f, 0.55f, 0.65f},
+                new float[]{0.01f, 0.35f, 0.38f, 0.42f, 0.45f, 0.50f, 0.65f},
                 Shader.TileMode.CLAMP);
 
         Paint paint2 = diastolicLineChart.getRenderer().getPaintRender();
