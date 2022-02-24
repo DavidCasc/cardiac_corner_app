@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(device.getName());
             if (device.getName().equals("Cardiac Corner Monitor")) {
                 paired = true;
+            } else {
+                paired = false;
             }
         }
         ;
@@ -72,31 +74,7 @@ public class MainActivity extends AppCompatActivity {
             btBlurb.setText("Bluetooth Device Not Connected");
         }
     }
-    Timer spawner = new Timer();
-    /**
-    TimerTask updateStatus = new TimerTask() {
-        @Override
-        public void run() {
-            btBlurb = (TextView) findViewById(R.id.btTextBlurb);
-            BluetoothAdapter BTAdapter = BluetoothAdapter.getDefaultAdapter();
-            Set<BluetoothDevice> pairedDevices = BTAdapter.getBondedDevices();
-            Boolean failed = false;
 
-            for (BluetoothDevice device : pairedDevices) {
-                System.out.println(device.getName());
-                if (device.getName().equals("Cardiac Corner Monitor")) {
-                    paired = true;
-                }
-            }
-            ;
-            if(paired){
-                btBlurb.setText("Bluetooth Device Connected");
-            } else {
-                btBlurb.setText("Bluetooth Device Not Connected");
-            }
-        }
-    };
-    **/
     @Override
     public void onBackPressed() {
         
