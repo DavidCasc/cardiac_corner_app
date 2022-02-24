@@ -52,6 +52,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="275dp"
         android:backgroundTint="#673AB7"
+        android:enabled="true"
         android:text="SIGN OUT"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
