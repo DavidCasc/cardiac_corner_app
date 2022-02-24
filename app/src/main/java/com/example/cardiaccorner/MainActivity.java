@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -17,6 +18,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 
@@ -40,13 +43,60 @@ public class MainActivity extends AppCompatActivity {
     Button graphViewBtn;
     static final String SHARED_PREFS = "cardiacCornerPrefs";
     String username;
+    TextView btBlurb;
 
     private UUID SerialUUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     private int tries = 0;
     private String str = "";
     BluetoothDevice monitor;
     BluetoothSocket socket;
+    Boolean paired = false;
 
+
+    void updateStatus() {
+        btBlurb = (TextView) findViewById(R.id.btTextBlurb);
+        BluetoothAdapter BTAdapter = BluetoothAdapter.getDefaultAdapter();
+        Set<BluetoothDevice> pairedDevices = BTAdapter.getBondedDevices();
+        Boolean failed = false;
+
+        for (BluetoothDevice device : pairedDevices) {
+            System.out.println(device.getName());
+            if (device.getName().equals("Cardiac Corner Monitor")) {
+                paired = true;
+            }
+        }
+        ;
+        if(paired){
+            btBlurb.setText("Bluetooth Device Connected");
+        } else {
+            btBlurb.setText("Bluetooth Device Not Connected");
+        }
+    }
+    Timer spawner = new Timer();
+    /**
+    TimerTask updateStatus = new TimerTask() {
+        @Override
+        public void run() {
+            btBlurb = (TextView) findViewById(R.id.btTextBlurb);
+            BluetoothAdapter BTAdapter = BluetoothAdapter.getDefaultAdapter();
+            Set<BluetoothDevice> pairedDevices = BTAdapter.getBondedDevices();
+            Boolean failed = false;
+
+            for (BluetoothDevice device : pairedDevices) {
+                System.out.println(device.getName());
+                if (device.getName().equals("Cardiac Corner Monitor")) {
+                    paired = true;
+                }
+            }
+            ;
+            if(paired){
+                btBlurb.setText("Bluetooth Device Connected");
+            } else {
+                btBlurb.setText("Bluetooth Device Not Connected");
+            }
+        }
+    };
+    **/
     @Override
     public void onBackPressed() {
         
@@ -73,71 +123,15 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        /**
-                        BluetoothAdapter BTAdapter = BluetoothAdapter.getDefaultAdapter();
-                        Set<BluetoothDevice> pairedDevices = BTAdapter.getBondedDevices();
-                        for (BluetoothDevice device : pairedDevices){
-                            System.out.println(device.getName());
-                            if(device.getName().equals("Cardiac Corner Monitor")) {
-                                monitor = BTAdapter.getRemoteDevice(device.getAddress());
-                            }
+                        if(paired) {
+                            Intent i = new Intent(MainActivity.this, BluetoothCommunicationInfo.class);
+                            //i.putExtra("measurement", str);
+                            startActivity(i);
+                        } else {
+                            Intent i = new Intent(MainActivity.this, BluetoothConnectInfo.class);
+                            //i.putExtra("measurement", str);
+                            startActivity(i);
                         }
-
-                        do {
-                            try {
-                                socket = monitor.createRfcommSocketToServiceRecord(SerialUUID);
-                                socket.connect();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        } while (!socket.isConnected() && tries < 3);
-
-                        //Send a character to start the transmission
-                        try {
-                            OutputStream outputStream = socket.getOutputStream();
-                            outputStream.write(111);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        //Receive the bit stream from the bluetooth transmission
-                        try {
-
-                            //Read the transmission
-                            InputStream inputStream = socket.getInputStream();
-                            inputStream.skip(inputStream.available());
-
-                            while(inputStream.available() == 0){
-                                System.out.println(inputStream.available());
-                                Thread.sleep(100);
-                            }
-                            for(int i = 0; i < 7; i++){
-                                byte b = (byte) inputStream.read();
-                                System.out.println(b);
-
-                                //If the byte is the ending character break
-                                if(b == 'n'){
-                                    break;
-                                } else {
-                                    //Concat to the string
-                                    str = str + b;
-                                }
-                            }
-
-                            System.out.println(str);
-                        } catch (IOException | InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                         socket.close();
-                        } catch (IOException e) {
-                         e.printStackTrace();
-                        }
-                        **/
-
-                        Intent i = new Intent(MainActivity.this,BluetoothScreenActivity.class);
-                        //i.putExtra("measurement", str);
-                        startActivity(i);
                     }
                 });
 
@@ -162,5 +156,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateStatus();
     }
 }

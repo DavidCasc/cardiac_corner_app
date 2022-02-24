@@ -35,6 +35,8 @@
         <activity android:name=".GraphViewActivity" />
         <activity android:name=".BluetoothScreenActivity"/>
         <activity android:name=".ManualEntryActivity"/>
+        <activity android:name=".BluetoothCommunicationInfo"/>
+        <activity android:name=".BluetoothConnectInfo"/>
 
         <meta-data
             android:name="preloaded_fonts"
