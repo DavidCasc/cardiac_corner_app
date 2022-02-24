@@ -200,4 +200,10 @@ public class BpHistoryActivity extends AppCompatActivity {
             textView.setText(String.valueOf(diastolic));
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recyclerAdapter.notifyDataSetChanged();
+    }
 }
