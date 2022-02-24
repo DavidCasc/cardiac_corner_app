@@ -74,7 +74,6 @@ public class BluetoothScreenActivity extends AppCompatActivity {
                         failed = false;
                     } catch (IOException e) {
                         e.printStackTrace();
-                        System.out.println("AAAAAH");
                     }
 
                     if (!socket.isConnected()) {
