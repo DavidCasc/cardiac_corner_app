@@ -183,8 +183,8 @@ public class GraphViewActivity extends AppCompatActivity {
 
         System.out.println(logs);
 
-        logs.add(new com.example.cardiaccorner.Entry("23-06-2022 16:23:07", 120, 80, true, true, true, "hi", true));
-        logs.add(new com.example.cardiaccorner.Entry("27-10-2022 18:27:28", 120, 80, true, true, true, "hi", true));
+        //logs.add(new com.example.cardiaccorner.Entry("23-06-2022 16:23:07", 120, 80, true, true, true, "hi", true));
+        //logs.add(new com.example.cardiaccorner.Entry("27-10-2022 18:27:28", 120, 80, true, true, true, "hi", true));
 
         com.example.cardiaccorner.Entry prevEntry = null;
         for(int i = 0; i<logs.size(); i++)

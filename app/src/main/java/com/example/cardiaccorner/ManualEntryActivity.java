@@ -45,9 +45,21 @@ public class ManualEntryActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String sysDataString = sysEntry.getText().toString();
+                String diaDataString = diaEntry.getText().toString();
+                int sysData = Integer.parseInt(sysDataString);
+                int diaData = Integer.parseInt(diaDataString);
+
                 if(sysEntry.getText() == null || diaEntry.getText() == null){
 
-                } else {
+                }
+                else if (sysData < 30 || diaData < 30){
+
+                }
+                else if (sysData > 210 || diaData > 210){
+
+                }
+                else {
                     Intent i = new Intent(ManualEntryActivity.this, NewMeasurementActivity.class);
                     i.putExtra("sys", Integer.parseInt(sysEntry.getText().toString()));
                     i.putExtra("dia", Integer.parseInt(diaEntry.getText().toString()));
