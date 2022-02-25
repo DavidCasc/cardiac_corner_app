@@ -67,6 +67,20 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
+        android:id="@+id/graph_view"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="#673AB7"
+        android:fontFamily="@font/rasa_bold"
+        android:text="BLOOD PRESSURE HISTORY          GRAPH VIEW"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_measurement" />
+
+    <Button
         android:id="@+id/bp_history"
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -78,21 +92,7 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_measurement" />
-
-    <Button
-        android:id="@+id/graph_view"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="#673AB7"
-        android:fontFamily="@font/rasa_bold"
-        android:text="BLOOD PRESSURE HISTORY        GRAPH VIEW"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bp_history" />
+        app:layout_constraintTop_toBottomOf="@+id/graph_view" />
 
     <Button
         android:id="@+id/settings"
@@ -106,7 +106,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/graph_view" />
+        app:layout_constraintTop_toBottomOf="@+id/bp_history" />
 
     <TextView
         android:id="@+id/btTextBlurb"
