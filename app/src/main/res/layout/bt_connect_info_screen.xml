@@ -38,7 +38,7 @@
         android:layout_height="170dp"
         android:background="#ff9898"
         android:fontFamily="@font/rasa_bold"
-        android:text="Bluetooth device is not connected.\n\nPlease connect to the blood pressure monitor using your device's Bluetooth settings.\n\nPress next when you are ready to proceed."
+        android:text="Bluetooth device is not connected.\n\nPlease connect to the blood pressure monitor using your device's Bluetooth settings.\n\nPress 'NEXT' when you are ready to proceed."
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="20dp"

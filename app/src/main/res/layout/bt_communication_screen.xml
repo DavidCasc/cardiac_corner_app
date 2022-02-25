@@ -49,16 +49,17 @@
 
     <TextView
         android:id="@+id/infoBox"
-        android:layout_width="320dp"
-        android:layout_height="260dp"
+        android:layout_width="340dp"
+        android:layout_height="280dp"
         android:background="#ff9898"
         android:fontFamily="@font/rasa_bold"
-        android:text="\n\n1. Please fasten the blood pressure monitor to your wrist.\n\n2. Press Start Measurement when you are ready to begin.\n\n3. If you are unable to connect to the blood pressure monitor, please proceed by creating a manual entry."
+        android:text="1. Please fasten the blood pressure monitor to your wrist.\n\n2. Press 'START MEASUREMENT' when you are ready to begin.\n\n3. Once the blood pressure measurement is complete, press 'On/Off' on the blood pressure monitor for the measurement to appear on the phone. \n\nIf you are unable to connect to the blood pressure monitor, please proceed by creating a manual entry. "
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="19dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

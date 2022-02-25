@@ -45,7 +45,7 @@
         android:fontFamily="@font/rasa_bold"
         android:gravity="center"
         android:text="NAVIGATION"
-        android:textColor="#3d0148"
+        android:textColor="#000000"
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
