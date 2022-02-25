@@ -67,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
                 paired = false;
             }
         }
+        if(pairedDevices.isEmpty()){
+            paired = false;
+        }
         ;
         if(paired){
             btBlurb.setText("Bluetooth Device Connected");
@@ -139,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         updateStatus();
     }
 }

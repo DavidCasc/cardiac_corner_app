@@ -25,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
     String emailStr, accStr, refreshToken;
     int count = 3;
     Toast toastMessage;
-    
+
     Timer timer = new Timer();
 
 
