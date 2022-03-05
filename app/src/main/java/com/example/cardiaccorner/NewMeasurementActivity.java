@@ -120,11 +120,12 @@ public class NewMeasurementActivity extends AppCompatActivity {
                         logs.add(entry);
                         storeLogs(logs);
 
-                        //Store logs
-                        addLog(entry,user);
-
                         Intent i = new Intent(NewMeasurementActivity.this,BreakdownActivity.class);
                         startActivity(i);
+
+                        //Store logs
+                        addLog(entry,user);
+                        
                     }
                 });
 
