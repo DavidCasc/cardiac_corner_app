@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
@@ -73,8 +74,10 @@ public class MainActivity extends AppCompatActivity {
         ;
         if(paired){
             btBlurb.setText("Bluetooth Device Connected");
+            btBlurb.setTextColor(Color.parseColor("#00FF00"));
         } else {
             btBlurb.setText("Bluetooth Device Not Connected");
+            btBlurb.setTextColor(Color.parseColor("#FF0000"));
         }
     }
 
