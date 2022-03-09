@@ -53,12 +53,6 @@ public class ManualEntryActivity extends AppCompatActivity {
                 if(sysEntry.getText() == null || diaEntry.getText() == null){
 
                 }
-                else if (sysData < 30 || diaData < 30){
-
-                }
-                else if (sysData > 210 || diaData > 210){
-
-                }
                 else {
                     Intent i = new Intent(ManualEntryActivity.this, NewMeasurementActivity.class);
                     i.putExtra("sys", Integer.parseInt(sysEntry.getText().toString()));
