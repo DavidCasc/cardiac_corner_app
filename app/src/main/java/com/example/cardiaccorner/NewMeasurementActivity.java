@@ -103,6 +103,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        continueBtn.setEnabled(false);
                         // set date and notes strings
                         setDateTime();
                         notesToString();
@@ -120,11 +121,10 @@ public class NewMeasurementActivity extends AppCompatActivity {
                         logs.add(entry);
                         storeLogs(logs);
 
-                        Intent i = new Intent(NewMeasurementActivity.this,BreakdownActivity.class);
-                        startActivity(i);
 
                         //Store logs
                         addLog(entry,user);
+
                         
                     }
                 });
@@ -241,11 +241,14 @@ public class NewMeasurementActivity extends AppCompatActivity {
         logPostCall.enqueue(new Callback<LogPostResponse>() {
             @Override
             public void onResponse(Call<LogPostResponse> call, Response<LogPostResponse> response) {
-
+                continueBtn.setEnabled(true);
+                Intent i = new Intent(NewMeasurementActivity.this,BreakdownActivity.class);
+                startActivity(i);
             }
 
             @Override
             public void onFailure(Call<LogPostResponse> call, Throwable t) {
+                continueBtn.setEnabled(true);
                 System.out.println("Post Failed");
                 //load logs
                 ArrayList<Entry> logs = retrieveLogs();
@@ -255,6 +258,9 @@ public class NewMeasurementActivity extends AppCompatActivity {
                 entry.setSynced(false);
                 logs.set(index, entry);
                 storeLogs(logs);
+
+                Intent i = new Intent(NewMeasurementActivity.this,BreakdownActivity.class);
+                startActivity(i);
             }
         });
     }
