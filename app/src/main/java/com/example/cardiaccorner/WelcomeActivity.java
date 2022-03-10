@@ -8,6 +8,10 @@ import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+
 public class WelcomeActivity extends AppCompatActivity {
 
     static final String SHARED_PREFS = "cardiacCornerPrefs";
@@ -33,6 +37,14 @@ public class WelcomeActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+    public void storeLogs(ArrayList<Entry> log){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String arr = gson.toJson(log);
+        editor.putString("logs", arr);
+        editor.commit();
     }
 
     Button signInBtn;
@@ -74,6 +86,15 @@ public class WelcomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        ArrayList<Entry> log = new ArrayList<>();
+                        log.add(new Entry("23-06-2021 16:23:07", 120, 80, true, false, false, "Had a good workout", true));
+                        log.add(new Entry("30-06-2021 11:23:07", 125, 90, false, false, true, "Had a stressful meeting", true));
+                        log.add(new Entry("20-07-2021 19:23:07", 130, 95, false, true, true, "Meeting with the parents", true));
+                        log.add(new Entry("21-10-2021 23:23:07", 150, 100, true, true, false, "Good workout", true));
+                        log.add(new Entry("23-10-2021 10:23:07", 110, 60, false, false, true, "Bad exam", true));
+                        log.add(new Entry("25-10-2021 9:23:07", 115, 75, false, true, true, "Family Dinner", true));
+                        log.add(new Entry("01-01-2022 12:23:07", 121, 84, true, false, false, "New Year resolution at the gym", true));
+                        storeLogs(log);
                         Intent i = new Intent(WelcomeActivity.this,MainActivity.class);
                         startActivity(i);
                     }
