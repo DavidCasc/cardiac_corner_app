@@ -71,7 +71,7 @@
         android:gravity="left"
         android:text="Email: johndoe@gmail.com"
         android:textColor="#000000"
-        android:textSize="27dp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
@@ -85,7 +85,7 @@
         android:gravity="left"
         android:text="Username: johndoe"
         android:textColor="#000000"
-        android:textSize="27dp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 

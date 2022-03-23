@@ -404,7 +404,7 @@ public class GraphViewActivity extends AppCompatActivity {
                 logs.add(e);
             } else if(sodiumChip.isChecked() && e.isSodium()){
                 logs.add(e);
-            } else if(exerciseChip.isChecked() && e.isSodium()){
+            } else if(exerciseChip.isChecked() && e.isExercise()){
                 logs.add(e);
             }
         }

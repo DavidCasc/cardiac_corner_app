@@ -6,13 +6,28 @@
     android:layout_height="match_parent"
     android:background="#A1D2F4">
 
+    <TextView
+        android:id="@+id/warning_msg"
+        android:layout_width="280dp"
+        android:layout_height="85dp"
+        android:background="#cccccc"
+        android:text="Warning: Before taking a new measurement, it is advised not to do heavy exercise or eat 30 minutes beforehand"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/manualEntryBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="160dp"
         android:src="@drawable/red_rectangle_shape"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,7 +35,7 @@
         android:id="@+id/manualEntryBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="100dp"
         android:width="250dp"
         android:backgroundTint="#673AB7"
         android:fontFamily="@font/rasa_bold"
@@ -36,7 +51,7 @@
         android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:width="250dp"
         android:backgroundTint="#673AB7"
         android:fontFamily="@font/rasa_bold"
@@ -44,6 +59,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/manualEntryBtn" />
 

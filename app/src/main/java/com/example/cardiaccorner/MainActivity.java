@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         ;
         if(paired){
             btBlurb.setText("Bluetooth Device Connected");
-            btBlurb.setTextColor(Color.parseColor("#00FF00"));
+            btBlurb.setTextColor(Color.parseColor("#329832"));
         } else {
             btBlurb.setText("Bluetooth Device Not Connected");
             btBlurb.setTextColor(Color.parseColor("#FF0000"));
