@@ -9,7 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * The ApiClient Class is used to build a user service with
  * Retrofit2. This is used to make HTTP calls to the web API
- *  Authentication Server
+ * Authentication Server
+ * @Author: David Casciano
  */
 public class AuthClient {
     private static Retrofit getRetrofit(){

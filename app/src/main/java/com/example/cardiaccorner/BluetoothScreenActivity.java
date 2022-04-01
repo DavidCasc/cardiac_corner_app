@@ -23,38 +23,56 @@ import java.util.UUID;
 
 public class BluetoothScreenActivity extends AppCompatActivity {
 
+    //Page Elements
     TextView statusText;
+
+    //Bluetooth Elements
     BluetoothDevice monitor;
     BluetoothSocket socket;
     int tries;
     private UUID SerialUUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+
+    //Data storage variabels
     String str = "";
     int systolic, diastolic;
+
+    //Activity control
     Intent intent;
     Timer spawner = new Timer();
     Activity activity;
 
+    /**
+     * Create a new timer task.
+     *
+     * We use a timer task because if you were not to do it asyncronously
+     * the activity lifecycle would hand and you would not be able to use
+     * the app.
+     */
     TimerTask btTask = new TimerTask() {
         @Override
         public void run() {
-            statusText = (TextView) findViewById(R.id.status);
-            BluetoothAdapter BTAdapter = BluetoothAdapter.getDefaultAdapter();
-            Set<BluetoothDevice> pairedDevices = BTAdapter.getBondedDevices();
+            statusText = (TextView) findViewById(R.id.status); //Get the element to alter the status text
+            BluetoothAdapter BTAdapter = BluetoothAdapter.getDefaultAdapter(); //Get the default bt adapter
+            Set<BluetoothDevice> pairedDevices = BTAdapter.getBondedDevices(); //Get the set of bluetooth devices
             Boolean failed = false;
 
+            //Enumerate through the devices to look for the Cardiac Corner Monitor
             for (BluetoothDevice device : pairedDevices) {
                 System.out.println(device.getName());
                 if (device.getName().equals("Cardiac Corner Monitor")) {
-                    monitor = BTAdapter.getRemoteDevice(device.getAddress());
+                    monitor = BTAdapter.getRemoteDevice(device.getAddress()); //Get device info if it is there
                 }
             }
 
-            statusText.setText("FINDING");
+            statusText.setText("FINDING"); //update status text
+
+            //If there was no monitor found go to manual entry page
             if (monitor == null) {
                 intent = new Intent(BluetoothScreenActivity.this, ManualEntryActivity.class);
                 finish();
                 startActivity(intent);
-            } else if (!monitor.getName().equals("Cardiac Corner Monitor")) {
+            } //If the name is not the device go to the manual entry page
+            else if (!monitor.getName().equals("Cardiac Corner Monitor")) {
                 intent = new Intent(BluetoothScreenActivity.this, ManualEntryActivity.class);
                 finish();
                 startActivity(intent);
@@ -65,8 +83,10 @@ public class BluetoothScreenActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                statusText.setText("CONNECTING");
+                statusText.setText("CONNECTING"); //update status text
                 tries = 0;
+
+                //Try to make a bluetooth connection through a socket
                 do {
                     try {
                         socket = monitor.createRfcommSocketToServiceRecord(SerialUUID);
@@ -93,9 +113,9 @@ public class BluetoothScreenActivity extends AppCompatActivity {
                         }
                     }
                     tries++;
-                } while (!socket.isConnected() && tries <= 5);
+                } while (!socket.isConnected() && tries <= 5); //We will only try five times
 
-                statusText.setText("CONNECTED");
+                statusText.setText("CONNECTED"); //Update the device to connected
 
                 //Send a character to start the transmission
                 if (!failed) {
@@ -140,7 +160,7 @@ public class BluetoothScreenActivity extends AppCompatActivity {
                                 str = str + (char) b;
                             }
                         }
-
+                        //Break the transmission into the two substrings
                         systolic = parseInt(str.substring(0, str.indexOf("/")));
                         diastolic = parseInt(str.substring(str.indexOf("/") + 1, str.length()));
 
@@ -149,14 +169,16 @@ public class BluetoothScreenActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
+                    //Close the blutooth socket
                     try {
                         socket.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
+                    //Automatically go to the entry screen
                     Intent i = new Intent(BluetoothScreenActivity.this, NewMeasurementActivity.class);
-                    i.putExtra("sys", systolic);
+                    i.putExtra("sys", systolic); //Hand off the information for both sys and dia
                     i.putExtra("dia", diastolic);
                     finish();
                     startActivity(i);
@@ -166,12 +188,15 @@ public class BluetoothScreenActivity extends AppCompatActivity {
                     finish();
                     startActivity(intent);
                 }
-
+                //Set status to complete
                 statusText.setText("COMPLETE");
             }
         }
     };
 
+    /**
+     * Have an event listener for the back press to handle it properly
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -180,6 +205,10 @@ public class BluetoothScreenActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    /**
+     * Autogenerated onCreate just to get the status text element
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,12 +217,18 @@ public class BluetoothScreenActivity extends AppCompatActivity {
         statusText = (TextView) findViewById(R.id.status);
     }
 
+    /**
+     * Start the task once the activity is created and in focus
+     */
     @Override
     protected void onResume() {
         super.onResume();
         spawner.schedule(btTask,100);
     }
 
+    /**
+     * Properly stop the async task when we quit the activity
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
