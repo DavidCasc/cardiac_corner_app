@@ -42,7 +42,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * The Breakdown Activity Class is the class which populates and gives functionality
+ * The BreakdownActivity Class is the class which populates and gives functionality
  * to the Breakdown activity.
  *
  * @Authors: David Casciano and Laura Reid
@@ -175,9 +175,9 @@ public class BreakdownActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Gets systolic data from the logs.
      * @param logs
-     * @return
+     * @return an arraylist of systolic data values
      */
     private ArrayList<com.github.mikephil.charting.data.Entry> getSystolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
         ArrayList<com.github.mikephil.charting.data.Entry> sysVals = new ArrayList<com.github.mikephil.charting.data.Entry>();
@@ -190,10 +190,10 @@ public class BreakdownActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Create a systolic entry that is compatible with the line chart.
      * @param entry
      * @param xVal
-     * @return
+     * @return systolic data entry
      */
     private com.github.mikephil.charting.data.Entry makeSystolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
     {
@@ -202,17 +202,16 @@ public class BreakdownActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Formats the dates to be displayed in the X axis.
      * @param logs
-     * @return
+     * @return arraylist of formatted date strings
      */
     private ArrayList<String> getDatesDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
         ArrayList<String> dates = new ArrayList<String>();
 
-        //logs.add(new com.example.cardiaccorner.Entry("23-06-2022 16:23:07", 120, 80, true, true, true, "hi", true));
-        //logs.add(new com.example.cardiaccorner.Entry("27-10-2022 18:27:28", 120, 80, true, true, true, "hi", true));
-
         com.example.cardiaccorner.Entry prevEntry = null;
+
+        //Step through each entry
         for(int i = 0; i<logs.size(); i++)
         {
             com.example.cardiaccorner.Entry currEntry = logs.get(i);
@@ -221,6 +220,7 @@ public class BreakdownActivity extends AppCompatActivity {
             String[] splitDate = currEntry.getTime_created().split(" ");
             String[] splitTime = splitDate[1].split(":");
 
+            //Condition for if the date is greater than 90 days from the last
             if(diff > 90)
             {
                 dateGapText.setVisibility(View.VISIBLE);
@@ -238,10 +238,10 @@ public class BreakdownActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Determines the number of days between two dates.
      * @param prevEntry
      * @param currEntry
-     * @return
+     * @return number of days between two dates
      */
     private long getDateDiff(com.example.cardiaccorner.Entry prevEntry, com.example.cardiaccorner.Entry currEntry)
     {
@@ -270,9 +270,9 @@ public class BreakdownActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Gets tags from logs.
      * @param logs
-     * @return
+     * @return arraylist of tags from logs
      */
     private ArrayList<String> getTagsDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
         ArrayList<String> tags = new ArrayList<String>();
@@ -285,9 +285,9 @@ public class BreakdownActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Gets diastolic data from the logs.
      * @param logs
-     * @return
+     * @return arraylist of diastolic data values
      */
     private ArrayList<com.github.mikephil.charting.data.Entry> getDiastolicDataSet(ArrayList<com.example.cardiaccorner.Entry> logs){
         ArrayList<com.github.mikephil.charting.data.Entry> diaVals = new ArrayList<com.github.mikephil.charting.data.Entry>();
@@ -300,10 +300,10 @@ public class BreakdownActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Create a diastolic entry that is compatible with the line chart.
      * @param entry
      * @param xVal
-     * @return
+     * @return diastolic data entry
      */
     private com.github.mikephil.charting.data.Entry makeDiastolicEntryFromLog(com.example.cardiaccorner.Entry entry, int xVal)
     {
@@ -312,10 +312,11 @@ public class BreakdownActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Creates the systolic and diastolic line charts with data from the logs.
      * @param logs
      */
     public void createGraphs(ArrayList<com.example.cardiaccorner.Entry> logs){
+
         // systolic line chart
 
         int[] colors = {R.color.dark_blue, R.color.medium_blue, R.color.light_blue, R.color.yellow, R.color.orange, R.color.red};
@@ -323,6 +324,7 @@ public class BreakdownActivity extends AppCompatActivity {
         ArrayList<String> dates = getDatesDataSet(logs);
         ArrayList<String> tags = getTagsDataSet(logs);
 
+        //Create systolic data set for line chart
         LineDataSet systolicLineDataSet = new LineDataSet(getSystolicDataSet(logs),"Systolic");
         systolicLineDataSet.setValueTextSize(12f);
         systolicLineDataSet.setLineWidth(6);
@@ -333,6 +335,7 @@ public class BreakdownActivity extends AppCompatActivity {
 
         LineData systolicData = new LineData(systolicLineDataSet);
 
+        //Inject LineData into LineChart and format it
         systolicLineChart.setData(systolicData);
 
         systolicLineChart.setTouchEnabled(true);
@@ -348,15 +351,18 @@ public class BreakdownActivity extends AppCompatActivity {
         systolicLineChart.setExtraTopOffset(30);
         systolicLineChart.setExtraRightOffset(32);
 
+        //Custom marker view formatter to allow tags to be displayed above data points
         BreakdownActivity.CustomMarkerView mv = new BreakdownActivity.CustomMarkerView(getApplicationContext(), R.layout.custom_marker_view_layout);
         systolicLineChart.setMarker(mv);
 
+        //Format the X axis
         XAxis x = systolicLineChart.getXAxis();
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
         x.setTextSize(0f);
         x.setDrawGridLines(false);
         x.setEnabled(false);
 
+        //Format the Y axis
         YAxis y = systolicLineChart.getAxisLeft();
         y.setTextSize(15f);
         y.setAxisMinimum(30);
@@ -366,6 +372,7 @@ public class BreakdownActivity extends AppCompatActivity {
         Legend legend = systolicLineChart.getLegend();
         legend.setEnabled(false);
 
+        //Format the colour gradient of the line chart
         LinearGradient linearGradient = new LinearGradient(
                 0, 0, 0, 500,
                 new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
@@ -378,6 +385,7 @@ public class BreakdownActivity extends AppCompatActivity {
 
         // diastolic line chart
 
+        //Create diastolic data set for line chart
         LineDataSet diastolicLineDataSet = new LineDataSet(getDiastolicDataSet(logs),"Diastolic");
         diastolicLineDataSet.setValueTextSize(12f);
         diastolicLineDataSet.setLineWidth(6);
@@ -386,6 +394,7 @@ public class BreakdownActivity extends AppCompatActivity {
         diastolicLineDataSet.setCircleRadius(4f);
         diastolicLineDataSet.setValueFormatter(new BreakdownActivity.MyValueFormatter());
 
+        //Inject LineData into LineChart and format it
         LineData diastolicData = new LineData(diastolicLineDataSet);
         diastolicLineChart.setData(diastolicData);
 
@@ -402,8 +411,10 @@ public class BreakdownActivity extends AppCompatActivity {
         diastolicLineChart.setExtraRightOffset(32);
         diastolicLineChart.setXAxisRenderer(new BreakdownActivity.CustomXAxisRenderer(diastolicLineChart.getViewPortHandler(), diastolicLineChart.getXAxis(), diastolicLineChart.getTransformer(YAxis.AxisDependency.LEFT)));
 
+        //Custom marker view formatter to allow tags to be displayed above data points
         diastolicLineChart.setMarker(mv);
 
+        //Format the X axis
         XAxis x2 = diastolicLineChart.getXAxis();
         x2.setPosition(XAxis.XAxisPosition.BOTTOM);
         x2.setTextSize(13f);
@@ -412,6 +423,7 @@ public class BreakdownActivity extends AppCompatActivity {
         x2.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dates));
         x2.setGranularityEnabled(true);
 
+        //Format the Y axis
         YAxis y2 = diastolicLineChart.getAxisLeft();
         y2.setTextSize(15f);
         y2.setAxisMinimum(30);
@@ -421,6 +433,7 @@ public class BreakdownActivity extends AppCompatActivity {
         Legend legend2 = diastolicLineChart.getLegend();
         legend2.setEnabled(false);
 
+        //Format the colour gradient of the line chart
         LinearGradient linearGradient2 = new LinearGradient(
                 0, 0, 0, 500,
                 new int[]{Color.parseColor("#000000"), Color.parseColor("#d73027"), Color.parseColor("#fc8d59"), Color.parseColor("#fee090"), Color.parseColor("#e0f3f8"), Color.parseColor("#91bfdb"), Color.parseColor("#4575b4")},
@@ -460,7 +473,7 @@ public class BreakdownActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Formats the X axis values to display the date and time on separate lines
      */
     public class CustomXAxisRenderer extends XAxisRenderer {
         public CustomXAxisRenderer(ViewPortHandler viewPortHandler, XAxis xAxis, Transformer trans) {
@@ -476,7 +489,7 @@ public class BreakdownActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Formats the markers to display the tags above each data point
      */
     public class CustomMarkerView extends MarkerView {
 
@@ -504,6 +517,9 @@ public class BreakdownActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Customization of the ValueFormatter class
+     */
     class MyValueFormatter extends ValueFormatter {
 
         @Override

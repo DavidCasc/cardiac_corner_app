@@ -28,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * The BpHistoryActivity is no known as the list view. This class
+ * The BpHistoryActivity is now known as the list view. This class
  * populates the list view as well as creates funtionality to the searching
  *
  * @Authors: David Casciano and Laura Reid
