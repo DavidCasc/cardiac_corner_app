@@ -3,6 +3,10 @@ package com.example.cardiaccorner;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Create a class to receive and store the logs
+ * from the APIs response
+ */
 public class LogsResponse {
     ArrayList<Entry> logs;
 

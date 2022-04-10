@@ -22,20 +22,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
     static final String SHARED_PREFS = "cardiacCornerPrefs";
 
-    /**
-     * TODO
-     * @param Key
-     * @param Val
-     */
-    private void saveData(String Key, String Val) {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(Key, Val);
-        editor.apply();
-    }
 
     /**
-     * TODO
+     * Initialize the local cache
      */
     private void initData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -45,8 +34,8 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
-     * @return
+     * Check if the user is logged into the app via the local cache
+     * @return a boolean if the user is logged in
      */
     private boolean loggedIn(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -57,18 +46,6 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * TODO
-     * @param log
-     */
-    public void storeLogs(ArrayList<Entry> log){
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String arr = gson.toJson(log);
-        editor.putString("logs", arr);
-        editor.commit();
-    }
 
     //Activity Elements
     Button signInBtn;

@@ -1,5 +1,8 @@
 package com.example.cardiaccorner;
 
+/**
+ * Create a class to make a call via retrofit2
+ */
 public class LogPostRequest {
     private Entry log;
     private String username;
@@ -8,7 +11,11 @@ public class LogPostRequest {
         this.log = log;
         this.username = username;
     }
-
+    /**
+     *
+     * Create getters and setters
+     *
+     */
     public Entry getLog() {
         return log;
     }

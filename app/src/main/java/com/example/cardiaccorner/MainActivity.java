@@ -33,9 +33,9 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity {
 
     /**
-     * TODO
-     * @param Key
-     * @param Val
+     * Helper function to write data to the local cache
+     * @param Key string value of the key
+     * @param Val string value of the value stored
      */
     private void saveData(String Key, String Val) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
-     * @param Key
-     * @return
+     * Helper function to load data from local cache
+     * @param Key the string value of the key
+     * @return string value of whats stored
      */
     public String loadData(String Key) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -71,14 +71,20 @@ public class MainActivity extends AppCompatActivity {
     Boolean paired = false;
 
     /**
-     * TODO
+     * Update status will be called on the onResume
+     * It checks the paired devices list and checks if the correct device is connected
+     * if so make correct page updates
      */
     void updateStatus() {
+        //Get page element
         btBlurb = (TextView) findViewById(R.id.btTextBlurb);
+
+        //Get bluetooth adapter
         BluetoothAdapter BTAdapter = BluetoothAdapter.getDefaultAdapter();
         Set<BluetoothDevice> pairedDevices = BTAdapter.getBondedDevices();
         Boolean failed = false;
 
+        //enumerate through the bluetooh devices
         for (BluetoothDevice device : pairedDevices) {
             System.out.println(device.getName());
             if (device.getName().equals("Cardiac Corner Monitor")) {
@@ -87,10 +93,13 @@ public class MainActivity extends AppCompatActivity {
                 paired = false;
             }
         }
+
+        //check if the list is empty
         if(pairedDevices.isEmpty()){
             paired = false;
         }
-        ;
+
+        //If the device is paired update status bar
         if(paired){
             btBlurb.setText("Bluetooth Device Connected");
             btBlurb.setTextColor(Color.parseColor("#329832"));
@@ -101,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Make the software back button do nothing as there shouldnt be any
+     * back navigation
      */
     @Override
     public void onBackPressed() {
@@ -174,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Call update status when the activity comes back into focus
      */
     @Override
     protected void onResume() {

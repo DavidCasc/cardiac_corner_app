@@ -1,5 +1,9 @@
 package com.example.cardiaccorner;
 
+/**
+ * Create a class to generate a call to the
+ * endpoint to get the logs
+ */
 public class LogsRequest {
     private String username;
 

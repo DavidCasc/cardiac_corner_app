@@ -9,6 +9,9 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
+/**
+ * Create a list of the endpoints and their URLs
+ */
 public interface UserService {
     @GET("/fetchLogs/{user}")
     Call<LogsResponse> fetchLogs(@Path("user") String username);

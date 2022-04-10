@@ -36,20 +36,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.bpEntr
     static final String SHARED_PREFS = "cardiacCornerPrefs";
     private boolean ok = false;
 
-    private void saveData(String Key, String Val) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(Key, Val);
-        editor.commit();
-    }
+    /**
+     * Load the data from cache give the key
+     * @param Key the string value of the key
+     * @return string value of what is stored
+     */
     public String loadData(String Key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(Key, "");
     }
-    public Boolean logsStored(){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        return sharedPreferences.contains("logs");
-    }
+
+    /**
+     * Serialize the log and store it into local cache
+     * @param log the arraylist of entries
+     */
     public void storeLogs(ArrayList<Entry> log){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -58,6 +58,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.bpEntr
         editor.putString("logs", arr);
         editor.commit();
     }
+
+    /**
+     * Helper function to retrieve the local cache of logs and deserialize
+     * the arrays
+     * @return arraylist of entries
+     */
     public ArrayList<Entry> retrieveLogs(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         Gson gson = new Gson();
@@ -76,11 +82,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.bpEntr
     private Context context;
     private ArrayList<Entry> entries;
 
+    /**
+     * Create a recycler adapter for the recycler view
+     * @param ct the context which the recyclerview is stored
+     * @param entriesList the arraylist of entries
+     */
+
     public RecyclerAdapter(Context ct, ArrayList<Entry> entriesList){
         context  = ct;
         entries = entriesList;
     }
 
+    /**
+     * Create a function to inflate the recyclerview
+     * @param parent the parent of the page
+     * @param viewType change the view of the list
+     * @return
+     */
     @NonNull
     @Override
     public bpEntry onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

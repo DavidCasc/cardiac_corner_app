@@ -66,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Create a Retrofit2 call to the register endpoint
      */
     public void register() {
         RegisterRequest registerRequest = new RegisterRequest();

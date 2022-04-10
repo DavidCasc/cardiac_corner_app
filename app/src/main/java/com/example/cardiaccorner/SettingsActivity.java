@@ -39,7 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
     static final String SHARED_PREFS = "cardiacCornerPrefs";
 
     /**
-     * TODO
+     * Used for the sign out function to clear the local cache
      */
     private void clearPrefs() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -49,7 +49,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Clear the data of the logs used by the clear log function
      */
     private void clearPrefsData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -59,9 +59,9 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
-     * @param Key
-     * @return
+     * Helper function to load data from the local cache
+     * @param Key the string value of the key
+     * @return the string stored at the key
      */
     public String loadData(String Key) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -165,7 +165,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Retrofit2 call to the logout endpoint
      */
     public void logoutDelete() {
         Call<LogoutResponse> ResponseCall = AuthClient.getUserService().logout(refreshToken);
@@ -184,7 +184,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Retrofit2 call to the clear data endpoint
      */
     public void clearData() {
         Call<ClearLogsResponse> ResponseCall = ApiClient.getUserService().deleteAll(loadData("username"));

@@ -8,16 +8,23 @@ import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
+/**
+ * Create a class to listen to the one chart and apply the same
+ * to the other chart
+ */
+
 public class MultiChartGestureListener implements OnChartGestureListener {
 
     private Chart srcChart;
     private Chart[] dstCharts;
 
+    //Constructor for each chart to listen to
     public MultiChartGestureListener(Chart srcChart, Chart[] dstCharts) {
         this.srcChart = srcChart;
         this.dstCharts = dstCharts;
     }
 
+    //The below are automatically generated and needed for the onChartGestureListener
     @Override
     public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
 
@@ -48,6 +55,7 @@ public class MultiChartGestureListener implements OnChartGestureListener {
 
     }
 
+    //Call the sync chart function to apply any transform from one to the other
     @Override
     public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
         //Log.d(TAG, "onChartScale " + scaleX + "/" + scaleY + " X=" + me.getX() + "Y=" + me.getY());
@@ -60,6 +68,7 @@ public class MultiChartGestureListener implements OnChartGestureListener {
         syncCharts();
     }
 
+    //Sync the charts for each each translation
     public void syncCharts() {
         Matrix srcMatrix;
         float[] srcVals = new float[9];

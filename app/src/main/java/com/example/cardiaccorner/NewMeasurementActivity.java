@@ -198,7 +198,7 @@ public class NewMeasurementActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
+     * Need to edit the onstart function
      */
     @Override
     protected void onStart() {
@@ -253,21 +253,24 @@ public class NewMeasurementActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
-     * @param entry
-     * @param user
+     * add log is a function which uses reftrofit to make a call to the API and add the log to the
+     * database
+     * @param entry the entry that is going to be added to the data base
+     * @param user the string value of the username
      */
     private void addLog(Entry entry, String user) {
+        //make the call to the http api
         LogPostRequest logPostRequest = new LogPostRequest(entry, user);
         Call<LogPostResponse> logPostCall = ApiClient.getUserService().addLogs(logPostRequest);
         logPostCall.enqueue(new Callback<LogPostResponse>() {
+            //Handle the success of the call
             @Override
             public void onResponse(Call<LogPostResponse> call, Response<LogPostResponse> response) {
                 continueBtn.setEnabled(true);
                 Intent i = new Intent(NewMeasurementActivity.this,BreakdownActivity.class);
                 startActivity(i);
             }
-
+            //Gracefully fail
             @Override
             public void onFailure(Call<LogPostResponse> call, Throwable t) {
                 continueBtn.setEnabled(true);
@@ -288,9 +291,9 @@ public class NewMeasurementActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
-     * @param Key
-     * @param Val
+     * Helper function to put information in local cache
+     * @param Key the string value of the key you want to store
+     * @param Val the value which is being stored
      */
     private void saveData(String Key, String Val) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -300,27 +303,20 @@ public class NewMeasurementActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
-     * @param Key
-     * @return
+     * Helper function to read information from the local stroe
+     * @param Key string value of the key that is wanting to be accessed
+     * @return string value of the information
      */
     public String loadData(String Key) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(Key, "");
     }
 
-    /**
-     * TODO
-     * @return
-     */
-    public Boolean logsStored(){
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        return sharedPreferences.contains("logs");
-    }
 
     /**
-     * TODO
-     * @param log
+     * Helper function to serialize the gson array and store it in local
+     * cache
+     * @param log arraylist of the entries
      */
     public void storeLogs(ArrayList<Entry> log){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -332,8 +328,9 @@ public class NewMeasurementActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO
-     * @return
+     * Helper function to deserialize the array in the local cache
+     * and return an arraylist
+     * @return an arraylist of the entries
      */
     public ArrayList<Entry> retrieveLogs(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
